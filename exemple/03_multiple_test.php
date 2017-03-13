@@ -16,4 +16,4 @@ Performance::point(); // -> Finish task A and start new point for task B
 // RUN TASK B
 
 // Finish all tasks and show test results
-Performance::result();
+Performance::results();

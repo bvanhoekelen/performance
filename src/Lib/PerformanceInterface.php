@@ -1,4 +1,4 @@
-<?php namespace Performance\src\lib;
+<?php namespace Performance\Lib;
 
 /**
  * Created by PhpStorm.

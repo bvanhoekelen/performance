@@ -1,6 +1,6 @@
-<?php namespace Performance\src;
+<?php namespace Performance;
 
-use Performance\src\lib\PerformanceInterface;
+use Performance\Lib\PerformanceInterface;
 
 class Performance implements PerformanceInterface
 {
@@ -22,6 +22,7 @@ class Performance implements PerformanceInterface
      */
     public static function point($label = null)
     {
+        echo "Ja";
 
     }
 

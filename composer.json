@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Performace\\": "src/"
+      "Performance\\": "src/"
     }
   },
   "require-dev": {

@@ -18,4 +18,4 @@ Performance::point();
 //
 
 // Finish all tasks and show test results
-Performance::result();
+Performance::results();

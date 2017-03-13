@@ -25,6 +25,6 @@ Performance::point('TASK C');
 Performance::finish();
 
 // Show test results
-Performance::result();
+Performance::results();
 
 // Options
