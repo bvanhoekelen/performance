@@ -12,10 +12,12 @@ use Performance\Performance;
 
 Performance::point('Task A');
 
-//
 // Run task A
-//
+for($x = 0; $x < 100; $x++)
+{
+    echo ".";
+}
 
 // Finish all tasks and show test results
-Performance::result();
+Performance::results();
 
