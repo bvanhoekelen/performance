@@ -10,7 +10,8 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0"
+    "php": ">=5.4.0",
+    "larapack/dd": "1.*"
   },
   "autoload": {
     "psr-4": {
