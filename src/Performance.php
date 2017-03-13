@@ -1,15 +1,19 @@
 <?php namespace Performance;
 
+use Performance\Lib\PerformanceHandler;
 use Performance\Lib\PerformanceInterface;
 
 class Performance implements PerformanceInterface
 {
+    /*
+     * Create a performance instance
+     */
     private static $performance;
 
     private static function getPerformance()
     {
         if( ! self::$performance)
-            self::$performance = new Compressor();
+            self::$performance = new PerformanceHandler();
         return self::$performance;
     }
 
@@ -22,8 +26,8 @@ class Performance implements PerformanceInterface
      */
     public static function point($label = null)
     {
-        echo "Ja";
-
+        $performance = self::getPerformance();
+        $performance->point($label);
     }
 
     /*
@@ -34,7 +38,8 @@ class Performance implements PerformanceInterface
      */
     public static function finish($label = null)
     {
-
+        $performance = self::getPerformance();
+        $performance->finish($label);
     }
 
     /*
@@ -45,6 +50,7 @@ class Performance implements PerformanceInterface
      */
     public static function results(array $config = [])
     {
-
+        $performance = self::getPerformance();
+        $performance->results($config);
     }
 }
