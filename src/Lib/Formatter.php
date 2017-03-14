@@ -8,6 +8,11 @@ class Formatter {
 
     public function timeToHuman($microTime, $unit = 'auto', $decimals = 2)
     {
+        // to small
+        if($microTime < 0.000006)
+            return '0.00';
+
+
         if($unit == "auto")
         {
             if ($microTime > 1)
@@ -18,18 +23,16 @@ class Formatter {
                 $unit = 'μs';
         }
 
-
-
         switch ($unit)
         {
             case 'μs':
-                return round($microTime * 1000000, $decimals) . $unit;
+                return round($microTime * 1000000, $decimals) . ' ' . $unit;
                 break;
             case 'ms':
-                return round($microTime * 1000, $decimals) . $unit;
+                return round($microTime * 1000, $decimals) . ' ' . $unit;
                 break;
             case 's':
-                return round($microTime * 1, $decimals) . $unit;
+                return round($microTime * 1, $decimals) . ' ' . $unit;
                 break;
             default:
                 new ErrorMessage($this, 'Performance format ' . $unit . ' not exist');

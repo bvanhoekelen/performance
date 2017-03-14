@@ -5,21 +5,25 @@
 }
 
 .performance{
+    display: block;
     position: fixed;
     border: solid #ccc 1px;
     bottom: 20px;
     right: 20px;
     z-index: 999999;
-    height: 200px;
-    max-width: 400px;
+    height: 300px;
+    max-width: 500px;
     width: 100%;
-    box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.50);
+    box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.30);
     background-color: #FFF;
     border-radius: 4px;
     border-top: solid 8px #e09a0f;
 }
 
 @media (max-width: 480px) {
+    body{
+        margin-bottom: 300px;
+    }
     .performance {
         bottom: 0px;
         left: 0;
@@ -31,38 +35,48 @@
 
 .performance .overflow{
     overflow: auto;
-    height: 78%;
+    height: 77%;
     border-top: solid #bababa 1px;
 }
 
 .performance .table-title{
     width: 100%;
-    background-color: #FFF;
+    background-color: #fff;
 }
 .performance .table-title td{
     text-align: center;
-    margin: 4px;
+    padding: 8px;
     font-size: 28px;
 }
-
-.performance table{
+.performance .table-point .t-l{
+    text-align: left;
 }
 
-.performance table th{
-    background-color: #eeeeee;
+.performance .table-title td span{
+    font-size: 12px;
+}
+
+.performance .table-point {
+    width: 100%;
+}
+
+.performance .table-point th{
+    background-color: #e2e2e2;
 
 }
 
 
-.performance table tr{
 
-}
 
-.performance table tr:nth-child(even) {
+.performance .table-point tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
+.performance .table-point tr:hover{
+    background-color: #e2e2e2;
 
-.performance table td{
+}
 
+.performance .table-point td{
     padding: 4px;
+    text-align: right;
 }
