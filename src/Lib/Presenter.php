@@ -38,10 +38,12 @@ class Presenter {
 
     private function displayForWebAsHtml()
     {
-        dd( getcwd() ,  file_exists('Css\DisplayHtml.css'));
 
-        echo "<style>a</style>";
+        echo '<style>';
+        include_once 'DisplayHtml.css';
+        echo '</style>';
 
+        echo "<div class='performance'>";
         echo "<h1>Hoi</h1>";
         echo "<hr>";
         echo "<table width='100%'>";
@@ -50,6 +52,7 @@ class Presenter {
             echo "<td>Time</td>";
             echo "<td>Memory usage</td>";
             echo "<td>Memory peak</td>";
+            echo "<td>Memory max</td>";
         echo "</tr>";
 
         foreach ($this->points as $point)
@@ -59,14 +62,12 @@ class Presenter {
                 echo "<td>" . $this->formatter->timeToHuman( $point->getDifferenceTime() ). "</td>";
                 echo "<td>" . $this->formatter->memoryToHuman( $point->getDifferenceMemory() ). "</td>";
                 echo "<td>" . $this->formatter->memoryToHuman( $point->getMemoryPeak() ). "</td>";
+                echo "<td>" . $this->formatter->memoryToHuman( $point->getStopMemoryUsage() ). "</td>";
             echo "</tr>";
 
         }
 
-        dd($this->points);
-
-
-
+        echo "</div>";
     }
 
     private function displayAsFileOutput()
@@ -76,8 +77,16 @@ class Presenter {
 
     private function displayForWebAsConsole()
     {
+        $data = [];
+        foreach ($this->points as $point)
+        {
+            $data[] = $point->export();
+        }
 
-        echo "<script>console.log(" . json_encode(['tst' => 2]) .")</script>";
+//        dd(json_encode($data), 1,$this->points);
+
+
+        echo "<script>console.log(" . json_encode($data) .")</script>";
     }
 
 }

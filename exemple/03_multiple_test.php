@@ -14,9 +14,12 @@ Performance::point();
 $y = [];
 for($x = 0; $x < 200000; $x++)
 {
-    $y[] = $x * 2;
+    $y[] = $x * 2 * 7;
+    $y[] = $x * 2 * 7;
     echo ".";
 }
+
+echo "3";
 
 Performance::point(); // -> Finish task A and start new point for task B
 // Run task B

@@ -1,0 +1,16 @@
+.performance{
+    /*display: block;*/
+    /*position: fixed;*/
+    border: solid #ccc 1px;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999999;
+    max-height: 100px;
+    height: 40vh;
+    min-height: 200px;
+    overflow: auto;
+}
+
+.performance table{
+    background-color: rebeccapurple;
+}

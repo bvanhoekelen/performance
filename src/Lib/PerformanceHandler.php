@@ -80,7 +80,7 @@ class PerformanceHandler
         // Give max time an max memory
 
         // Print results
-        dd($this);
+//        dd($this);
 
     }
 
