@@ -6,7 +6,7 @@ use phpDocumentor\Reflection\Types\Boolean;
 class Point
 {
     private $active;
-    private $name;
+    private $label;
     private $startTime;
     private $startMemoryUsage;
     private $stopTime;
@@ -25,7 +25,7 @@ class Point
     {
         // Set items
         $this->setActive(true);
-        $this->setName($name);
+        $this->setLabel($name);
         $this->setStartTime($startTime);
         $this->setStartMemoryUsage($startMemory);
     }
@@ -110,17 +110,17 @@ class Point
     /**
      * @return mixed
      */
-    public function getName()
+    public function getLabel()
     {
-        return $this->name;
+        return $this->label;
     }
 
     /**
-     * @param mixed $name
+     * @param mixed $label
      */
-    public function setName($name)
+    public function setLabel($label)
     {
-        $this->name = $name;
+        $this->label = $label;
     }
 
     /**
