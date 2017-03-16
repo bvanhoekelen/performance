@@ -12,7 +12,6 @@ class Formatter {
         if($microTime < 0.000006)
             return '0.00';
 
-
         if($unit == "auto")
         {
             if ($microTime > 1)
@@ -76,7 +75,4 @@ class Formatter {
         // Format output
         return sprintf('%.' . $decimals . 'f ' . $unit, $value);
     }
-
-
-
 }
