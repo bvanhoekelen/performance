@@ -42,6 +42,7 @@ class PerformanceHandler
 
         // Create and add point to stack
         $this->addPointToStack(new Point($label));
+
     }
 
     /*
@@ -117,9 +118,8 @@ class PerformanceHandler
         foreach ($this->pointStack as $pointId => $point)
         {
             if($point->isActive())
-                $point->finish();
+                $this->finishPoint($point);
         }
-
     }
 
     /*
@@ -137,12 +137,21 @@ class PerformanceHandler
             if($pointId == $label)
             {
                 $findLabel = true;
-                $point->finish();
+                $this->finishPoint($point);
+                break;
             }
-            break;
         }
 
         return $findLabel;
+    }
+
+    private function finishPoint(Point $point)
+    {
+        // Finish point
+        $point->finish();
+
+        // Trigger presenter listener
+        $this->presenter->finishPointListener($point);
     }
 
 }
