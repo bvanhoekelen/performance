@@ -3,7 +3,7 @@
 use Performance\Lib\PerformanceHandler;
 use Performance\Lib\Point;
 
-class CommandLineDisplay extends Display implements DisplayInterface
+class CommandLineDisplay extends Display
 {
     private $firstCommandLineMessage = false;
     private $commandLineWidth;

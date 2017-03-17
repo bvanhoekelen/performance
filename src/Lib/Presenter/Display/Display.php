@@ -2,7 +2,7 @@
 
 use Performance\Lib\Presenter\Formatter;
 
-class Display
+abstract class Display implements DisplayInterface
 {
     protected $pointStage;
     protected $masterPoint;

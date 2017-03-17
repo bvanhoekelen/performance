@@ -4,11 +4,11 @@ use Performance\Lib\Presenter\Formatter;
 use Performance\Lib\Point;
 use Performance\Lib\Presenter;
 
-class WebDisplay extends Display implements DisplayInterface
+class WebDisplay extends Display
 {
-    public function displayStartPoint(Point $point)
-    {
-    }
+//    public function displayStartPoint(Point $point)
+//    {
+//    }
 
     public function displayFinishPoint(Point $point)
     {
