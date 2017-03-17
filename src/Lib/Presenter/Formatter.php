@@ -1,4 +1,4 @@
-<?php namespace Performance\Lib;
+<?php namespace Performance\Lib\Presenter;
 
 class Formatter {
 
@@ -10,7 +10,7 @@ class Formatter {
     {
         // to small
         if($microTime < 0.000006)
-            return '0.00';
+            return '0.00 ms';
 
         if($unit == "auto")
         {
@@ -41,6 +41,9 @@ class Formatter {
     // Creatis to cam-gists/memoryuse.php !!
     public function memoryToHuman($bytes, $unit = "", $decimals = 2)
     {
+        if($bytes == 0)
+            return '0.00 KB';
+
         $units = [
             'B' => 0,
             'KB' => 1,

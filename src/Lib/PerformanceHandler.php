@@ -4,6 +4,11 @@
 class PerformanceHandler
 {
     /*
+     * Version
+     */
+    const VERSION = '0.01';
+
+    /*
      * Hold point stack
      */
     private $pointStack = [];
@@ -40,8 +45,16 @@ class PerformanceHandler
             $label = 'Task ' . (count($this->pointStack) + 1);
         }
 
+        // Create point
+        $point = new Point($label);
+
         // Create and add point to stack
-        $this->addPointToStack(new Point($label));
+        $this->addPointToStack($point);
+
+        // Trigger point
+        $this->presenter->startPointTrigger($point);
+
+        return $point;
 
     }
 
@@ -73,16 +86,8 @@ class PerformanceHandler
         // Close master point
         $this->masterPoint->finish();
 
-        // Add resultes to presenter
-        $this->presenter->setResults($this);
-        $this->presenter->display();
-
-
-        // Give max time an max memory
-
-        // Print results
-//        dd($this);
-
+        // Add results to presenter
+        $this->presenter->displayResults($this->masterPoint, $this->pointStack);
     }
 
     public function getPoints()
@@ -151,7 +156,7 @@ class PerformanceHandler
         $point->finish();
 
         // Trigger presenter listener
-        $this->presenter->finishPointListener($point);
+        $this->presenter->finishPointTrigger($point);
     }
 
 }
