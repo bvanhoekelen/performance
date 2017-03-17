@@ -65,8 +65,8 @@ class CommandLineDisplay extends Display implements DisplayInterface
         echo " |  _/ -_) '_|  _/ _ \ '_| '  \/ _` | ' \/ _/ -_)" . PHP_EOL;
         echo " |_| \___|_| |_| \___/_| |_|_|_\__,_|_||_\__\___|" . PHP_EOL;
         echo PHP_EOL;
-        echo " Create by B. van hoekelen " . $this->color('green', 'v' . PerformanceHandler::VERSION) . PHP_EOL;
-        echo " Max memory " . ini_get("memory_limit") . " max execution time " . ini_get('max_execution_time') . " sec on " . date('Y-m-d H:i:s') . PHP_EOL;
+        echo " Create by B. van hoekelen " . $this->color('green', 'v' . PerformanceHandler::VERSION)  . " PHP " . $this->color('green', 'v'. phpversion()) . PHP_EOL;
+        echo " Max memory " . ini_get("memory_limit") . " max, execution time " . ini_get('max_execution_time') . " sec on " . date('Y-m-d H:i:s') . PHP_EOL;
         echo PHP_EOL;
 
         // Print head
@@ -94,9 +94,9 @@ class CommandLineDisplay extends Display implements DisplayInterface
     private function printPointLine($label, $time, $memory)
     {
         echo " > "
-            . str_pad(mb_strimwidth($label . strlen($this->formatter->timeToHuman( $time )), 0, 42, '..'), $this->commandLineWidth - 35)
+            . str_pad(mb_strimwidth($label, 0, 42, '..'), $this->commandLineWidth - 35)
             . " -"
-            . str_pad( $this->formatter->timeToHuman( $time ), 14, " ", STR_PAD_LEFT)
+            . $this->formatter->stringPad( $this->formatter->timeToHuman( $time ), 14, " ")
             . " -"
             . str_pad( $this->formatter->memoryToHuman( $memory ) , 14, " ", STR_PAD_LEFT) . PHP_EOL;
     }

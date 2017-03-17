@@ -78,4 +78,20 @@ class Formatter {
         // Format output
         return sprintf('%.' . $decimals . 'f ' . $unit, $value);
     }
+
+    /*
+     * Fix problem 'μs'
+     */
+    public function stringPad($input, $pad_length, $pad_string = ' ')
+    {
+        $count = strlen($input);
+
+        // Fix μ issues
+        if(strpos($input, 'μ'))
+            $count--;
+
+        $space = $pad_length - $count;
+
+        return str_repeat($pad_string, $space) . $input;
+    }
 }
