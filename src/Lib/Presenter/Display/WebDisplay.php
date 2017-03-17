@@ -6,9 +6,9 @@ use Performance\Lib\Presenter;
 
 class WebDisplay extends Display
 {
-//    public function displayStartPoint(Point $point)
-//    {
-//    }
+    public function displayStartPoint(Point $point)
+    {
+    }
 
     public function displayFinishPoint(Point $point)
     {
