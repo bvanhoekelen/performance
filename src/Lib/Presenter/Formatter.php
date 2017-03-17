@@ -10,7 +10,7 @@ class Formatter {
     {
         // to small
         if($microTime < 0.000006)
-            return '0.00 ms';
+            return ' > 0.00 ms';
 
         if($unit == "auto")
         {

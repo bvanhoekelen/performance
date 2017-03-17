@@ -69,27 +69,17 @@ class WebDisplay extends Display implements DisplayInterface
                 <th width="18%">Memory max</th>
             </tr>';
 
-        $max_time = 0;
-        $max_memory = 0;
-
-        foreach ($this->pointStage as $point)
-        {
-            $max_time += $point->getDifferenceTime();
-            $max_memory += $point->getDifferenceMemory();
-        }
-
-        $max_time = $max_time * 1000000;
-        $max_memory = $max_memory * 1000000;
-
+        // Set total time
+        $this->updateTotalTimeAndMemory();
 
         foreach ($this->pointStage as $point)
         {
             echo '<tr>';
             echo '<td class="t-l">' . $point->getLabel() . '</td>';
             echo '<td>' . $this->formatter->timeToHuman( $point->getDifferenceTime() ). '</td>';
-            echo '<td>' . round((100 * $point->getDifferenceTime() * 1000000 ) / $max_time) . '</td>';
+            echo '<td>' . $this->calculatProcens($point->getDifferenceTime(), $this->totalTime) . '</td>';
             echo '<td>' . $this->formatter->memoryToHuman( $point->getDifferenceMemory() ) . '</td>';
-            if($point->getDifferenceMemory() * 1000000 > 1) echo '<td>' . round((100 * $point->getDifferenceMemory() * 1000000) / $max_memory) . '</td>'; else echo '<td>00</td>';
+            echo '<td>' . $this->calculatProcens($point->getDifferenceMemory(), $this->totalMemory) . '</td>';
             echo '<td>' . $this->formatter->memoryToHuman( $point->getMemoryPeak() ). '</td>';
             echo '<td>' . $this->formatter->memoryToHuman( $point->getStopMemoryUsage() ). '</td>';
             echo '</tr>';

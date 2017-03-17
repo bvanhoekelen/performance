@@ -21,7 +21,7 @@ class CommandLineDisplay extends Display implements DisplayInterface
     public function displayFinishPoint(Point $point)
     {
 
-        $this->printPointLine($point->getLabel(), $point->getDifferenceTime(), $point->getDifferenceMemory());
+        $this->printPointLine($point->getLabel(), $point->getDifferenceTime(), $point->getDifferenceMemory(), $point->getMemoryPeak());
     }
 
     public function displayResults(Point $masterPoint, $pointStack)
@@ -74,31 +74,36 @@ class CommandLineDisplay extends Display implements DisplayInterface
 
     }
 
+    private function printHeadLine()
+    {
+        echo "   " . str_pad("Label", $this->commandLineWidth - 42) . "   " . str_pad("   Time", 11) . "   " . str_pad("  Memory", 11) . "   " . str_pad(" Peak", 11) .  PHP_EOL;
+        echo str_repeat("-", $this->commandLineWidth) . PHP_EOL;
+    }
+
     private function printFinishDown()
     {
+        $this->updateTotalTimeAndMemory();
+
         echo str_repeat("-", $this->commandLineWidth) . PHP_EOL;
         echo "   " . str_pad("Total " . count($this->pointStage)
-                . " taken", $this->commandLineWidth - 35)
-                . "   " . str_pad(" Time", 12, ' ',STR_PAD_LEFT)
-                . "   " . str_pad("  Memory", 12, ' ', STR_PAD_LEFT) .  PHP_EOL;
+                . " taken", $this->commandLineWidth - 42)
+                . "  " . $this->formatter->stringPad( $this->formatter->timeToHuman( $this->totalTime ), 11, ' ', STR_PAD_LEFT)
+                . "  " . str_pad( $this->formatter->memoryToHuman( $this->totalMemory ), 11, ' ', STR_PAD_LEFT)
+                . "  " . str_pad( $this->formatter->memoryToHuman( $this->masterPoint->getMemoryPeak() ), 11, ' ', STR_PAD_LEFT) .  PHP_EOL;
         echo PHP_EOL;
 
     }
 
-    private function printHeadLine()
-    {
-        echo "   " . str_pad("Label", $this->commandLineWidth - 35) . "   " . str_pad(" Time", 12) . "   " . str_pad("  Memory", 12) .  PHP_EOL;
-        echo str_repeat("-", $this->commandLineWidth) . PHP_EOL;
-    }
-
-    private function printPointLine($label, $time, $memory)
+    private function printPointLine($label, $time, $memoryUsage, $memoryPeak)
     {
         echo " > "
-            . str_pad(mb_strimwidth($label, 0, 42, '..'), $this->commandLineWidth - 35)
+            . str_pad(mb_strimwidth($label, 0, $this->commandLineWidth - 42, '..'), $this->commandLineWidth - 42)
             . " -"
-            . $this->formatter->stringPad( $this->formatter->timeToHuman( $time ), 14, " ")
+            . $this->formatter->stringPad( $this->formatter->timeToHuman( $time ), 11, " ")
             . " -"
-            . str_pad( $this->formatter->memoryToHuman( $memory ) , 14, " ", STR_PAD_LEFT) . PHP_EOL;
+            . str_pad( $this->formatter->memoryToHuman( $memoryUsage ) , 11, " ", STR_PAD_LEFT)
+            . " -"
+            . str_pad( $this->formatter->memoryToHuman( $memoryPeak ) , 11, " ", STR_PAD_LEFT) . PHP_EOL;
     }
 
     private function setCommandSize()
