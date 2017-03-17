@@ -98,11 +98,11 @@ class CommandLineDisplay extends Display implements DisplayInterface
     {
         echo " > "
             . str_pad(mb_strimwidth($label, 0, $this->commandLineWidth - 42, '..'), $this->commandLineWidth - 42)
-            . " -"
+            . " |"
             . $this->formatter->stringPad( $this->formatter->timeToHuman( $time ), 11, " ")
-            . " -"
+            . " |"
             . str_pad( $this->formatter->memoryToHuman( $memoryUsage ) , 11, " ", STR_PAD_LEFT)
-            . " -"
+            . " |"
             . str_pad( $this->formatter->memoryToHuman( $memoryPeak ) , 11, " ", STR_PAD_LEFT) . PHP_EOL;
     }
 
