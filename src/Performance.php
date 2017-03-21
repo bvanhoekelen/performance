@@ -17,7 +17,6 @@ class Performance implements PerformanceInterface
         return self::$performance;
     }
 
-
     /*
      * Set measuring point X
      *
