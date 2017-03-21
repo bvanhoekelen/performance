@@ -8,10 +8,6 @@ class Formatter {
 
     public function timeToHuman($microTime, $unit = 'auto', $decimals = 2)
     {
-        // to small
-        if($microTime < 0.000006)
-            return ' > 0.00 ms';
-
         if($unit == "auto")
         {
             if ($microTime > 1)
