@@ -20,7 +20,6 @@ class CommandLineDisplay extends Display
 
     public function displayFinishPoint(Point $point)
     {
-
         $this->printPointLine($point->getLabel(), $point->getDifferenceTime(), $point->getDifferenceMemory(), $point->getMemoryPeak());
     }
 
@@ -58,7 +57,7 @@ class CommandLineDisplay extends Display
         $this->setCommandSize();
         $this->clearScreen();
 
-
+        // Print art
         echo PHP_EOL;
         echo "  ___          __                                " . PHP_EOL;
         echo " | _ \___ _ _ / _|___ _ _ _ __  __ _ _ _  __ ___ " . PHP_EOL;
