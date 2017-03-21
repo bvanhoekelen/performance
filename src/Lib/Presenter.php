@@ -23,6 +23,8 @@ class Presenter {
         $this->setDisplay();
     }
 
+    // Triggers
+
     public function displayResults(Point $masterPoint, $pointStack)
     {
         $this->display->displayResults($masterPoint, $pointStack);
@@ -38,6 +40,8 @@ class Presenter {
         $this->display->displayFinishPoint($point);
     }
 
+    // Print format
+
     private function setPrintFormat()
     {
         if (php_sapi_name() == "cli")
@@ -45,6 +49,8 @@ class Presenter {
         else
             $this->printFormat = self::PRINT_FORMAT_WEB;
     }
+
+    // Display
 
     private function setDisplay()
     {
