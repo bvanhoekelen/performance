@@ -35,10 +35,10 @@ class Performance implements PerformanceInterface
      * @param string|null   $label
      * @return void
      */
-    public static function finish($label = null)
+    public static function finish()
     {
         $performance = self::getPerformance();
-        $performance->finish($label);
+        $performance->finish();
     }
 
     /*

@@ -39,11 +39,13 @@ class PerformanceHandler
      */
     public function point($label = null)
     {
-        if( ! $label)
-        {
-            $this->finishAll();
+        // Check if point already exists
+        $this->finishLastPoint();
+        $this->checkIfPointLabelExists($label);
+
+        // Set label
+        if(is_null($label))
             $label = 'Task ' . (count($this->pointStack) + 1);
-        }
 
         // Create point
         $point = new Point($label);
@@ -54,8 +56,10 @@ class PerformanceHandler
         // Trigger point
         $this->presenter->startPointTrigger($point);
 
-        return $point;
+        // Start point
+        $point->start();
 
+        return $point;
     }
 
     /*
@@ -64,12 +68,9 @@ class PerformanceHandler
      * @param string|null   $label
      * @return void
      */
-    public function finish($label = null)
+    public function finish()
     {
-        if($label)
-            $this->finishPointByLabel($label);
-        else
-            $this->finishAll();
+        $this->finishLastPoint();
     }
 
     /*
@@ -81,7 +82,7 @@ class PerformanceHandler
     public function results(array $config = [])
     {
         // Finish all
-        $this->finishAll();
+        $this->finishLastPoint();
 
         // Close master point
         $this->masterPoint->finish();
@@ -118,45 +119,35 @@ class PerformanceHandler
      *
      * @return void
      */
-    private function finishAll()
+    private function finishLastPoint()
     {
-        foreach ($this->pointStack as $pointId => $point)
+        if(count($this->pointStack))
         {
-            if($point->isActive())
-                $this->finishPoint($point);
+            // Get point
+            $point = end($this->pointStack);
+
+            // Finish point
+            $point->finish();
+
+            // Trigger presenter listener
+            $this->presenter->finishPointTrigger($point);
         }
     }
 
-    /*
-     * Finish point by label in the stack
-     *
-     * @param string    $label (point label)
-     *
-     * @return Boolean
-     */
-    private function finishPointByLabel($label)
+    private function checkIfPointLabelExists($label)
     {
-        $findLabel = false;
-        foreach ($this->pointStack as $pointId => $point)
+        $labelExists = false;
+        foreach ($this->pointStack as $point)
         {
-            if($pointId == $label)
+            if($point->getLabel() == $label)
             {
-                $findLabel = true;
-                $this->finishPoint($point);
+                $labelExists = true;
                 break;
             }
         }
 
-        return $findLabel;
-    }
-
-    private function finishPoint(Point $point)
-    {
-        // Finish point
-        $point->finish();
-
-        // Trigger presenter listener
-        $this->presenter->finishPointTrigger($point);
+        if($labelExists)
+            dd(" Label " . $label . " already exists! Choose new point label." );
     }
 
 }

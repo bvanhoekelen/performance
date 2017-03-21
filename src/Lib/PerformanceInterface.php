@@ -17,12 +17,11 @@ interface PerformanceInterface
     public static function point($label = null);
 
     /*
-     * Finish measuring point X
+     * Finish measuring point
      *
-     * @param string|null   $label
      * @return void
      */
-    public static function finish($label = null);
+    public static function finish();
 
     /*
      * Return test results
