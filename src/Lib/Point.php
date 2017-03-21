@@ -26,8 +26,12 @@ class Point
         // Set items
         $this->setActive(true);
         $this->setLabel($name);
-        $this->setStartTime($startTime);
-        $this->setStartMemoryUsage($startMemory);
+    }
+
+    public function start()
+    {
+        $this->setStartTime();
+        $this->setStartMemoryUsage();
     }
 
     public function finish()
