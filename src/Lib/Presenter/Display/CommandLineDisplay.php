@@ -8,6 +8,14 @@ class CommandLineDisplay extends Display
     private $firstCommandLineMessage = false;
     private $commandLineWidth;
     private $commandLineHeight;
+    private $optionLive = false;
+    private $printStack = [];
+
+    public function __construct()
+    {
+        $this->setOptions();
+        parent::__construct();
+    }
 
     public function displayStartPoint(Point $point)
     {
@@ -20,14 +28,41 @@ class CommandLineDisplay extends Display
 
     public function displayFinishPoint(Point $point)
     {
-        echo $this->printPointLine($point->getLabel(), $point->getDifferenceTime(), $point->getDifferenceMemory(), $point->getMemoryPeak());
+        $this->liveOrStack($this->printPointLine($point->getLabel(), $point->getDifferenceTime(), $point->getDifferenceMemory(), $point->getMemoryPeak()));
     }
 
     public function displayResults($pointStack)
     {
         $this->pointStage = $pointStack;
-
         $this->printFinishDown();
+        $this->printStack();
+    }
+
+    private function liveOrStack($line)
+    {
+        if($this->optionLive)
+            echo $line;
+        else
+            $this->printStack[] = $line;
+    }
+
+    private function printStack()
+    {
+        if( ! $this->optionLive)
+            foreach ($this->printStack as $line)
+            {
+                echo $line;
+            }
+    }
+
+    private function setOptions()
+    {
+        $shortopts = 'l::';
+        $longopts = ['live'];
+        $options = getopt($shortopts, $longopts);
+
+        // Set live option
+        $this->optionLive = (isset($options['l']) or isset($options['live'])) ? true : false;
     }
 
     private function color($color, $text)
@@ -56,16 +91,19 @@ class CommandLineDisplay extends Display
         $this->setCommandSize();
         $this->clearScreen();
 
+        // Live indication
+        $liveIndication = ($this->optionLive) ? $this->color('red', ' LIVE') : '';
+
         // Print art
-        echo PHP_EOL;
-        echo "  ___          __                                " . PHP_EOL;
-        echo " | _ \___ _ _ / _|___ _ _ _ __  __ _ _ _  __ ___ " . PHP_EOL;
-        echo " |  _/ -_) '_|  _/ _ \ '_| '  \/ _` | ' \/ _/ -_)" . PHP_EOL;
-        echo " |_| \___|_| |_| \___/_| |_|_|_\__,_|_||_\__\___|" . PHP_EOL;
-        echo PHP_EOL;
-        echo " Create by B. van hoekelen " . $this->color('green', 'v' . PerformanceHandler::VERSION)  . " PHP " . $this->color('green', 'v'. phpversion()) . PHP_EOL;
-        echo " Max memory " . ini_get("memory_limit") . " max, execution time " . ini_get('max_execution_time') . " sec on " . date('Y-m-d H:i:s') . PHP_EOL;
-        echo PHP_EOL;
+        $this->liveOrStack(PHP_EOL
+            . "  ___          __                                " . PHP_EOL
+            . " | _ \___ _ _ / _|___ _ _ _ __  __ _ _ _  __ ___ " . PHP_EOL
+            . " |  _/ -_) '_|  _/ _ \ '_| '  \/ _` | ' \/ _/ -_)" . PHP_EOL
+            . " |_| \___|_| |_| \___/_| |_|_|_\__,_|_||_\__\___|" . PHP_EOL
+            . PHP_EOL
+            . " Create by B. van hoekelen " . $this->color('green', 'v' . PerformanceHandler::VERSION)  . " PHP " . $this->color('green', 'v'. phpversion()) . $liveIndication . PHP_EOL
+            . " Max memory " . ini_get("memory_limit") . " max, execution time " . ini_get('max_execution_time') . " sec on " . date('Y-m-d H:i:s') . PHP_EOL
+            . PHP_EOL);
 
         // Print head
         $this->printHeadLine();
@@ -74,22 +112,21 @@ class CommandLineDisplay extends Display
 
     private function printHeadLine()
     {
-        echo "   " . str_pad("Label", $this->commandLineWidth - 42) . "   " . str_pad("   Time", 11) . "   " . str_pad("  Memory", 11) . "   " . str_pad(" Peak", 11) .  PHP_EOL;
-        echo str_repeat("-", $this->commandLineWidth) . PHP_EOL;
+        $this->liveOrStack("   " . str_pad("Label", $this->commandLineWidth - 42) . "   " . str_pad("   Time", 11) . "   " . str_pad("  Memory", 11) . "   " . str_pad(" Peak", 11) .  PHP_EOL
+        . str_repeat("-", $this->commandLineWidth) . PHP_EOL);
     }
 
     private function printFinishDown()
     {
         $this->updateTotalTimeAndMemory();
 
-        echo str_repeat("-", $this->commandLineWidth) . PHP_EOL;
-        echo "   " . str_pad("Total " . count($this->pointStage)
+        $this->liveOrStack( str_repeat("-", $this->commandLineWidth) . PHP_EOL
+            . "   " . str_pad("Total " . count($this->pointStage)
                 . " taken", $this->commandLineWidth - 42)
                 . "  " . $this->formatter->stringPad( $this->formatter->timeToHuman( $this->totalTime ), 11, ' ', STR_PAD_LEFT)
                 . "  " . str_pad( $this->formatter->memoryToHuman( $this->totalMemory ), 11, ' ', STR_PAD_LEFT)
-                . "  " . str_pad( $this->formatter->memoryToHuman( $this->totalMemoryPeak ), 11, ' ', STR_PAD_LEFT) .  PHP_EOL;
-        echo PHP_EOL;
-
+                . "  " . str_pad( $this->formatter->memoryToHuman( $this->totalMemoryPeak ), 11, ' ', STR_PAD_LEFT) .  PHP_EOL
+            . PHP_EOL);
     }
 
     private function printPointLine($label, $time, $memoryUsage, $memoryPeak)
