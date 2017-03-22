@@ -18,14 +18,6 @@
 - Live function » [how to use](#Command line options)
 - Easy to install » [instalation](#instalation)
 
-## Web preview
-<p align="center"><img src="/assets/raw/php-performance-tool-web-support.png" alt="PHP performance tool for web" /></p>
-
-## Command line preview
-<p align="center"><img src="/assets/raw/php-performance-tool-command-line.png" alt="PHP performance tool for command line" /></p>
-
-# Commands
-
 ## Easy to use
 Example code
 ```php
@@ -44,6 +36,14 @@ Performance::point();
 Performance::results();
 
 ```
+
+## Web preview
+<p align="center"><img src="/assets/raw/php-performance-tool-web-support.png" alt="PHP performance tool for web" /></p>
+
+## Command line preview
+<p align="center"><img src="/assets/raw/php-performance-tool-command-line.png" alt="PHP performance tool for command line" /></p>
+
+# Commands
 
 ## General commands
 Set measuring point with or without label
