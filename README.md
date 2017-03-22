@@ -1,11 +1,11 @@
 # PHP Performance tool
 
-[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000&style=flat-square)](https://github.com/bvanhoekelen/php-compressor/blob/master/LICENSE)
-[![Packagist Prerelease](https://img.shields.io/packagist/vpre/bvanhoekelen/php-performance.svg?style=flat-square)](https://packagist.org/packages/bvanhoekelen/php-performance)
-[![Packagist](https://img.shields.io/packagist/dt/bvanhoekelen/php-performance.svg?style=flat-square)](https://packagist.org/packages/bvanhoekelen/php-performance)
-[![Github issues](https://img.shields.io/github/issues/bvanhoekelen/php-performance.svg?style=flat-square)](https://github.com/bvanhoekelen/php-performance/issues)
-[![Travis branch](https://img.shields.io/travis/bvanhoekelen/php-performance/master.svg?style=flat-square)](https://travis-ci.org/bvanhoekelen/php-performance)
-[![Travis branch](https://img.shields.io/travis/bvanhoekelen/php-performance/develop.svg?style=flat-square)](https://travis-ci.org/bvanhoekelen/php-performance) Build: Master|Develop
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000&style=flat-square)](https://github.com/bvanhoekelen/performance/blob/master/LICENSE)
+[![Packagist Prerelease](https://img.shields.io/packagist/vpre/bvanhoekelen/performance.svg?style=flat-square)](https://packagist.org/packages/bvanhoekelen/performance)
+[![Packagist](https://img.shields.io/packagist/dt/bvanhoekelen/performance.svg?style=flat-square)](https://packagist.org/packages/bvanhoekelen/performance)
+[![Github issues](https://img.shields.io/github/issues/bvanhoekelen/performance.svg?style=flat-square)](https://github.com/bvanhoekelen/performance/issues)
+[![Travis branch](https://img.shields.io/travis/bvanhoekelen/performance/master.svg?style=flat-square)](https://travis-ci.org/bvanhoekelen/performance)
+[![Travis branch](https://img.shields.io/travis/bvanhoekelen/performance/develop.svg?style=flat-square)](https://travis-ci.org/bvanhoekelen/performance) Build: Master|Develop
 
 <p align="center"><img src="/assets/raw/php-performance-tool.png" alt="PHP performance tool" /></p>
 
@@ -82,15 +82,15 @@ $ php your_script.php --live
 ```
 
 # Help, docs and links
-- [Wiki](https://github.com/bvanhoekelen/php-performance/wiki)
-- [Packagist](https://packagist.org/packages/bvanhoekelen/php-performance)
+- [Wiki](https://github.com/bvanhoekelen/performance/wiki)
+- [Packagist](https://packagist.org/packages/bvanhoekelen/performance)
 
 # Instalation
 
 ## Install with Laravel
 Get PHP performance tool by running the composer command in the command line. 
 ```{r, engine='bash', count_lines}
- $ composer require bvanhoekelen/php-performance
+ $ composer require bvanhoekelen/performance
 ```
 
 Open your file for the performance test.
@@ -112,7 +112,7 @@ Performance::results();
 ## Install with composer
 Get PHP performance by running the composer command in the command line. 
 ```{r, engine='bash', count_lines}
- $ composer require bvanhoekelen/php-performance
+ $ composer require bvanhoekelen/performance
 ```
 
 Open your file for the performance test.
