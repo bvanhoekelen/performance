@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
     <testsuite name="Test interface">
-        <directory>./tests/Unit/</directory>
+        <directory>./tests/Unit/*.php</directory>
     </testsuite>
 </testsuites>
