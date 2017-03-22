@@ -50,7 +50,6 @@ class WebDisplay extends Display
         echo '<div class="performance">';
         if(count($this->pointStage) > 2)
         {
-
             echo'<table class="table-title">
                 <tr>
                     <td width="50%">' . $this->formatter->memoryToHuman($this->totalMemory) . '<br><span>Max memory ' . ini_get("memory_limit") . '</span></td>
@@ -71,19 +70,28 @@ class WebDisplay extends Display
             </tr>';
 
             foreach (array_slice($this->pointStage, 1) as $point) {
-                echo '<tr>';
-                echo '<td class="t-l">' . $point->getLabel() . '</td>';
-                echo '<td>' . $this->formatter->timeToHuman($point->getDifferenceTime()) . '</td>';
-                echo '<td>' . $this->calculatProcens($point->getDifferenceTime(), $this->totalTime) . '</td>';
-                echo '<td>' . $this->formatter->memoryToHuman($point->getDifferenceMemory()) . '</td>';
-                echo '<td>' . $this->calculatProcens($point->getDifferenceMemory(), $this->totalMemory) . '</td>';
-                echo '<td>' . $this->formatter->memoryToHuman($point->getMemoryPeak()) . '</td>';
-                echo '</tr>';
-            }
+                $line = '<tr>'
+                    . '<td class="t-l">' . $point->getLabel() . '</td>'
+                    . '<td>' . $this->formatter->timeToHuman($point->getDifferenceTime()) . '</td>'
+                    . '<td>' . $this->calculatProcens($point->getDifferenceTime(), $this->totalTime) . '</td>'
+                    . '<td>' . $this->formatter->memoryToHuman($point->getDifferenceMemory()) . '</td>'
+                    . '<td>' . $this->calculatProcens($point->getDifferenceMemory(), $this->totalMemory) . '</td>'
+                    . '<td>' . $this->formatter->memoryToHuman($point->getMemoryPeak()) . '</td>'
+                    . '</tr>';
 
+                // For real calibrate results fake printing
+                if( $point->getLabel() !== Point::POINT_CALIBRATE)
+                    echo $line;
+            }
             echo '</table>';
 
-            echo '<div class="table-more-info">Performance v' . PerformanceHandler::VERSION . ' PHP v' . phpversion() . ' on ' . date('Y-m-d H:i:s') . '</div>';
+            $calibratePoint = $this->pointStage[1];
+
+            echo '<div class="table-more-info">Performance v' . PerformanceHandler::VERSION
+                . ' PHP v' . phpversion() . ' on ' . date('Y-m-d H:i:s')
+                . '<br>Calibrate point: '
+                . $this->formatter->timeToHuman($calibratePoint->getDifferenceTime())
+                . '</div>';
         }
         else
             echo '<div class="table-more-info"> <h2>There are not point set</h2>Set your first point with <var>point</var> command:<br><code>Performance::point()</code>Final you can view the results with the <var>results</var> command:<br><code>Performance::results()</code></div>';
