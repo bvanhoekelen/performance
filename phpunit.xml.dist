@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true">
-    <php></php>
-
-    <testsuites>
-        <testsuite name="Test interface">
-            <directory>./tests/Unit/</directory>
-        </testsuite>
-    </testsuites>
-</phpunit>
+<testsuites>
+    <testsuite name="Test interface">
+        <directory>./tests/Unit/</directory>
+    </testsuite>
+</testsuites>
