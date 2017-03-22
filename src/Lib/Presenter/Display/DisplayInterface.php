@@ -17,5 +17,5 @@ interface DisplayInterface
     /*
      * Display results
      */
-    public function displayResults(Point $masterPoint, $pointStack);
+    public function displayResults($pointStack);
 }

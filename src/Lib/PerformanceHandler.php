@@ -14,11 +14,6 @@ class PerformanceHandler
     private $pointStack = [];
 
     /*
-     * Hold Point form the first to last measuring point
-     */
-    private $masterPoint;
-
-    /*
      *  Hold presenter
      */
     private $presenter;
@@ -27,7 +22,6 @@ class PerformanceHandler
     public function __construct()
     {
         // Setup first master point
-        $this->masterPoint = new Point('start');
         $this->presenter = new Presenter();
     }
 
@@ -84,24 +78,14 @@ class PerformanceHandler
         // Finish all
         $this->finishLastPoint();
 
-        // Close master point
-        $this->masterPoint->finish();
-
         // Add results to presenter
-        $this->presenter->displayResults($this->masterPoint, $this->pointStack);
+        $this->presenter->displayResults($this->pointStack);
     }
 
     public function getPoints()
     {
         return $this->pointStack;
     }
-
-    public function getMasterPoint()
-    {
-        return $this->masterPoint;
-    }
-
-    // Private
 
     /*
      * Add point to stack

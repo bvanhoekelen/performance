@@ -1,8 +1,6 @@
 <?php namespace Performance\Lib\Presenter\Display;
 
-use Performance\Lib\Presenter\Formatter;
 use Performance\Lib\Point;
-use Performance\Lib\Presenter;
 
 class WebDisplay extends Display
 {
@@ -15,10 +13,10 @@ class WebDisplay extends Display
 
     }
 
-    public function displayResults(Point $masterPoint, $pointStack)
+    public function displayResults($pointStack)
     {
-        $this->masterPoint = $masterPoint;
         $this->pointStage = $pointStack;
+        $this->updateTotalTimeAndMemory();
         $this->displayForWebAsHtml();
         $this->displayForWebAsConsole();
     }
@@ -43,7 +41,7 @@ class WebDisplay extends Display
 
     private function displayForWebAsHtml()
     {
-
+        // Set total time
         echo '<style>';
         include_once 'DisplayHtml.css';
         echo '</style>';
@@ -51,8 +49,8 @@ class WebDisplay extends Display
         echo '<div class="performance">
             <table class="table-title">
                 <tr>
-                    <td width="50%">' . $this->formatter->memoryToHuman( $this->masterPoint->getDifferenceMemory() ) . '<br><span>Max memory ' . ini_get("memory_limit") . '</span></td>
-                    <td width="50%">' . $this->formatter->timeToHuman( $this->masterPoint->getDifferenceTime() )  .  '<br><span>Max time ' . ini_get('max_execution_time') . ' sec</span></td>
+                    <td width="50%">' . $this->formatter->memoryToHuman( $this->totalMemory ) . '<br><span>Max memory ' . ini_get("memory_limit") . '</span></td>
+                    <td width="50%">' . $this->formatter->timeToHuman( $this->totalTime )  .  '<br><span>Max time ' . ini_get('max_execution_time') . ' sec</span></td>
                 </tr>
             </table>
             
@@ -68,9 +66,6 @@ class WebDisplay extends Display
                 <th width="18%">Memory peak</th>
                 <th width="18%">Memory max</th>
             </tr>';
-
-        // Set total time
-        $this->updateTotalTimeAndMemory();
 
         foreach ($this->pointStage as $point)
         {

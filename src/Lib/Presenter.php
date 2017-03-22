@@ -25,9 +25,9 @@ class Presenter {
 
     // Triggers
 
-    public function displayResults(Point $masterPoint, $pointStack)
+    public function displayResults($pointStack)
     {
-        $this->display->displayResults($masterPoint, $pointStack);
+        $this->display->displayResults($pointStack);
     }
 
     public function startPointTrigger(Point $point)

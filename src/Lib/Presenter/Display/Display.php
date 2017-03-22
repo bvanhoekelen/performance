@@ -5,11 +5,11 @@ use Performance\Lib\Presenter\Formatter;
 abstract class Display implements DisplayInterface
 {
     protected $pointStage;
-    protected $masterPoint;
     protected $formatter;
 
     protected $totalTime;
     protected $totalMemory;
+    protected $totalMemoryPeak;
 
     public function __construct()
     {
@@ -29,6 +29,7 @@ abstract class Display implements DisplayInterface
 
         $this->totalTime = $max_time;
         $this->totalMemory = $max_memory;
+        $this->totalMemoryPeak = memory_get_peak_usage(true);
     }
 
     public function calculatProcens($pointDifference, $total)
@@ -38,7 +39,7 @@ abstract class Display implements DisplayInterface
         if($pointDifference > 0)
             return round((100 * $pointDifference * $upCount ) / ($total * $upCount)) ;
         else
-            return '0.00';
+            return '0';
     }
 
 }

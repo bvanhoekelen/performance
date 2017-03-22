@@ -23,9 +23,8 @@ class CommandLineDisplay extends Display
         $this->printPointLine($point->getLabel(), $point->getDifferenceTime(), $point->getDifferenceMemory(), $point->getMemoryPeak());
     }
 
-    public function displayResults(Point $masterPoint, $pointStack)
+    public function displayResults($pointStack)
     {
-        $this->masterPoint = $masterPoint;
         $this->pointStage = $pointStack;
 
         $this->printFinishDown();
@@ -88,7 +87,7 @@ class CommandLineDisplay extends Display
                 . " taken", $this->commandLineWidth - 42)
                 . "  " . $this->formatter->stringPad( $this->formatter->timeToHuman( $this->totalTime ), 11, ' ', STR_PAD_LEFT)
                 . "  " . str_pad( $this->formatter->memoryToHuman( $this->totalMemory ), 11, ' ', STR_PAD_LEFT)
-                . "  " . str_pad( $this->formatter->memoryToHuman( $this->masterPoint->getMemoryPeak() ), 11, ' ', STR_PAD_LEFT) .  PHP_EOL;
+                . "  " . str_pad( $this->formatter->memoryToHuman( $this->totalMemoryPeak ), 11, ' ', STR_PAD_LEFT) .  PHP_EOL;
         echo PHP_EOL;
 
     }
