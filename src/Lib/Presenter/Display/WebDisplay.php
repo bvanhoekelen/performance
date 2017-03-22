@@ -64,10 +64,9 @@ class WebDisplay extends Display
                 <th width="17%">Memory usage</th>
                 <th width="5%">%</th>
                 <th width="18%">Memory peak</th>
-                <th width="18%">Memory max</th>
             </tr>';
 
-        foreach ($this->pointStage as $point)
+        foreach (array_slice($this->pointStage, 1) as $point)
         {
             echo '<tr>';
             echo '<td class="t-l">' . $point->getLabel() . '</td>';
@@ -76,7 +75,6 @@ class WebDisplay extends Display
             echo '<td>' . $this->formatter->memoryToHuman( $point->getDifferenceMemory() ) . '</td>';
             echo '<td>' . $this->calculatProcens($point->getDifferenceMemory(), $this->totalMemory) . '</td>';
             echo '<td>' . $this->formatter->memoryToHuman( $point->getMemoryPeak() ). '</td>';
-            echo '<td>' . $this->formatter->memoryToHuman( $point->getStopMemoryUsage() ). '</td>';
             echo '</tr>';
         }
 

@@ -21,7 +21,7 @@ abstract class Display implements DisplayInterface
         $max_time = 0;
         $max_memory = 0;
 
-        foreach ($this->pointStage as $point)
+        foreach (array_slice($this->pointStage, 2) as $point)
         {
             $max_time += $point->getDifferenceTime();
             $max_memory += $point->getDifferenceMemory();

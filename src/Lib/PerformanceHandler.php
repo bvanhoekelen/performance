@@ -1,5 +1,6 @@
 <?php namespace Performance\Lib;
 
+use Performance\Lib\Point;
 
 class PerformanceHandler
 {
@@ -23,6 +24,9 @@ class PerformanceHandler
     {
         // Setup first master point
         $this->presenter = new Presenter();
+
+        // Preload class point
+        $this->preload();
     }
 
     /*
@@ -39,7 +43,7 @@ class PerformanceHandler
 
         // Set label
         if(is_null($label))
-            $label = 'Task ' . (count($this->pointStack) + 1);
+            $label = 'Task ' . (count($this->pointStack) - 1);
 
         // Create point
         $point = new Point($label);
@@ -52,8 +56,6 @@ class PerformanceHandler
 
         // Start point
         $point->start();
-
-        return $point;
     }
 
     /*
@@ -132,6 +134,15 @@ class PerformanceHandler
 
         if($labelExists)
             dd(" Label " . $label . " already exists! Choose new point label." );
+    }
+
+    /*
+     * Preload wil setup te point class
+     */
+    private function preload()
+    {
+        $this->point( Point::POINT_PRELOAD );
+        $this->point( Point::POINT_CALIBRATE );
     }
 
 }

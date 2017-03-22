@@ -5,6 +5,9 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class Point
 {
+    const POINT_PRELOAD = '__POINT_PRELOAD';
+    const POINT_CALIBRATE = 'Calibrate point';
+
     private $active;
     private $label;
     private $startTime;

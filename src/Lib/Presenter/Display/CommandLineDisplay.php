@@ -20,7 +20,7 @@ class CommandLineDisplay extends Display
 
     public function displayFinishPoint(Point $point)
     {
-        $this->printPointLine($point->getLabel(), $point->getDifferenceTime(), $point->getDifferenceMemory(), $point->getMemoryPeak());
+        echo $this->printPointLine($point->getLabel(), $point->getDifferenceTime(), $point->getDifferenceMemory(), $point->getMemoryPeak());
     }
 
     public function displayResults($pointStack)
@@ -94,7 +94,8 @@ class CommandLineDisplay extends Display
 
     private function printPointLine($label, $time, $memoryUsage, $memoryPeak)
     {
-        echo " > "
+
+        $return = " > "
             . str_pad(mb_strimwidth($label, 0, $this->commandLineWidth - 42, '..'), $this->commandLineWidth - 42)
             . " |"
             . $this->formatter->stringPad( $this->formatter->timeToHuman( $time ), 11, " ")
@@ -102,6 +103,13 @@ class CommandLineDisplay extends Display
             . str_pad( $this->formatter->memoryToHuman( $memoryUsage ) , 11, " ", STR_PAD_LEFT)
             . " |"
             . str_pad( $this->formatter->memoryToHuman( $memoryPeak ) , 11, " ", STR_PAD_LEFT) . PHP_EOL;
+
+        // Preload and calculate
+        if($label === Point::POINT_PRELOAD)
+            return;
+
+        // Return line
+        return $return;
     }
 
     private function setCommandSize()
