@@ -72,10 +72,9 @@ class PerformanceHandler
     /*
      * Return test results
      *
-     * @param array|[]   $config
      * @return mixed
      */
-    public function results(array $config = [])
+    public function results()
     {
         // Finish all
         $this->finishLastPoint();

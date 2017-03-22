@@ -44,12 +44,11 @@ class Performance implements PerformanceInterface
     /*
      * Return test results
      *
-     * @param array|[]   $config
      * @return mixed
      */
-    public static function results(array $config = [])
+    public static function results()
     {
         $performance = self::getPerformance();
-        $performance->results($config);
+        $performance->results();
     }
 }
