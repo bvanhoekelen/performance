@@ -1,4 +1,4 @@
-# PHP Performance test tool
+# PHP Performance tool
 
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000&style=flat-square)](https://github.com/bvanhoekelen/php-compressor/blob/master/LICENSE)
 [![Packagist Prerelease](https://img.shields.io/packagist/vpre/bvanhoekelen/php-performance.svg?style=flat-square)](https://packagist.org/packages/bvanhoekelen/php-performance)
@@ -17,6 +17,14 @@
 - Switch automatically to terminal output
 - Live function » [how to use](#Command line options)
 - Easy to install » [instalation](#instalation)
+
+## Web preview
+<p align="center"><img src="/assets/raw/php-performance-tool-web-support.png" alt="PHP performance tool for web" /></p>
+
+## Command line preview
+<p align="center"><img src="/assets/raw/php-performance-tool-command-line.png" alt="PHP performance tool for command line" /></p>
+
+# Commands
 
 ## Easy to use
 Example code
