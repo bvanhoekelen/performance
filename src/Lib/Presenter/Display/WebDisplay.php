@@ -1,5 +1,6 @@
 <?php namespace Performance\Lib\Presenter\Display;
 
+use Performance\Lib\PerformanceHandler;
 use Performance\Lib\Point;
 
 class WebDisplay extends Display
@@ -46,11 +47,14 @@ class WebDisplay extends Display
         include_once 'DisplayHtml.css';
         echo '</style>';
 
-        echo '<div class="performance">
-            <table class="table-title">
+        echo '<div class="performance">';
+        if(count($this->pointStage) > 2)
+        {
+
+            echo'<table class="table-title">
                 <tr>
-                    <td width="50%">' . $this->formatter->memoryToHuman( $this->totalMemory ) . '<br><span>Max memory ' . ini_get("memory_limit") . '</span></td>
-                    <td width="50%">' . $this->formatter->timeToHuman( $this->totalTime )  .  '<br><span>Max time ' . ini_get('max_execution_time') . ' sec</span></td>
+                    <td width="50%">' . $this->formatter->memoryToHuman($this->totalMemory) . '<br><span>Max memory ' . ini_get("memory_limit") . '</span></td>
+                    <td width="50%">' . $this->formatter->timeToHuman($this->totalTime) . '<br><span>Max time ' . ini_get('max_execution_time') . ' sec on PHP ' . phpversion() . '</span></td>
                 </tr>
             </table>
             
@@ -66,17 +70,23 @@ class WebDisplay extends Display
                 <th width="18%">Memory peak</th>
             </tr>';
 
-        foreach (array_slice($this->pointStage, 1) as $point)
-        {
-            echo '<tr>';
-            echo '<td class="t-l">' . $point->getLabel() . '</td>';
-            echo '<td>' . $this->formatter->timeToHuman( $point->getDifferenceTime() ). '</td>';
-            echo '<td>' . $this->calculatProcens($point->getDifferenceTime(), $this->totalTime) . '</td>';
-            echo '<td>' . $this->formatter->memoryToHuman( $point->getDifferenceMemory() ) . '</td>';
-            echo '<td>' . $this->calculatProcens($point->getDifferenceMemory(), $this->totalMemory) . '</td>';
-            echo '<td>' . $this->formatter->memoryToHuman( $point->getMemoryPeak() ). '</td>';
-            echo '</tr>';
+            foreach (array_slice($this->pointStage, 1) as $point) {
+                echo '<tr>';
+                echo '<td class="t-l">' . $point->getLabel() . '</td>';
+                echo '<td>' . $this->formatter->timeToHuman($point->getDifferenceTime()) . '</td>';
+                echo '<td>' . $this->calculatProcens($point->getDifferenceTime(), $this->totalTime) . '</td>';
+                echo '<td>' . $this->formatter->memoryToHuman($point->getDifferenceMemory()) . '</td>';
+                echo '<td>' . $this->calculatProcens($point->getDifferenceMemory(), $this->totalMemory) . '</td>';
+                echo '<td>' . $this->formatter->memoryToHuman($point->getMemoryPeak()) . '</td>';
+                echo '</tr>';
+            }
+
+            echo '</table>';
+
+            echo '<div class="table-more-info">Performance v' . PerformanceHandler::VERSION . ' PHP v' . phpversion() . ' on ' . date('Y-m-d H:i:s') . '</div>';
         }
+        else
+            echo '<div class="table-more-info"> <h2>There are not point set</h2>Set your first point with <var>point</var> command:<br><code>Performance::point()</code>Final you can view the results with the <var>results</var> command:<br><code>Performance::results()</code></div>';
 
         echo '</div>';
     }

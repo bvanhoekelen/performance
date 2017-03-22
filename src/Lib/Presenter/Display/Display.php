@@ -36,7 +36,7 @@ abstract class Display implements DisplayInterface
     {
         $upCount = 1000000;
 
-        if($pointDifference > 0)
+        if($pointDifference > 0 and $total > 0)
             return round((100 * $pointDifference * $upCount ) / ($total * $upCount)) ;
         else
             return '0';

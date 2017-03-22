@@ -20,9 +20,9 @@
     border-top: solid 8px #e09a0f;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 540px) {
     body{
-        margin-bottom: 300px;
+        margin-bottom: 350px;
     }
     .performance {
         bottom: 0px;
@@ -65,9 +65,6 @@
 
 }
 
-
-
-
 .performance .table-point tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
@@ -79,4 +76,20 @@
 .performance .table-point td{
     padding: 4px;
     text-align: right;
+}
+
+.performance .table-more-info{
+    border-top: solid #ccc 2px;
+    color: #555;
+    padding: 14px 10px;
+    text-align: center;
+}
+
+.performance code {
+    background-color: #2b542c;
+    margin: 20px;
+    padding: 20px;
+    display: block;
+    background:#F8F8FF;
+    border:black dashed 1px;
 }
