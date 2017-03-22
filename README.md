@@ -21,7 +21,6 @@
 ## Easy to use
 Example code
 ```php
-
 // Add namespace at the top
 use Performance\Performance;
 
@@ -49,29 +48,23 @@ Performance::results();
 Set measuring point with or without label
 
 ```php
-
 Performance::point();
 
 or 
 
 Performance::point('point label');
-
 ```
 
 Finish previous measuring point 
 
 ```php
-
 Performance::finish();
-
 ```
 
 Finish all measuring points and return test results
 
 ```php
-
 Performance::results();
-
 ```
 
 ## Command line options
@@ -79,17 +72,13 @@ Performance::results();
 Run the performance test for the command line
 
 ```php
-
 // Normal
 $ php your_script.php
 ```
 Run the performance test `live` for the command line
-
 ```php
-
 // Live version
 $ php your_script.php --live 
-
 ```
 
 # Help, docs and links
@@ -106,7 +95,6 @@ Get PHP performance tool by running the composer command in the command line.
 
 Open your file for the performance test.
 ```php
-
 // Add namespace at the top
 use Performance\Performance;
 
@@ -119,7 +107,6 @@ Performance::point();
 
 // Finish all tasks and show test results
 Performance::results();
-
 ```
 
 ## Install with composer
@@ -130,7 +117,6 @@ Get PHP performance by running the composer command in the command line.
 
 Open your file for the performance test.
 ```php
-
 // Require vender autoload
 require_once('../vendor/autoload.php');
 
@@ -146,5 +132,4 @@ Performance::point();
 
 // Finish all tasks and show test results
 Performance::results();
-
 ```
