@@ -12,14 +12,19 @@ class NormalStaticSetupTest extends \PHPUnit_Framework_TestCase
 
     public function testStaticFunctionPoint()
     {
-        Performance::hoi();
+        Performance::point();
+        Performance::point();
+    }
+
+    public function testStaticFunctionPointWithLabel()
+    {
+        Performance::point('Label');
     }
 
     public function testStaticFunctionFinish()
     {
         Performance::finish();
     }
-
 
     public function testStaticFunctionResult()
     {
