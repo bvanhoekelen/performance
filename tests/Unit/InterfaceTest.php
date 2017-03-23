@@ -1,6 +1,6 @@
 <?php namespace Tests\Unit;
 
-class InterfaceTest extends \PHPUnit\Framework\TestCase
+class InterfaceTest extends \PHPUnit_Framework_TestCase
 {
     protected $stack;
 
