@@ -12,7 +12,7 @@ class NormalStaticSetupTest extends \PHPUnit_Framework_TestCase
 
     public function testStaticFunctionPoint()
     {
-        Performance::point();
+        Performance::hoi();
     }
 
     public function testStaticFunctionFinish()
