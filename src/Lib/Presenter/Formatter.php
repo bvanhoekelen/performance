@@ -12,7 +12,7 @@ class Formatter {
         {
             if ($microTime > 1)
                 $unit = 's';
-            if($microTime > 0.001)
+            elseif($microTime > 0.001)
                 $unit = 'ms';
             else
                 $unit = 'μs';
@@ -27,7 +27,7 @@ class Formatter {
                 return round($microTime * 1000, $decimals) . ' ' . $unit;
                 break;
             case 's':
-                return round($microTime * 1, $decimals) . ' ' . $unit;
+                return round($microTime * 1, $decimals) . '  ' . $unit;
                 break;
             default:
                 new ErrorMessage($this, 'Performance format ' . $unit . ' not exist');
