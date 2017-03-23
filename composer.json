@@ -1,6 +1,6 @@
 {
   "name": "bvanhoekelen/performance",
-  "description": "PHP performance tool support for Laravel and Composer",
+  "description": "PHP performance tool support Laravel and Composer for web, web console and command line interfaces. With built in export function to class, json and file.",
   "keywords": ["php", "performance", "performance tool", "php performance tool", "php-performance", "laravel", "compressor", "web", "terminal", "command line", "export", "memory", "time"],
   "license" : "Apache License 2.0",
   "authors" : [
