@@ -47,7 +47,7 @@ Performance::results();
 Set measuring point with or without label
 
 ```php
-Performance::point( <optioneel:label> );
+Performance::point( <optional:label> );
 ```
 
 Finish previous measuring point 
