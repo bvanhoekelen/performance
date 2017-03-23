@@ -37,7 +37,7 @@ class Formatter {
     // Creatis to cam-gists/memoryuse.php !!
     public function memoryToHuman($bytes, $unit = "", $decimals = 2)
     {
-        if($bytes == 0)
+        if($bytes <= 0)
             return '0.00 KB';
 
         $units = [
