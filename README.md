@@ -83,6 +83,7 @@ $ php your_script.php --live
 
 # Help, docs and links
 - [Wiki](https://github.com/bvanhoekelen/performance/wiki)
+- [Change log](https://github.com/bvanhoekelen/performance/blob/master/CHANGELOG.md)
 - [Packagist](https://packagist.org/packages/bvanhoekelen/performance)
 
 # Instalation
