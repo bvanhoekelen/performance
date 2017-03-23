@@ -21,7 +21,6 @@
 - Easy to install » [instalation](#instalation)
 
 ## Easy to use
-Example code
 ```php
 // Add namespace at the top
 use Performance\Performance;
