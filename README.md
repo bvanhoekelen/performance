@@ -17,7 +17,7 @@
 - Print information about PHP version, max exaction time and max memory
 - Measure time, memory usage and memory peak
 - Switch automatically between interfaces
-- Live function » [how to use](#command-line-options)
+- Live function » [how to use](#command-line)
 - Easy to install » [instalation](#instalation)
 
 ## Easy to use
@@ -63,7 +63,7 @@ Finish all measuring points and return test results
 Performance::results();
 ```
 
-## Run command line
+## Command line
 
 Run the performance test for the command line
 
@@ -71,9 +71,7 @@ Run the performance test for the command line
 // Normal
 $ php your_script.php
 
-// or
-
-// Live version
+// Or Live version
 $ php your_script.php --live 
 ```
 
