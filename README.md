@@ -12,10 +12,10 @@
 ## Highlight
 - Measure easily the performance of your PHP script across multiple platforms
 - Support for Laravel framework » [Laravel](https://laravel.com)
-- Support terminal and web console output
-- Export results to file or json string
-- Switch automatically to terminal output
-- Live function » [how to use](#Command line options)
+- Support interface web, web console and command line
+- Export results to class, file or json string
+- Switch automatically between interfaces
+- Live function » [how to use](#command_line_options)
 - Easy to install » [instalation](#instalation)
 
 ## Easy to use
