@@ -14,6 +14,8 @@
 - Support for Laravel framework » [Laravel](https://laravel.com)
 - Support interface web, web console and command line
 - Export results to class, file or json string
+- Print information about PHP version, max exaction time and max memory
+- Measure time, memory usage and memory peak
 - Switch automatically between interfaces
 - Live function » [how to use](#command-line-options)
 - Easy to install » [instalation](#instalation)
@@ -42,17 +44,11 @@ Performance::results();
 ## Command line preview
 <p align="center"><img src="/assets/raw/php-performance-tool-command-line.png" alt="PHP performance tool for command line" /></p>
 
-# Commands
-
-## General commands
+## Functions
 Set measuring point with or without label
 
 ```php
-Performance::point();
-
-or 
-
-Performance::point('point label');
+Performance::point( <optioneel:label> );
 ```
 
 Finish previous measuring point 
@@ -67,16 +63,16 @@ Finish all measuring points and return test results
 Performance::results();
 ```
 
-## Command line options
+## Run command line
 
 Run the performance test for the command line
 
 ```php
 // Normal
 $ php your_script.php
-```
-Run the performance test `live` for the command line
-```php
+
+// or
+
 // Live version
 $ php your_script.php --live 
 ```
