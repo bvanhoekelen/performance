@@ -15,7 +15,7 @@
 - Support interface web, web console and command line
 - Export results to class, file or json string
 - Switch automatically between interfaces
-- Live function » [how to use](#command_line_options)
+- Live function » [how to use](#command-line-options)
 - Easy to install » [instalation](#instalation)
 
 ## Easy to use
