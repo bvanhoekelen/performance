@@ -121,7 +121,7 @@ class CommandLineDisplay extends Display
         $this->updateTotalTimeAndMemory();
 
         $this->liveOrStack( str_repeat("-", $this->commandLineWidth) . PHP_EOL
-            . "   " . str_pad("Total " . count($this->pointStage)
+            . "   " . str_pad("Total " . (count($this->pointStage) - 2)
                 . " taken", $this->commandLineWidth - 42)
                 . "  " . $this->formatter->stringPad( $this->formatter->timeToHuman( $this->totalTime ), 11, ' ', STR_PAD_LEFT)
                 . "  " . str_pad( $this->formatter->memoryToHuman( $this->totalMemory ), 11, ' ', STR_PAD_LEFT)
