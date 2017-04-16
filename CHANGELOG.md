@@ -1,5 +1,9 @@
 # Change Log
 
+## [v1.0.4](https://github.com/bvanhoekelen/performance/tree/v1.0.4) - 2017-04-17
+### Changes
+- Imported typo Fixe form nunomaduro. Thanks!
+
 ## [v1.0.3](https://github.com/bvanhoekelen/performance/tree/v1.0.3) - 2017-04-16
 ### Added
 - Config system
