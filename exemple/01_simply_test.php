@@ -10,7 +10,6 @@ use Performance\Performance;
 /*
  * One simply performance check
  */
-
 Performance::point();
 
 // Run task A
