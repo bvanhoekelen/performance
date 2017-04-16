@@ -1,5 +1,6 @@
 <?php namespace Performance\Lib\Presenter\Display;
 
+use Performance\Config;
 use Performance\Lib\PerformanceHandler;
 use Performance\Lib\Point;
 
@@ -8,11 +9,12 @@ class CommandLineDisplay extends Display
     private $firstCommandLineMessage = false;
     private $commandLineWidth;
     private $commandLineHeight;
-    private $optionLive = false;
+    private $optionLive;            // Load form config
     private $printStack = [];
 
     public function __construct()
     {
+        $this->setConfig();
         $this->setOptions();
         parent::__construct();
     }
@@ -55,6 +57,11 @@ class CommandLineDisplay extends Display
             }
     }
 
+    private function setConfig()
+    {
+        $this->optionLive = Config::get(Config::CONSOLE_LIVE, $this->optionLive);
+    }
+
     private function setOptions()
     {
         $shortopts = 'l::';
@@ -62,7 +69,8 @@ class CommandLineDisplay extends Display
         $options = getopt($shortopts, $longopts);
 
         // Set live option
-        $this->optionLive = (isset($options['l']) or isset($options['live'])) ? true : false;
+        if(isset($options['l']) or isset($options['live']))
+            $this->optionLive = true;
     }
 
     private function color($color, $text)

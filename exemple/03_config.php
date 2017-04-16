@@ -6,6 +6,12 @@
 
 require_once('../vendor/autoload.php');
 use Performance\Performance;
+use Performance\Config;
+
+/*
+ * Set config item
+ */
+Config::set(Config::CONSOLE_LIVE, true);
 
 /*
  * One simply performance check

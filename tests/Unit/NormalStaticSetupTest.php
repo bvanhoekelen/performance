@@ -1,5 +1,6 @@
 <?php namespace Tests\Unit;
 
+use Performance\Config;
 use Performance\Performance;
 
 class NormalStaticSetupTest extends \PHPUnit_Framework_TestCase
@@ -7,7 +8,7 @@ class NormalStaticSetupTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-
+        Config::reset();
     }
 
     public function testStaticFunctionPoint()
