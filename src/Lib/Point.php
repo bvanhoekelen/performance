@@ -1,8 +1,5 @@
 <?php namespace Performance\Lib;
 
-
-use phpDocumentor\Reflection\Types\Boolean;
-
 class Point
 {
     const POINT_PRELOAD = '__POINT_PRELOAD';
