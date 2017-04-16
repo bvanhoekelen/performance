@@ -1,13 +1,11 @@
 <?php namespace Performance\Lib;
 
-use Performance\Lib\Point;
-
 class PerformanceHandler
 {
     /*
      * Version
      */
-    const VERSION = '1.0.2';
+    const VERSION = '1.0.3';
 
     /*
      * Hold point stack
@@ -87,6 +85,10 @@ class PerformanceHandler
     {
         return $this->pointStack;
     }
+
+//
+// PRIVATE
+//
 
     /*
      * Add point to stack

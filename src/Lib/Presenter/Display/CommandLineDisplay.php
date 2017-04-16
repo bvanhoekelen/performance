@@ -1,5 +1,6 @@
 <?php namespace Performance\Lib\Presenter\Display;
 
+use Performance\Config;
 use Performance\Lib\PerformanceHandler;
 use Performance\Lib\Point;
 
@@ -8,11 +9,12 @@ class CommandLineDisplay extends Display
     private $firstCommandLineMessage = false;
     private $commandLineWidth;
     private $commandLineHeight;
-    private $optionLive = false;
+    private $optionLive;            // Load form config
     private $printStack = [];
 
     public function __construct()
     {
+        $this->setConfig();
         $this->setOptions();
         parent::__construct();
     }
@@ -55,6 +57,11 @@ class CommandLineDisplay extends Display
             }
     }
 
+    private function setConfig()
+    {
+        $this->optionLive = Config::get(Config::CONSOLE_LIVE, $this->optionLive);
+    }
+
     private function setOptions()
     {
         $shortopts = 'l::';
@@ -62,7 +69,8 @@ class CommandLineDisplay extends Display
         $options = getopt($shortopts, $longopts);
 
         // Set live option
-        $this->optionLive = (isset($options['l']) or isset($options['live'])) ? true : false;
+        if(isset($options['l']) or isset($options['live']))
+            $this->optionLive = true;
     }
 
     private function color($color, $text)
@@ -94,10 +102,13 @@ class CommandLineDisplay extends Display
         // Live indication
         $liveIndication = ($this->optionLive) ? $this->color('red', ' LIVE') : '';
 
+        // Execution time
+        $textExecutionTime = (ini_get('max_execution_time') > 1) ? ini_get('max_execution_time') . ' sec' : 'unlimited';
+
         // Print art
         $this->liveOrStack(PHP_EOL
             . " Create by B. van hoekelen " . $this->color('green', 'v' . PerformanceHandler::VERSION)  . " PHP " . $this->color('green', 'v'. phpversion()) . $liveIndication . PHP_EOL
-            . " Max memory " . ini_get("memory_limit") . " max, execution time " . ini_get('max_execution_time') . " sec on " . date('Y-m-d H:i:s') . PHP_EOL
+            . " Max memory " . ini_get("memory_limit") . ", max execution time " . $textExecutionTime . " on " . date('Y-m-d H:i:s') . PHP_EOL
             . PHP_EOL);
 
         // Print head
