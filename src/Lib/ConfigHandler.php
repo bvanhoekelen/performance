@@ -39,7 +39,7 @@ class ConfigHandler
             return $default;
         else
             dd('Config item: "' . $item . '" does not exist! Use:',
-                $this->getAllConfigItemsNames());
+                $this->getAllItemNames());
     }
 
     /*
@@ -54,11 +54,11 @@ class ConfigHandler
             $this->configItems[$item] = $value;
         else
             dd('Config item: "' . $item . '" does not exist! You can only change:',
-                $this->getAllConfigItemsNames());
+                $this->getAllItemNames());
     }
 
 
-    public function getAllConfigItemsNames()
+    public function getAllItemNames()
     {
         return array_keys($this->configItems);
     }
