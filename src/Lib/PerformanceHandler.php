@@ -7,7 +7,7 @@ class PerformanceHandler
     /*
      * Version
      */
-    const VERSION = '1.0.2';
+    const VERSION = '1.0.3';
 
     /*
      * Hold point stack
