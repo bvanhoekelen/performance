@@ -50,10 +50,12 @@ class WebDisplay extends Display
         echo '<div class="performance">';
             if(count($this->pointStage) > 2)
             {
+                $textExecutionTime = (ini_get('max_execution_time') > 1) ? ini_get('max_execution_time') . ' sec' : 'unlimited';
+
                 echo'<table class="table-title">
                     <tr>
                         <td width="50%">' . $this->formatter->memoryToHuman($this->totalMemory) . '<br><span>Max memory ' . ini_get("memory_limit") . '</span></td>
-                        <td width="50%">' . $this->formatter->timeToHuman($this->totalTime) . '<br><span>Max time ' . ini_get('max_execution_time') . ' sec on PHP ' . phpversion() . '</span></td>
+                        <td width="50%">' . $this->formatter->timeToHuman($this->totalTime) . '<br><span>Max time ' . $textExecutionTime . ' on PHP ' . phpversion() . '</span></td>
                     </tr>
                 </table>
                 

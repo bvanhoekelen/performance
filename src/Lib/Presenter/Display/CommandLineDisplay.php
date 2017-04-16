@@ -102,10 +102,13 @@ class CommandLineDisplay extends Display
         // Live indication
         $liveIndication = ($this->optionLive) ? $this->color('red', ' LIVE') : '';
 
+        // Execution time
+        $textExecutionTime = (ini_get('max_execution_time') > 1) ? ini_get('max_execution_time') . ' sec' : 'unlimited';
+
         // Print art
         $this->liveOrStack(PHP_EOL
             . " Create by B. van hoekelen " . $this->color('green', 'v' . PerformanceHandler::VERSION)  . " PHP " . $this->color('green', 'v'. phpversion()) . $liveIndication . PHP_EOL
-            . " Max memory " . ini_get("memory_limit") . " max, execution time " . ini_get('max_execution_time') . " sec on " . date('Y-m-d H:i:s') . PHP_EOL
+            . " Max memory " . ini_get("memory_limit") . ", max execution time " . $textExecutionTime . " on " . date('Y-m-d H:i:s') . PHP_EOL
             . PHP_EOL);
 
         // Print head
