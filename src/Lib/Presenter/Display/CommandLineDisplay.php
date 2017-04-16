@@ -107,7 +107,7 @@ class CommandLineDisplay extends Display
 
         // Print art
         $this->liveOrStack(PHP_EOL
-            . " Create by B. van hoekelen " . $this->color('green', 'v' . PerformanceHandler::VERSION)  . " PHP " . $this->color('green', 'v'. phpversion()) . $liveIndication . PHP_EOL
+            . " Created by B. van hoekelen " . $this->color('green', 'v' . PerformanceHandler::VERSION)  . " PHP " . $this->color('green', 'v'. phpversion()) . $liveIndication . PHP_EOL
             . " Max memory " . ini_get("memory_limit") . ", max execution time " . $textExecutionTime . " on " . date('Y-m-d H:i:s') . PHP_EOL
             . PHP_EOL);
 
