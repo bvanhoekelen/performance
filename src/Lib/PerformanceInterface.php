@@ -30,5 +30,21 @@ interface PerformanceInterface
      */
     public static function results();
 
+    /*
+     * Change config items
+     *
+     * @param
+     * @return mixed
+     */
+    public static function config($configItem);
+
+    /*
+     * Change single config item
+     *
+     * @param string    $item
+     * @param mixed     $value
+     * @return mixed
+     */
+    public static function changeConfig($item, $value);
 
 }
