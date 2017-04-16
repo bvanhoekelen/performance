@@ -96,11 +96,6 @@ class CommandLineDisplay extends Display
 
         // Print art
         $this->liveOrStack(PHP_EOL
-            . "  ___          __                                " . PHP_EOL
-            . " | _ \___ _ _ / _|___ _ _ _ __  __ _ _ _  __ ___ " . PHP_EOL
-            . " |  _/ -_) '_|  _/ _ \ '_| '  \/ _` | ' \/ _/ -_)" . PHP_EOL
-            . " |_| \___|_| |_| \___/_| |_|_|_\__,_|_||_\__\___|" . PHP_EOL
-            . PHP_EOL
             . " Create by B. van hoekelen " . $this->color('green', 'v' . PerformanceHandler::VERSION)  . " PHP " . $this->color('green', 'v'. phpversion()) . $liveIndication . PHP_EOL
             . " Max memory " . ini_get("memory_limit") . " max, execution time " . ini_get('max_execution_time') . " sec on " . date('Y-m-d H:i:s') . PHP_EOL
             . PHP_EOL);
