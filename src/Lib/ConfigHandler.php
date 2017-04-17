@@ -78,7 +78,7 @@ class ConfigHandler
 
             // Determinable stat on ENV
             if(isset($split[1]) and $split[0] == 'ENV' and function_exists('env'))
-                $this->configItems[Config::DISABLE_TOOL] = (bool) env($split[1]);
+                $this->configItems[Config::DISABLE_TOOL] =  (env($split[1])) ? false : true; // true is false !
             else
                 dd('Config::DISABLE_TOOL value string not supported! Check if ENV and value exists', $value, $split);
         }
