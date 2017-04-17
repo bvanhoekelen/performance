@@ -8,6 +8,7 @@ class Config implements ConfigInterface
     CONST CONSOLE_LIVE = 'consoleLive';                 // Determined if the console results are live or not
     CONST POINT_LABEL_LTRIM = 'pointLabelLtrim';        // Call ltrim function on label
     CONST POINT_LABEL_RTRIM = 'pointLabelRtrim';        // Call rtrim function on label
+    CONST DISABLE_TOOL = 'disableTool';                 // Disable tool for production
 
     /*
      * Create a config instance
