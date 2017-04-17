@@ -19,6 +19,7 @@
 - Switch automatically between interfaces
 - Live function » [how to use](#command-line)
 - Easy to install » [instalation](#instalation)
+- Clear and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
 
 ## Easy to use
 ```php
