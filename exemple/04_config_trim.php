@@ -37,7 +37,7 @@ class Foo
         sleep(1);
         //
 
-        // Finish point Task C
+        // Finish point Task A
         Performance::finish();
     }
 
