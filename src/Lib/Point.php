@@ -1,5 +1,7 @@
 <?php namespace Performance\Lib;
 
+use Performance\Config;
+
 class Point
 {
     const POINT_PRELOAD = '__POINT_PRELOAD';
@@ -129,6 +131,16 @@ class Point
      */
     public function setLabel($label)
     {
+        // Run ltrim
+        $configLtrim = Config::get(Config::POINT_LABEL_LTRIM);
+        if($configLtrim)
+            $label = ltrim($label, $configLtrim);
+
+        // Run Rtrim
+        $configRtrim = Config::get(Config::POINT_LABEL_RTRIM);
+        if($configRtrim)
+            $label = rtrim($label, $configRtrim);
+
         $this->label = $label;
     }
 
