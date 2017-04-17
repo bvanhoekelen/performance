@@ -17,6 +17,8 @@ class ConfigHandler
         // Set default configs
         $this->configItems = [
             Config::CONSOLE_LIVE => false,
+            Config::POINT_LABEL_LTRIM => false,
+            Config::POINT_LABEL_RTRIM => false,
         ];
     }
 
