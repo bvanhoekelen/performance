@@ -34,7 +34,8 @@ class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
 
         //
         // Run code
-        sleep(1);
+//        sleep(1);
+        usleep(2000);
         //
 
         // Finish point Task C
@@ -48,7 +49,7 @@ class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
 
         //
         // Run code
-        sleep(1);
+        usleep(2000);
         //
 
         // Finish point Task B
@@ -62,6 +63,7 @@ class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
 
         //
         // Run code
+        usleep(2000);
         //
 
         // Finish point Task C
