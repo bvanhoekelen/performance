@@ -2,8 +2,8 @@
 
 ## [v1.0.5](https://github.com/bvanhoekelen/performance/tree/v1.0.4) - 2017-04-17
 ### Added
-- Config item: POINT_LABEL_LTRIM_LIVE see wiki for info
-- Config item: POINT_LABEL_RTRIM_LIVE see wiki for info
+- Config item: POINT_LABEL_LTRIM see wiki for info
+- Config item: POINT_LABEL_RTRIM see wiki for info
 
 ## [v1.0.4](https://github.com/bvanhoekelen/performance/tree/v1.0.4) - 2017-04-17
 ### Changes
