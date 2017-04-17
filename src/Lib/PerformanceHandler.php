@@ -5,7 +5,7 @@ class PerformanceHandler
     /*
      * Version
      */
-    const VERSION = '1.0.4';
+    const VERSION = '1.0.5';
 
     /*
      * Hold point stack
@@ -113,11 +113,14 @@ class PerformanceHandler
             // Get point
             $point = end($this->pointStack);
 
-            // Finish point
-            $point->finish();
+            if($point->isActive())
+            {
+                // Finish point
+                $point->finish();
 
-            // Trigger presenter listener
-            $this->presenter->finishPointTrigger($point);
+                // Trigger presenter listener
+                $this->presenter->finishPointTrigger($point);
+            }
         }
     }
 
