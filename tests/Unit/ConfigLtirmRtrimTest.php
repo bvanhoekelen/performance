@@ -1,19 +1,17 @@
-<?php
+<?php namespace Tests\Unit;
 
-/*
- * Require Performance
- */
-
-require_once('../vendor/autoload.php');
 use Performance\Performance;
 use Performance\Config;
 
-// Bootstrap class
-$foo = new Foo();
-
-class Foo
+class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
 {
-    public function __construct()
+
+    protected function setUp()
+    {
+        Config::reset();
+    }
+
+    public function testStaticFunctionPoint()
     {
         // You can specify the characters you want to strip
         Config::set(Config::POINT_LABEL_LTRIM, 'synchronize');
@@ -26,6 +24,8 @@ class Foo
         // Finish all tasks and show test results
         Performance::results();
     }
+
+    // Create task
 
     public function synchronizeTaskARun()
     {
@@ -62,7 +62,6 @@ class Foo
 
         //
         // Run code
-        sleep(1);
         //
 
         // Finish point Task C
