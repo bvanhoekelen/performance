@@ -26,7 +26,7 @@ class Performance implements PerformanceInterface
     public static function point($label = null)
     {
         // Check DISABLE_TOOL
-        if(Config::get(Config::DISABLE_TOOL))
+        if( ! Config::get(Config::ENABLE_TOOL))
             return;
 
         // Run
@@ -43,7 +43,7 @@ class Performance implements PerformanceInterface
     public static function finish()
     {
         // Check DISABLE_TOOL
-        if(Config::get(Config::DISABLE_TOOL))
+        if( ! Config::get(Config::ENABLE_TOOL))
             return;
 
         $performance = self::getPerformance();
@@ -58,7 +58,7 @@ class Performance implements PerformanceInterface
     public static function results()
     {
         // Check DISABLE_TOOL
-        if(Config::get(Config::DISABLE_TOOL))
+        if( ! Config::get(Config::ENABLE_TOOL))
             return;
 
         $performance = self::getPerformance();

@@ -19,7 +19,7 @@ class ConfigHandler
             Config::CONSOLE_LIVE => false,
             Config::POINT_LABEL_LTRIM => false,
             Config::POINT_LABEL_RTRIM => false,
-            Config::DISABLE_TOOL => false,
+            Config::ENABLE_TOOL => true,
         ];
     }
 
@@ -53,8 +53,8 @@ class ConfigHandler
      */
     public function set($item, $value)
     {
-        if($item == Config::DISABLE_TOOL)
-            $this->setItemDisableTool($value);
+        if($item == Config::ENABLE_TOOL)
+            $this->setItemEnableTool($value);
         elseif( isset($this->configItems[$item]) )
             $this->configItems[$item] = $value;
         else
@@ -68,17 +68,17 @@ class ConfigHandler
         return array_keys($this->configItems);
     }
 
-    private function setItemDisableTool($value)
+    private function setItemEnableTool($value)
     {
         if(is_bool($value))
-            $this->configItems[Config::DISABLE_TOOL] = $value;
+            $this->configItems[Config::ENABLE_TOOL] = $value;
         elseif(is_string($value))
         {
             $split = explode(':', $value);
 
             // Determinable stat on ENV
             if(isset($split[1]) and $split[0] == 'ENV' and function_exists('env'))
-                $this->configItems[Config::DISABLE_TOOL] =  (env($split[1])) ? false : true; // true is false !
+                $this->configItems[Config::ENABLE_TOOL] = (bool) env($split[1]);
             else
                 dd('Config::DISABLE_TOOL value string not supported! Check if ENV and value exists', $value, $split);
         }

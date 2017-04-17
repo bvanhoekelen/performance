@@ -3,7 +3,7 @@
 use Performance\Performance;
 use Performance\Config;
 
-class ConfigDisableToolTest extends \PHPUnit_Framework_TestCase
+class ConfigEnableToolTest extends \PHPUnit_Framework_TestCase
 {
 
     protected function setUp()
@@ -14,7 +14,7 @@ class ConfigDisableToolTest extends \PHPUnit_Framework_TestCase
     public function testStaticFunctionPoint()
     {
         // You can specify the characters you want to strip
-        Config::set(Config::DISABLE_TOOL, true);
+        Config::set(Config::ENABLE_TOOL, false);
 
         $this->taskA();
         $this->taskB();

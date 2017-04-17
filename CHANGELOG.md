@@ -2,7 +2,7 @@
 
 ## [v1.0.6](https://github.com/bvanhoekelen/performance/tree/v1.0.6) - 2017-04-17
 ### Added
-- Config item: DISABLE_TOOL see wiki for info
+- Config item: ENABLE_TOOL see wiki for info
 
 ## [v1.0.5](https://github.com/bvanhoekelen/performance/tree/v1.0.5) - 2017-04-17
 ### Added
