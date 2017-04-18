@@ -19,7 +19,8 @@
 - Switch automatically between interfaces
 - Live function » [how to use](#command-line)
 - Easy to install » [instalation](#instalation)
-- Clear and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
+- Cleary and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
+- Love feedback » [backlog](https://github.com/bvanhoekelen/performance/blob/develop/BACKLOG.md)
 
 ## Easy to use
 ```php
@@ -77,13 +78,13 @@ $ php your_script.php --live
 
 # Help, docs and links
 - [Wiki](https://github.com/bvanhoekelen/performance/wiki)
-- [Backlog](https://github.com/bvanhoekelen/performance/blob/develop/README.md)
+- [Backlog](https://github.com/bvanhoekelen/performance/blob/develop/BACKLOG.md)
 - [Change log](https://github.com/bvanhoekelen/performance/blob/master/CHANGELOG.md)
 - [Packagist](https://packagist.org/packages/bvanhoekelen/performance)
 
 ## Backlog & Feedback
-If you have any suggestions to improve this performance tool? Please add your feature, bug or improvement to the [BACKLOG.dm](https://github.com/bvanhoekelen/performance/blob/develop/README.md).
-- [Open backlog](https://github.com/bvanhoekelen/performance/blob/develop/README.md)
+If you have any suggestions to improve this performance tool? Please add your feature, bug or improvement to the [BACKLOG.dm](https://github.com/bvanhoekelen/performance/blob/develop/BACKLOG.md).
+- [Open backlog](https://github.com/bvanhoekelen/performance/blob/develop/BACKLOG.md)
 
 
 # Instalation
