@@ -83,9 +83,9 @@ $ php your_script.php --live
 - [Packagist](https://packagist.org/packages/bvanhoekelen/performance)
 
 ## Backlog & Feedback
-If you have any suggestions to improve this performance tool? Please add your feature, bug or improvement to the [BACKLOG.dm](https://github.com/bvanhoekelen/performance/blob/master/BACKLOG.md).
+If you have any suggestions to improve this performance tool? Please add your feature, bug or improvement to the [BACKLOG.dm](https://github.com/bvanhoekelen/performance/blob/master/BACKLOG.md). Or create a [issues](https://github.com/bvanhoekelen/performance/issues).
 - [Open backlog](https://github.com/bvanhoekelen/performance/blob/master/BACKLOG.md)
-
+- [Create issues](https://github.com/bvanhoekelen/performance/issues)
 
 # Instalation
 
