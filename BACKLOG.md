@@ -1,10 +1,11 @@
 # Product backlog
-If you have any suggestions to improve this performance tool please add your feature [F000](), bug [B000]() or improvement [I000]() to the backlog.
+If you have any suggestions to improve this performance tool? Please add your feature [F000](), bug [B000]() or improvement [I000]() to the backlog.
 
 - [Backlog](#backlog)
     - [Bug](#bug)
     - [Improvement](#improvement)
     - [Feature](#feature)
+- [Description](#description)
 - [Done](#done)
 
 ***
@@ -21,7 +22,7 @@ Create your card names
 1. [F004](#F004) Log database queries
     - Time and query
 
-# Backlog description
+# Description
 
 ## [F001]()
 - Add function exactly() for very precisely results
