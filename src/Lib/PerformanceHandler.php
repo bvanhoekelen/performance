@@ -20,7 +20,7 @@ class PerformanceHandler
 
     public function __construct()
     {
-        // Setup first master point
+        // Setup first point
         $this->presenter = new Presenter();
 
         // Preload class point
