@@ -73,26 +73,6 @@ class CommandLineDisplay extends Display
             $this->optionLive = true;
     }
 
-    private function color($color, $text)
-    {
-        $colorCode = [];
-
-        $colorCode['black'] = 30;
-        $colorCode['red'] = 31;
-        $colorCode['green'] = 32;
-        $colorCode['yellow'] = 33;
-        $colorCode['blue'] = 34;
-        $colorCode['purple'] = 35;
-        $colorCode['cyan'] = 36;
-        $colorCode['white'] = 37;
-
-        if(isset($colorCode[$color]))
-            return "\e[" . $colorCode[$color] . "m" . $text . "\e[0m";
-        else
-            dd("Color " . $color . " not exists", $colorCode);
-
-    }
-
     private function printStartUp()
     {
         // Get size
@@ -100,14 +80,16 @@ class CommandLineDisplay extends Display
         $this->clearScreen();
 
         // Live indication
-        $liveIndication = ($this->optionLive) ? $this->color('red', ' LIVE') : '';
+        $liveIndication = ($this->optionLive) ? terminal_style(' LIVE ', 'gray', 'red') : '';
 
         // Execution time
         $textExecutionTime = (ini_get('max_execution_time') > 1) ? ini_get('max_execution_time') . ' sec' : 'unlimited';
 
         // Print art
         $this->liveOrStack(PHP_EOL
-            . " Created by B. van hoekelen " . $this->color('green', 'v' . PerformanceHandler::VERSION)  . " PHP " . $this->color('green', 'v'. phpversion()) . $liveIndication . PHP_EOL
+//            . " " . $this->color('green', 'Php performance tool') . $liveIndication . PHP_EOL
+            . " " . terminal_style('     PHP PERFORMANCE TOOL     ', null, 'gray') . $liveIndication . PHP_EOL
+            . " Created by B. van Hoekelen version " .  PerformanceHandler::VERSION . " PHP v" . phpversion() . PHP_EOL
             . " Max memory " . ini_get("memory_limit") . ", max execution time " . $textExecutionTime . " on " . date('Y-m-d H:i:s') . PHP_EOL
             . PHP_EOL);
 
