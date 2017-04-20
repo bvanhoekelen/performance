@@ -18,7 +18,7 @@
 - Measure time, memory usage and memory peak
 - Switch automatically between interfaces
 - Live function » [how to use](#command-line)
-- Easy to install » [instalation](#instalation)
+- Easy to install » [installation](#installation)
 - Cleary and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
 - Love feedback » [backlog](https://github.com/bvanhoekelen/performance/blob/master/BACKLOG.md) or [create issues](https://github.com/bvanhoekelen/performance/issues)
 
@@ -87,10 +87,10 @@ If you have any suggestions to improve this performance tool? Please add your fe
 - [Open backlog](https://github.com/bvanhoekelen/performance/blob/master/BACKLOG.md)
 - [Create issues](https://github.com/bvanhoekelen/performance/issues)
 
-# Instalation
+# Installation
 
 ## Install with Laravel
-Get PHP performance tool by running the composer command in the command line. 
+Get PHP performance tool by running the Composer command in the command line. 
 ```{r, engine='bash', count_lines}
  $ composer require bvanhoekelen/performance
 ```
@@ -111,8 +111,8 @@ Performance::point();
 Performance::results();
 ```
 
-## Install with composer
-Get PHP performance by running the composer command in the command line. 
+## Install with Composer
+Get PHP performance by running the Composer command in the command line. 
 ```{r, engine='bash', count_lines}
  $ composer require bvanhoekelen/performance
 ```
