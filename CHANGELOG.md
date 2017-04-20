@@ -1,5 +1,9 @@
 # Change Log
 
+## [v1.0.7](https://github.com/bvanhoekelen/performance/tree/v1.0.7) - 2017-04-20
+### Change
+- Terminal view: redesign, add tool name and change background color
+
 ## [v1.0.6](https://github.com/bvanhoekelen/performance/tree/v1.0.6) - 2017-04-17
 ### Added
 - Config item: ENABLE_TOOL see wiki for info
