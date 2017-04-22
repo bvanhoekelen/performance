@@ -3,7 +3,6 @@
 use Performance\Config;
 use Performance\Lib\PerformanceHandler;
 use Performance\Lib\Point;
-use Prophecy\Exception\Exception;
 
 class CommandLineDisplay extends Display
 {
@@ -41,6 +40,8 @@ class CommandLineDisplay extends Display
         $this->pointStage = $pointStack;
         $this->printFinishDown();
         $this->printStack();
+
+        $this->printQueryLogFooter();
     }
 
     private function liveOrStack($line)
@@ -142,6 +143,13 @@ class CommandLineDisplay extends Display
 
         // Return line
         return $return;
+    }
+
+    private function printQueryLogFooter()
+    {
+
+        dd($this->pointStage);
+
     }
 
     private function setCommandSize()

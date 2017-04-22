@@ -37,19 +37,17 @@ class Foo
         // Set point Task A
         Performance::point(__FUNCTION__);
 
-
-
         $users = DB::table('user')->select('*')
             ->where('id', '<=', '1077')
             ->get();
 
-        $user = DB::table('user')->select('*')
-            ->where('name', 'Bart')
-            ->first();
+//        $user = DB::table('user')->select('*')
+//            ->where('name', 'Bart')
+//            ->first();
 
-        $user->email = 'bart@gmail.com';
-
-        $user->save();
+//        $user->email = 'bart@gmail.com';
+//
+//        $user->save();
 
 //        $users = DB::table('user')->select('*')
 //            ->where('id', '<=', '1072')

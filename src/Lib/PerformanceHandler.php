@@ -1,6 +1,7 @@
 <?php namespace Performance\Lib;
 
 use Performance\Config;
+use Performance\Lib\Holders\QueryLogHolder;
 
 class PerformanceHandler
 {
@@ -175,9 +176,7 @@ class PerformanceHandler
             return;
 
         // Set check query log state
-        $value = Config::get(Config::QUERY_LOG);
-
-        if($value)
+        if(Config::get(Config::QUERY_LOG))
         {
             if( ! class_exists('\Illuminate\Support\Facades\DB'))
                 dd('The DB class form Laravel illuminate does not exists. (class_exists(\'\Illuminate\Support\Facades\DB\'))');
