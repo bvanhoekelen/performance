@@ -9,6 +9,7 @@ class Config implements ConfigInterface
     CONST POINT_LABEL_LTRIM = 'pointLabelLtrim';        // Call ltrim function on label
     CONST POINT_LABEL_RTRIM = 'pointLabelRtrim';        // Call rtrim function on label
     CONST ENABLE_TOOL = 'enableTool';                   // Disable tool for production
+    CONST QUERY_LOG = 'queryLog';                       // Enable query log
 
     /*
      * Create a config instance

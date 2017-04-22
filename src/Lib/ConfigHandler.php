@@ -20,6 +20,7 @@ class ConfigHandler
             Config::POINT_LABEL_LTRIM => false,
             Config::POINT_LABEL_RTRIM => false,
             Config::ENABLE_TOOL => true,
+            Config::QUERY_LOG => false,
         ];
     }
 
@@ -55,6 +56,8 @@ class ConfigHandler
     {
         if($item == Config::ENABLE_TOOL)
             $this->setItemEnableTool($value);
+        elseif($item == Config::QUERY_LOG)
+            $this->setItemQueryLog($value);
         elseif( isset($this->configItems[$item]) )
             $this->configItems[$item] = $value;
         else
@@ -85,6 +88,18 @@ class ConfigHandler
         else
             dd('Config::DISABLE_TOOL value not supported!', $value);
 
+    }
+
+    private function setItemQueryLog($value)
+    {
+        if(is_bool($value))
+            $this->configItems[Config::QUERY_LOG] = $value;
+        elseif(is_string($value))
+        {
+            $this->configItems[Config::QUERY_LOG] = $value;
+        }
+        else
+            dd('Config::ENABLE_TOOL value not supported!', $value);
     }
 
 }
