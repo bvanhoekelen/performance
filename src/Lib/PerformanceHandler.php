@@ -1,5 +1,7 @@
 <?php namespace Performance\Lib;
 
+use Performance\Config;
+
 class PerformanceHandler
 {
     /*
@@ -16,6 +18,16 @@ class PerformanceHandler
      *  Hold presenter
      */
     private $presenter;
+
+    /*
+     * Hold state of the query log
+     *
+     * null = not set
+     * false = config is false
+     * true = query log is set
+     */
+    public $queryLogState = null;
+    public $queryLogStack = [];
 
 
     public function __construct()
@@ -38,6 +50,7 @@ class PerformanceHandler
         // Check if point already exists
         $this->finishLastPoint();
         $this->checkIfPointLabelExists($label);
+        $this->checkQueryLogState();
 
         // Set label
         if(is_null($label))
@@ -115,6 +128,9 @@ class PerformanceHandler
 
             if($point->isActive())
             {
+                // Set query log items
+                $this->setQueryLogItemsToPoint($point);
+
                 // Finish point
                 $point->finish();
 
@@ -149,4 +165,54 @@ class PerformanceHandler
         $this->point( Point::POINT_CALIBRATE );
     }
 
+    /*
+     * Check if query log is possible
+     */
+    private function checkQueryLogState()
+    {
+        // Check if state is set
+        if( ! is_null($this->queryLogState))
+            return;
+
+        // Set check query log state
+        $value = Config::get(Config::QUERY_LOG);
+
+        if($value)
+        {
+            if( ! class_exists('\Illuminate\Support\Facades\DB'))
+                dd('The DB class form Laravel illuminate does not exists. (class_exists(\'\Illuminate\Support\Facades\DB\'))');
+
+            // Setup query log
+            try
+            {
+                \Illuminate\Support\Facades\DB::listen(function ($sql) {$this->queryLogStack[] = new QueryLogHolder($sql);});
+                $this->queryLogState = true;
+            }
+            catch (\RuntimeException $e)
+            {
+                try
+                {
+                    \Illuminate\Database\Capsule\Manager::listen(function ($sql) {$this->queryLogStack[] = new QueryLogHolder($sql);});
+                    $this->queryLogState = true;
+                }
+                catch (\RuntimeException $e)
+                {
+                    $this->queryLogState = false;
+                }
+            }
+        }
+    }
+
+    /*
+     * Move query log items to point
+     */
+    private function setQueryLogItemsToPoint(Point $point)
+    {
+        // Skip if query log is disabled
+        if($this->queryLogState !== true)
+            return;
+
+        $point->setQueryLog($this->queryLogStack);
+        $this->queryLogStack = [];
+    }
 }

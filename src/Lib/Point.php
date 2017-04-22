@@ -16,6 +16,7 @@ class Point
     private $memoryPeak;
     private $differenceTime;
     private $differenceMemory;
+    private $queryLog;
 
     /**
      * Point constructor.
@@ -207,6 +208,24 @@ class Point
     {
         $this->differenceMemory = $this->stopMemoryUsage - $this->startMemoryUsage;
     }
+
+    /**
+     * @return array
+     */
+    public function getQueryLog()
+    {
+        return $this->queryLog;
+    }
+
+    /**
+     * @param array $queryLog
+     */
+    public function setQueryLog($queryLog)
+    {
+        $this->queryLog = $queryLog;
+    }
+
+
 
 
 
