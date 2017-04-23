@@ -35,6 +35,24 @@ class Performance implements PerformanceInterface
     }
 
     /*
+     * Set message
+     *
+     * @param string|null   $message
+     * @param boolean|null   $newLine
+     * @return void
+     */
+    public static function message($message = null, $newLine = true)
+    {
+        // Check DISABLE_TOOL
+        if( ! Config::get(Config::ENABLE_TOOL) or ! $message)
+            return;
+
+        $performance = self::getPerformance();
+        $performance->message($message, $newLine);
+    }
+
+
+    /*
      * Finish measuring point X
      *
      * @param string|null   $label

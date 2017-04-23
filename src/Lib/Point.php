@@ -17,6 +17,7 @@ class Point
     private $differenceTime;
     private $differenceMemory;
     private $queryLog;
+    private $newLineMessage = [];
 
     /**
      * Point constructor.
@@ -225,9 +226,20 @@ class Point
         $this->queryLog = $queryLog;
     }
 
+    /**
+     * @return array
+     */
+    public function getNewLineMessage()
+    {
+        return $this->newLineMessage;
+    }
 
-
-
-
+    /**
+     * @param string $newLineMessage
+     */
+    public function addNewLineMessage($newLineMessage)
+    {
+        $this->newLineMessage[] = $newLineMessage;
+    }
 
 }

@@ -72,7 +72,12 @@ class WebDisplay extends Display
                     </tr>';
 
                     foreach (array_slice($this->pointStage, 1) as $point) {
-                        $line = '<tr>'
+
+                        // For real calibrate results fake printing
+                        if( $point->getLabel() === Point::POINT_CALIBRATE )
+                            continue;
+
+                        echo '<tr>'
                             . '<td class="t-l">' . $point->getLabel() . '</td>'
                             . '<td>' . $this->formatter->timeToHuman($point->getDifferenceTime()) . '</td>'
                             . '<td>' . $this->calculatProcens($point->getDifferenceTime(), $this->totalTime) . '</td>'
@@ -81,9 +86,14 @@ class WebDisplay extends Display
                             . '<td>' . $this->formatter->memoryToHuman($point->getMemoryPeak()) . '</td>'
                             . '</tr>';
 
-                        // For real calibrate results fake printing
-                        if( $point->getLabel() !== Point::POINT_CALIBRATE)
-                            echo $line;
+
+                        if(count($point->getNewLineMessage()))
+                        {
+                            foreach ($point->getNewLineMessage() as $message)
+                            {
+                                echo '<tr><td class="new-line-message" colspan="6">' . $message . '</td></tr>';
+                            }
+                        }
                     }
                     echo '</table>';
 
@@ -101,4 +111,8 @@ class WebDisplay extends Display
         echo '</div>';
     }
 
+    public function printMessage($message = null)
+    {
+        // TODO: Implement printMessage() method.
+    }
 }

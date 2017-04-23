@@ -30,6 +30,10 @@ class PerformanceHandler
     public $queryLogState = null;
     public $queryLogStack = [];
 
+    /*
+     *
+     */
+    private $messageToLabel = null;
 
     public function __construct()
     {
@@ -68,6 +72,27 @@ class PerformanceHandler
 
         // Start point
         $point->start();
+    }
+
+    /*
+     * Set message
+     *
+     * @param string|null   $message
+     * @param boolean|null   $newLine
+     * @return void
+     */
+    public function message($message, $newLine = true)
+    {
+        $point = end($this->pointStack);
+
+        // Skip
+        if( ! $point or ! $point->isActive())
+            return;
+
+        if($newLine)
+            $point->addNewLineMessage($message);
+        else
+            $this->messageToLabel .= $message;
     }
 
     /*
@@ -131,6 +156,9 @@ class PerformanceHandler
             {
                 // Set query log items
                 $this->setQueryLogItemsToPoint($point);
+
+                // Check if message in label text
+                $this->checkAndSetMessageInToLabel($point);
 
                 // Finish point
                 $point->finish();
@@ -214,4 +242,21 @@ class PerformanceHandler
         $point->setQueryLog($this->queryLogStack);
         $this->queryLogStack = [];
     }
+
+    /*
+     * Update point label with message
+     */
+    private function checkAndSetMessageInToLabel(Point $point)
+    {
+        if( ! $this->messageToLabel)
+            return;
+
+        // Update label
+        $point->setLabel( $point->getLabel() . " - " . $this->messageToLabel);
+
+        // Reset
+        $this->messageToLabel = '';
+
+    }
+
 }

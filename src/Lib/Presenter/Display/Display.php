@@ -10,6 +10,9 @@ abstract class Display implements DisplayInterface
     protected $totalTime;
     protected $totalMemory;
     protected $totalMemoryPeak;
+    protected $printStack = [];
+
+    abstract public function printMessage($message = null);
 
     public function __construct()
     {

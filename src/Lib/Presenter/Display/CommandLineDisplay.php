@@ -12,7 +12,6 @@ class CommandLineDisplay extends Display
     private $cellWightResult;
     private $cellWightLabel;
     private $optionLive;            // Load form config
-    private $printStack = [];
 
     public function __construct()
     {
@@ -32,7 +31,24 @@ class CommandLineDisplay extends Display
 
     public function displayFinishPoint(Point $point)
     {
-        $this->liveOrStack($this->printPointLine($point->getLabel(), $point->getDifferenceTime(), $point->getDifferenceMemory(), $point->getMemoryPeak()));
+        // Preload and calculate
+        if($point->getLabel() === Point::POINT_PRELOAD)
+            return;
+
+        $this->liveOrStack(
+            str_pad(mb_strimwidth( " > " . $point->getLabel(), 0, $this->cellWightLabel, '..'), $this->cellWightLabel)
+            . ' ' . $this->formatter->stringPad( $this->formatter->timeToHuman( $point->getDifferenceTime() ). ' ', $this->cellWightResult, " ")
+            . '|' . str_pad( $this->formatter->memoryToHuman( $point->getDifferenceMemory() ) . ' ', $this->cellWightResult, " ", STR_PAD_LEFT)
+            . '|' . str_pad( $this->formatter->memoryToHuman( $point->getMemoryPeak() ) . ' ', $this->cellWightResult, " ", STR_PAD_LEFT) . PHP_EOL);
+
+        // Set message
+        if(count($point->getNewLineMessage()))
+        {
+            foreach ($point->getNewLineMessage() as $message)
+            {
+                $this->printMessage($message);
+            }
+        }
     }
 
     public function displayResults($pointStack)
@@ -124,31 +140,15 @@ class CommandLineDisplay extends Display
             . $a
             . " " . $this->formatter->stringPad( $this->formatter->timeToHuman( $this->totalTime ) . ' ', $this->cellWightResult, ' ', STR_PAD_LEFT)
             . " " . str_pad( $this->formatter->memoryToHuman( $this->totalMemory ) . ' ', $this->cellWightResult, ' ', STR_PAD_LEFT)
-            . " " . str_pad( $this->formatter->memoryToHuman( $this->totalMemoryPeak ), $this->cellWightResult - 1, ' ', STR_PAD_LEFT)
+            . " " . str_pad( $this->formatter->memoryToHuman( $this->totalMemoryPeak ) . ' ', $this->cellWightResult, ' ', STR_PAD_LEFT)
             . PHP_EOL
             . PHP_EOL);
-    }
-
-    private function printPointLine($label, $time, $memoryUsage, $memoryPeak)
-    {
-        $return =
-            str_pad(mb_strimwidth( " > " . $label, 0, $this->cellWightLabel, '..'), $this->cellWightLabel)
-            . '|' . $this->formatter->stringPad( $this->formatter->timeToHuman( $time ). ' ', $this->cellWightResult, " ")
-            . '|' . str_pad( $this->formatter->memoryToHuman( $memoryUsage ) . ' ' , $this->cellWightResult, " ", STR_PAD_LEFT)
-            . '|' . str_pad( $this->formatter->memoryToHuman( $memoryPeak ), $this->cellWightResult - 1, " ", STR_PAD_LEFT) . PHP_EOL;
-
-        // Preload and calculate
-        if($label === Point::POINT_PRELOAD)
-            return;
-
-        // Return line
-        return $return;
     }
 
     private function printQueryLogFooter()
     {
 
-        dd($this->pointStage);
+//        dd($this->pointStage);
 
     }
 
@@ -175,7 +175,7 @@ class CommandLineDisplay extends Display
          */
 
         $this->cellWightResult = 12;
-        $this->cellWightLabel = $this->commandLineWidth - 39;
+        $this->cellWightLabel = $this->commandLineWidth - 40;
     }
 
     private function clearScreen()
@@ -184,5 +184,13 @@ class CommandLineDisplay extends Display
             system('cls');
         else
             system('clear');
+    }
+
+    public function printMessage($message = null)
+    {
+        $this->liveOrStack(terminal_style(str_pad(mb_strimwidth( "   " . $message, 0, $this->cellWightLabel, '..'), $this->cellWightLabel)
+            . ' ' . str_pad('-- ', $this->cellWightResult, ' ', STR_PAD_LEFT)
+            . '|' . str_pad('-- ', $this->cellWightResult, ' ', STR_PAD_LEFT)
+            . '|' . str_pad('-- ', $this->cellWightResult, ' ', STR_PAD_LEFT) , 'dark-gray'). PHP_EOL );
     }
 }
