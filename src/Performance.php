@@ -1,5 +1,6 @@
 <?php namespace Performance;
 
+use Performance\Lib\ConfigHandler;
 use Performance\Lib\PerformanceHandler;
 use Performance\Lib\PerformanceInterface;
 
@@ -10,10 +11,10 @@ class Performance implements PerformanceInterface
      */
     private static $performance;
 
-    private static function getPerformance()
+    public static function instance()
     {
         if( ! self::$performance)
-            self::$performance = new PerformanceHandler();
+            self::$performance = new PerformanceHandler( new ConfigHandler() );
         return self::$performance;
     }
 
@@ -30,7 +31,7 @@ class Performance implements PerformanceInterface
             return;
 
         // Run
-        $performance = self::getPerformance();
+        $performance = self::instance();
         $performance->point($label);
     }
 
@@ -47,7 +48,7 @@ class Performance implements PerformanceInterface
         if( ! Config::get(Config::ENABLE_TOOL) or ! $message)
             return;
 
-        $performance = self::getPerformance();
+        $performance = self::instance();
         $performance->message($message, $newLine);
     }
 
@@ -64,7 +65,7 @@ class Performance implements PerformanceInterface
         if( ! Config::get(Config::ENABLE_TOOL))
             return;
 
-        $performance = self::getPerformance();
+        $performance = self::instance();
         $performance->finish();
     }
 
@@ -79,7 +80,7 @@ class Performance implements PerformanceInterface
         if( ! Config::get(Config::ENABLE_TOOL))
             return;
 
-        $performance = self::getPerformance();
+        $performance = self::instance();
         $performance->results();
     }
 }
