@@ -102,12 +102,15 @@ class CommandLineDisplay extends Display
         // Live indication
         $liveIndication = ($this->optionLive) ? terminal_style(' LIVE ', 'gray', 'red') : '';
 
+        // Query log indication
+        $queryLogIndication = (Config::get(Config::QUERY_LOG)) ? terminal_style(' QUERY ', 'gray', 'black') : '';
+
         // Execution time
         $textExecutionTime = (ini_get('max_execution_time') > 1) ? ini_get('max_execution_time') . ' sec' : 'unlimited';
 
         // Print art
         $this->liveOrStack(PHP_EOL
-            . " " . terminal_style('     PHP PERFORMANCE TOOL     ', null, 'gray') . $liveIndication . PHP_EOL
+            . " " . terminal_style('     PHP PERFORMANCE TOOL     ', null, 'gray') . $queryLogIndication . $liveIndication . PHP_EOL
             . " Created by B. van Hoekelen version " .  PerformanceHandler::VERSION . " PHP v" . phpversion() . PHP_EOL
             . " Max memory " . ini_get("memory_limit") . ", max execution time " . $textExecutionTime . " on " . date('Y-m-d H:i:s') . PHP_EOL
             . PHP_EOL);
