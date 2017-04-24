@@ -16,7 +16,7 @@ class Point
     private $memoryPeak;
     private $differenceTime;
     private $differenceMemory;
-    private $queryLog;
+    private $queryLog = [];
     private $newLineMessage = [];
 
     /**
