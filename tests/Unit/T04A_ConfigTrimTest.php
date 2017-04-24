@@ -3,19 +3,17 @@
 use Performance\Performance;
 use Performance\Config;
 
-class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
+class T04A_ConfigTrimTest extends \PHPUnit_Framework_TestCase
 {
-
-    protected function setUp()
-    {
-    }
-
     public function testStaticFunctionPoint()
     {
+        Performance::instanceReset();
+
         // You can specify the characters you want to strip
         Config::setPointLabelLTrim('synchronize');
         Config::setPointLabelRTrim('Run');
 
+        // Run test tasks
         $this->synchronizeTaskARun();
         $this->synchronizeTaskBRun();
         $this->synchronizeTaskCRun();
@@ -24,16 +22,25 @@ class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
         Performance::results();
     }
 
+    public function testTrimFunction()
+    {
+        $points = Performance::instance()->getPoints();
+
+        $this->assertEquals($points[2]->getLabel(), 'TaskA');
+        $this->assertEquals($points[3]->getLabel(), 'TaskB');
+        $this->assertEquals($points[4]->getLabel(), 'TaskC');
+    }
+
+
     // Create task
 
-    public function synchronizeTaskARun()
+    private function synchronizeTaskARun()
     {
         // Set point Task A
         Performance::point(__FUNCTION__);
 
         //
         // Run code
-//        sleep(1);
         usleep(2000);
         //
 
@@ -41,7 +48,7 @@ class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
         Performance::finish();
     }
 
-    public function synchronizeTaskBRun()
+    private function synchronizeTaskBRun()
     {
         // Set point Task B
         Performance::point(__FUNCTION__);
@@ -55,7 +62,7 @@ class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
         Performance::finish();
     }
 
-    public function synchronizeTaskCRun()
+    private function synchronizeTaskCRun()
     {
         // Set point Task C
         Performance::point(__FUNCTION__);

@@ -3,15 +3,13 @@
 use Performance\Performance;
 use Performance\Config;
 
-class ConfigEnableToolTest extends \PHPUnit_Framework_TestCase
+class T05A_ConfigEnableToolTest extends \PHPUnit_Framework_TestCase
 {
-
-    protected function setUp()
-    {
-    }
-
     public function testStaticFunctionPoint()
     {
+        // Reset
+        Performance::instanceReset();
+
         // You can specify the characters you want to strip
         Config::setEnableTool(false);
 
@@ -22,30 +20,42 @@ class ConfigEnableToolTest extends \PHPUnit_Framework_TestCase
         Performance::results();
     }
 
+    public function testSkipTool()
+    {
+        $points = Performance::instance()->getPoints();
+        $this->assertEquals(0, count($points));
+    }
+
+    public function testConfigEnableToolIsFalse()
+    {
+        $configItem = Performance::instance()->config->isEnableTool();
+        $this->assertFalse($configItem);
+    }
+
     // Create task
 
-    public function taskA()
+    private function taskA()
     {
         // Set point Task A
         Performance::point(__FUNCTION__);
 
         //
         // Run code
-        sleep(1);
+        usleep(2000);
         //
 
         // Finish point Task A
         Performance::finish();
     }
 
-    public function taskB()
+    private function taskB()
     {
         // Set point Task B
         Performance::point(__FUNCTION__);
 
         //
         // Run code
-        sleep(1);
+        usleep(2000);
         //
 
         // Finish point Task B

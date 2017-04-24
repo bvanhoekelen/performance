@@ -35,7 +35,7 @@ class Foo
 
         //
         // Run code
-        sleep(.5);
+        usleep(2000);
         //
 
         // Finish point Task A
@@ -49,7 +49,7 @@ class Foo
 
         //
         // Run code
-        sleep(.5);
+        usleep(2000);
         //
 
         // Finish point Task B

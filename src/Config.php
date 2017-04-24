@@ -99,5 +99,13 @@ class Config implements ConfigInterface
         self::$config->setQueryLog($status);
     }
 
+    /*
+     * Reset
+     */
+    public static function instanceReset()
+    {
+        self::$config = null;
+    }
+
 
 }

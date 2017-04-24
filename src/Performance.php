@@ -14,9 +14,8 @@ class Performance implements PerformanceInterface
 
     public static function instance()
     {
-        if( ! self::$performance) {
+        if( ! self::$performance)
             self::$performance = new PerformanceHandler(new ConfigHandler());
-        }
         return self::$performance;
     }
 
@@ -97,5 +96,17 @@ class Performance implements PerformanceInterface
 
         // Run
         self::$performance->results();
+    }
+
+    /*
+     * Reset
+     */
+    public static function instanceReset()
+    {
+        // Run
+        Config::instanceReset();
+        self::$performance = null;
+        self::$bootstrap = false;
+
     }
 }
