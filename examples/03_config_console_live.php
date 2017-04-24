@@ -11,7 +11,7 @@ use Performance\Config;
 /*
  * Set config item
  */
-Config::set(Config::CONSOLE_LIVE, true);
+Config::setConsoleLive(true);
 
 /*
  * One simply performance check

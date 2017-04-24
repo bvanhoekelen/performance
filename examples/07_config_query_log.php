@@ -20,11 +20,10 @@ class Foo
     public function __construct()
     {
         // Enable query log
-        Config::set(Config::QUERY_LOG, true);
+        Config::setQueryLog(true);
 
         $this->selectQuery();
         $this->taskB();
-
 
 //        dd(DB::getQueryLog());
 
@@ -46,17 +45,17 @@ class Foo
 //            ->first();
 
 //        $user->email = 'bart@gmail.com';
-//
+
 //        $user->save();
 
 //        $users = DB::table('user')->select('*')
 //            ->where('id', '<=', '1072')
 //            ->delete();
 
-        foreach($users as $user)
-        {
-            echo $user->name . PHP_EOL;
-        }
+//        foreach($users as $user)
+//        {
+//            echo $user->name . PHP_EOL;
+//        }
 
         // Finish point Task A
         Performance::finish();

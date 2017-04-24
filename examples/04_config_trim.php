@@ -16,8 +16,8 @@ class Foo
     public function __construct()
     {
         // You can specify the characters you want to strip
-        Config::set(Config::POINT_LABEL_LTRIM, 'synchronize');
-        Config::set(Config::POINT_LABEL_RTRIM, 'Run');
+        Config::setPointLabelLTrim('synchronize');
+        Config::setPointLabelRTrim('Run');
 
         $this->synchronizeTaskARun();
         $this->synchronizeTaskBRun();
