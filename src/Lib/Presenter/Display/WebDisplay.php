@@ -5,10 +5,6 @@ use Performance\Lib\Point;
 
 class WebDisplay extends Display
 {
-    public function displayStartPoint(Point $point)
-    {
-    }
-
     public function displayFinishPoint(Point $point)
     {
 

@@ -5,11 +5,6 @@ use Performance\Lib\Point;
 interface DisplayInterface
 {
     /*
-     * Display start point
-     */
-    public function displayStartPoint(Point $point);
-
-    /*
      * Display finish point
      */
     public function displayFinishPoint(Point $point);

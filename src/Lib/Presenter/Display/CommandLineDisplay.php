@@ -6,7 +6,6 @@ use Performance\Lib\Point;
 
 class CommandLineDisplay extends Display
 {
-    private $firstCommandLineMessage = false;
     private $commandLineWidth;
     private $commandLineHeight;
     private $cellWightResult;
@@ -17,16 +16,8 @@ class CommandLineDisplay extends Display
     {
         $this->setConfig();
         $this->setOptions();
+        $this->printStartUp();
         parent::__construct();
-    }
-
-    public function displayStartPoint(Point $point)
-    {
-        if( ! $this->firstCommandLineMessage)
-        {
-            $this->printStartUp();
-            $this->firstCommandLineMessage = true;
-        }
     }
 
     public function displayFinishPoint(Point $point)
@@ -41,14 +32,11 @@ class CommandLineDisplay extends Display
             . '|' . str_pad( $this->formatter->memoryToHuman( $point->getDifferenceMemory() ) . ' ', $this->cellWightResult, " ", STR_PAD_LEFT)
             . '|' . str_pad( $this->formatter->memoryToHuman( $point->getMemoryPeak() ) . ' ', $this->cellWightResult, " ", STR_PAD_LEFT) . PHP_EOL);
 
-        // Set message
-        if(count($point->getNewLineMessage()))
-        {
-            foreach ($point->getNewLineMessage() as $message)
-            {
-                $this->printMessage($message);
-            }
-        }
+        // Print query log resume
+        $this->printPointQueryLogAsNewLineMessage($point);
+
+        // Print point new line message
+        $this->printPointNewLineMessage($point);
     }
 
     public function displayResults($pointStack)
@@ -103,7 +91,14 @@ class CommandLineDisplay extends Display
         $liveIndication = ($this->optionLive) ? terminal_style(' LIVE ', 'gray', 'red') : '';
 
         // Query log indication
-        $queryLogIndication = (Config::get(Config::QUERY_LOG)) ? terminal_style(' QUERY ', 'gray', 'black') : '';
+        $logIndicationStatus = Config::get(Config::QUERY_LOG);
+        $queryLogIndication = '';
+        if($logIndicationStatus === true)
+            $queryLogIndication = terminal_style(' QUERY ', 'gray', 'black');
+        elseif($logIndicationStatus === false)
+            $queryLogIndication = terminal_style(' QUERY NOT ACTIVE ', 'gray', 'yellow', 'bold');
+
+//        dd($logIndicationStatus);
 
         // Execution time
         $textExecutionTime = (ini_get('max_execution_time') > 1) ? ini_get('max_execution_time') . ' sec' : 'unlimited';
@@ -189,11 +184,47 @@ class CommandLineDisplay extends Display
             system('clear');
     }
 
-    public function printMessage($message = null)
+    private function printPointNewLineMessage(Point $point)
+    {
+        if(count($point->getNewLineMessage()))
+        {
+            foreach ($point->getNewLineMessage() as $message)
+            {
+                $this->printMessage($message);
+            }
+        }
+    }
+
+    public function printMessage($message = null, $time = '-- ', $memory = '-- ', $peak = '-- ')
     {
         $this->liveOrStack(terminal_style(str_pad(mb_strimwidth( "   " . $message, 0, $this->cellWightLabel, '..'), $this->cellWightLabel)
-            . ' ' . str_pad('-- ', $this->cellWightResult, ' ', STR_PAD_LEFT)
-            . '|' . str_pad('-- ', $this->cellWightResult, ' ', STR_PAD_LEFT)
-            . '|' . str_pad('-- ', $this->cellWightResult, ' ', STR_PAD_LEFT) , 'dark-gray'). PHP_EOL );
+            . ' ' . str_pad($time, $this->cellWightResult, ' ', STR_PAD_LEFT)
+            . '|' . str_pad($memory, $this->cellWightResult, ' ', STR_PAD_LEFT)
+            . '|' . str_pad($peak, $this->cellWightResult, ' ', STR_PAD_LEFT) , 'dark-gray'). PHP_EOL );
     }
+
+    private function printPointQueryLogAsNewLineMessage(Point $point)
+    {
+        $infoArray = [];
+
+        foreach ($point->getQueryLog() as $queryLogHolder)
+        {
+            if(isset($infoArray[$queryLogHolder->type . 'Count']))
+            {
+                $infoArray[$queryLogHolder->type . 'Count']++;
+                $infoArray[$queryLogHolder->type . 'Time'] = $infoArray[$queryLogHolder->type . 'Time'] + $queryLogHolder->time ;
+            }
+            else
+            {
+                $infoArray[$queryLogHolder->type . 'Count'] = 1;
+                $infoArray[$queryLogHolder->type . 'Time'] = $queryLogHolder->time ;
+            }
+
+//            dd($infoArray);
+
+            $this->printMessage($queryLogHolder->query, $queryLogHolder->time . ' ms ');
+        }
+    }
+
+
 }

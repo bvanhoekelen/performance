@@ -29,11 +29,6 @@ class Presenter {
         $this->display->displayResults($pointStack);
     }
 
-    public function startPointTrigger(Point $point)
-    {
-        $this->display->displayStartPoint($point);
-    }
-
     public function finishPointTrigger(Point $point)
     {
         $this->display->displayFinishPoint($point);
