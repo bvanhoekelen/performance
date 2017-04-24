@@ -8,14 +8,13 @@ class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        Config::reset();
     }
 
     public function testStaticFunctionPoint()
     {
         // You can specify the characters you want to strip
-        Config::set(Config::POINT_LABEL_LTRIM, 'synchronize');
-        Config::set(Config::POINT_LABEL_RTRIM, 'Run');
+        Config::setPointLabelLTrim('synchronize');
+        Config::setPointLabelRTrim('Run');
 
         $this->synchronizeTaskARun();
         $this->synchronizeTaskBRun();

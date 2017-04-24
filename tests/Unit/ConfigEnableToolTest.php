@@ -8,13 +8,12 @@ class ConfigEnableToolTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        Config::reset();
     }
 
     public function testStaticFunctionPoint()
     {
         // You can specify the characters you want to strip
-        Config::set(Config::ENABLE_TOOL, false);
+        Config::setEnableTool(false);
 
         $this->taskA();
         $this->taskB();

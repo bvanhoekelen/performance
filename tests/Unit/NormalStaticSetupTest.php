@@ -8,7 +8,6 @@ class NormalStaticSetupTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        Config::reset();
     }
 
     public function testStaticFunctionPoint()
