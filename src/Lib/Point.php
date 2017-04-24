@@ -7,6 +7,8 @@ class Point
     const POINT_PRELOAD = '__POINT_PRELOAD';
     const POINT_CALIBRATE = 'Calibrate point';
 
+    private $config;
+
     private $active;
     private $label;
     private $startTime;
@@ -25,9 +27,10 @@ class Point
      * @param $startTime
      * @param $startMemory
      */
-    public function __construct($name, $startTime = null, $startMemory = null)
+    public function __construct(ConfigHandler $config, $name, $startTime = null, $startMemory = null)
     {
         // Set items
+        $this->config = $config;
         $this->setActive(true);
         $this->setLabel($name);
     }
@@ -134,12 +137,12 @@ class Point
     public function setLabel($label)
     {
         // Run ltrim
-        $configLtrim = Config::get(Config::POINT_LABEL_LTRIM);
+        $configLtrim = $this->config->getPointLabelLTrim();
         if($configLtrim)
             $label = ltrim($label, $configLtrim);
 
         // Run Rtrim
-        $configRtrim = Config::get(Config::POINT_LABEL_RTRIM);
+        $configRtrim = $this->config->getPointLabelRTrim();
         if($configRtrim)
             $label = rtrim($label, $configRtrim);
 

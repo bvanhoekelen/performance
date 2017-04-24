@@ -11,9 +11,12 @@ class Presenter {
 
     public $printFormat;
     private $display;
+    protected $config;
 
-    public function __construct()
+    public function __construct(ConfigHandler $config)
     {
+        $this->config = $config;
+
         // Check date function
         if( ! ini_get('date.timezone') )
             date_default_timezone_set('UTC');
@@ -47,8 +50,8 @@ class Presenter {
     private function setDisplay()
     {
         if($this->printFormat == self::PRINT_FORMAT_COMMAND_LINE)
-            $this->display = new CommandLineDisplay();
+            $this->display = new CommandLineDisplay($this->config);
         else
-            $this->display = new WebDisplay();
+            $this->display = new WebDisplay($this->config);
     }
 }

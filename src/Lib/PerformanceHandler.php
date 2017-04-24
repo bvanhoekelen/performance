@@ -1,6 +1,5 @@
 <?php namespace Performance\Lib;
 
-use Performance\Config;
 use Performance\Lib\Holders\QueryLogHolder;
 
 class PerformanceHandler
@@ -21,24 +20,32 @@ class PerformanceHandler
     private $presenter;
 
     /*
-     * Hold state of the query log
-     *
-     * null = not set
-     * false = config is false
-     * true = query log is set
+     * Hold the query log items
      */
-    public $queryLogState = null;
     public $queryLogStack = [];
+
+    /*
+     * Hold the config class
+     */
+    public $config;
 
     /*
      *
      */
     private $messageToLabel = null;
 
-    public function __construct()
+    public function __construct(ConfigHandler $configHandler)
     {
-        // Setup first point
-        $this->presenter = new Presenter();
+        // Set config
+        $this->config = $configHandler;
+    }
+
+    public function bootstrap()
+    {
+        $this->setConfigQueryLogState();
+
+        // Set display
+        $this->bootstrapDisplay();
 
         // Preload class point
         $this->preload();
@@ -55,20 +62,16 @@ class PerformanceHandler
         // Check if point already exists
         $this->finishLastPoint();
         $this->checkIfPointLabelExists($label);
-        $this->checkQueryLogState();
 
         // Set label
         if(is_null($label))
             $label = 'Task ' . (count($this->pointStack) - 1);
 
         // Create point
-        $point = new Point($label);
+        $point = new Point($this->config, $label);
 
         // Create and add point to stack
         $this->addPointToStack($point);
-
-        // Trigger point
-        $this->presenter->startPointTrigger($point);
 
         // Start point
         $point->start();
@@ -128,6 +131,12 @@ class PerformanceHandler
 //
 // PRIVATE
 //
+
+    private function bootstrapDisplay()
+    {
+        // Setup first point
+        $this->presenter = new Presenter($this->config);
+    }
 
     /*
      * Add point to stack
@@ -197,34 +206,38 @@ class PerformanceHandler
     /*
      * Check if query log is possible
      */
-    private function checkQueryLogState()
+    private function setConfigQueryLogState()
     {
         // Check if state is set
-        if( ! is_null($this->queryLogState))
+        if( ! is_null($this->config->queryLogState))
             return;
 
         // Set check query log state
-        if(Config::get(Config::QUERY_LOG))
+        if($this->config->isQueryLog())
         {
-            if( ! class_exists('\Illuminate\Support\Facades\DB'))
-                dd('The DB class form Laravel illuminate does not exists. (class_exists(\'\Illuminate\Support\Facades\DB\'))');
+            $this->config->queryLogState = false;
 
-            // Setup query log
+            // Check if DB class exists
+            if( ! class_exists('\Illuminate\Support\Facades\DB'))
+                return;
+
+            // Resister listener
             try
             {
                 \Illuminate\Support\Facades\DB::listen(function ($sql) {$this->queryLogStack[] = new QueryLogHolder($sql);});
-                $this->queryLogState = true;
+                $this->config->queryLogState = true;
             }
             catch (\RuntimeException $e)
             {
                 try
                 {
                     \Illuminate\Database\Capsule\Manager::listen(function ($sql) {$this->queryLogStack[] = new QueryLogHolder($sql);});
-                    $this->queryLogState = true;
+                    $this->config->queryLogState = true;
+
                 }
                 catch (\RuntimeException $e)
                 {
-                    $this->queryLogState = false;
+                    $this->config->queryLogState = false;
                 }
             }
         }
@@ -236,7 +249,7 @@ class PerformanceHandler
     private function setQueryLogItemsToPoint(Point $point)
     {
         // Skip if query log is disabled
-        if($this->queryLogState !== true)
+        if($this->config->queryLogState !== true)
             return;
 
         $point->setQueryLog($this->queryLogStack);

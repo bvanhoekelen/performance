@@ -1,6 +1,5 @@
 <?php namespace Performance\Lib\Presenter\Display;
 
-use Performance\Config;
 use Performance\Lib\PerformanceHandler;
 use Performance\Lib\Point;
 
@@ -10,14 +9,10 @@ class CommandLineDisplay extends Display
     private $commandLineHeight;
     private $cellWightResult;
     private $cellWightLabel;
-    private $optionLive;            // Load form config
 
-    public function __construct()
+    public function bootstrap()
     {
-        $this->setConfig();
-        $this->setOptions();
         $this->printStartUp();
-        parent::__construct();
     }
 
     public function displayFinishPoint(Point $point)
@@ -50,7 +45,7 @@ class CommandLineDisplay extends Display
 
     private function liveOrStack($line)
     {
-        if($this->optionLive)
+        if($this->config->isConsoleLive())
             echo $line;
         else
             $this->printStack[] = $line;
@@ -58,27 +53,11 @@ class CommandLineDisplay extends Display
 
     private function printStack()
     {
-        if( ! $this->optionLive)
+        if( ! $this->config->isConsoleLive())
             foreach ($this->printStack as $line)
             {
                 echo $line;
             }
-    }
-
-    private function setConfig()
-    {
-        $this->optionLive = Config::get(Config::CONSOLE_LIVE, $this->optionLive);
-    }
-
-    private function setOptions()
-    {
-        $shortopts = 'l::';
-        $longopts = ['live'];
-        $options = getopt($shortopts, $longopts);
-
-        // Set live option
-        if(isset($options['l']) or isset($options['live']))
-            $this->optionLive = true;
     }
 
     private function printStartUp()
@@ -88,17 +67,14 @@ class CommandLineDisplay extends Display
         $this->clearScreen();
 
         // Live indication
-        $liveIndication = ($this->optionLive) ? terminal_style(' LIVE ', 'gray', 'red') : '';
+        $liveIndication = ($this->config->isConsoleLive()) ? terminal_style(' LIVE ', 'gray', 'red') : '';
 
         // Query log indication
-        $logIndicationStatus = Config::get(Config::QUERY_LOG);
         $queryLogIndication = '';
-        if($logIndicationStatus === true)
+        if($this->config->queryLogState === true)
             $queryLogIndication = terminal_style(' QUERY ', 'gray', 'black');
-        elseif($logIndicationStatus === false)
+        elseif($this->config->queryLogState === false)
             $queryLogIndication = terminal_style(' QUERY NOT ACTIVE ', 'gray', 'yellow', 'bold');
-
-//        dd($logIndicationStatus);
 
         // Execution time
         $textExecutionTime = (ini_get('max_execution_time') > 1) ? ini_get('max_execution_time') . ' sec' : 'unlimited';

@@ -10,12 +10,32 @@ class Performance implements PerformanceInterface
      * Create a performance instance
      */
     private static $performance;
+    private static $bootstrap = false;
 
     public static function instance()
     {
-        if( ! self::$performance)
-            self::$performance = new PerformanceHandler( new ConfigHandler() );
+        if( ! self::$performance) {
+            self::$performance = new PerformanceHandler(new ConfigHandler());
+        }
         return self::$performance;
+    }
+
+    private static function enableTool()
+    {
+        $performance = self::instance();
+
+        // Check DISABLE_TOOL
+        if( ! $performance->config->isEnableTool())
+            return false;
+
+        // Check bootstrap
+        if( ! self::$bootstrap)
+        {
+            $performance->bootstrap();
+            self::$bootstrap = true;
+        }
+
+        return true;
     }
 
     /*
@@ -26,13 +46,11 @@ class Performance implements PerformanceInterface
      */
     public static function point($label = null)
     {
-        // Check DISABLE_TOOL
-        if( ! Config::get(Config::ENABLE_TOOL))
+        if( ! self::enableTool() )
             return;
 
         // Run
-        $performance = self::instance();
-        $performance->point($label);
+        self::$performance->point($label);
     }
 
     /*
@@ -44,12 +62,11 @@ class Performance implements PerformanceInterface
      */
     public static function message($message = null, $newLine = true)
     {
-        // Check DISABLE_TOOL
-        if( ! Config::get(Config::ENABLE_TOOL) or ! $message)
+        if( ! self::enableTool() or ! $message)
             return;
 
-        $performance = self::instance();
-        $performance->message($message, $newLine);
+        // Run
+        self::$performance->message($message, $newLine);
     }
 
 
@@ -61,12 +78,11 @@ class Performance implements PerformanceInterface
      */
     public static function finish()
     {
-        // Check DISABLE_TOOL
-        if( ! Config::get(Config::ENABLE_TOOL))
+        if( ! self::enableTool() )
             return;
 
-        $performance = self::instance();
-        $performance->finish();
+        // Run
+        self::$performance->finish();
     }
 
     /*
@@ -76,11 +92,10 @@ class Performance implements PerformanceInterface
      */
     public static function results()
     {
-        // Check DISABLE_TOOL
-        if( ! Config::get(Config::ENABLE_TOOL))
+        if( ! self::enableTool() )
             return;
 
-        $performance = self::instance();
-        $performance->results();
+        // Run
+        self::$performance->results();
     }
 }

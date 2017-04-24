@@ -3,24 +3,32 @@
 interface ConfigInterface
 {
     /*
-     * Change config item
-     *
-     * @param string    $item
-     * @param mixed     $value
+     * Set config item console live
+     * @param bool $status
      */
-    public static function set($item, $value);
+    public static function setConsoleLive($status);
 
     /*
-     * Get config item
-     *
-     * @param string    $item
-     * @param mixed     $default
-     * @return mixed
+     * Set config item point label RTrim
+     * @param bool $mask
      */
-    public static function get($item, $default = null);
+    public static function setPointLabelLTrim($mask);
 
     /*
-     * Reset config
+     * Set config item point label RTrim
+     * @param bool $mask
      */
-    public static function reset();
+    public static function setPointLabelRTrim($mask);
+
+    /*
+     * Set config item enable tool
+     * @param bool $value
+     */
+    public static function setEnableTool($value);
+
+    /*
+     * Set config item enable tool
+     * @param bool $status
+     */
+    public static function setQueryLog($status);
 }

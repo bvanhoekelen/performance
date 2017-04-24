@@ -1,58 +1,103 @@
 <?php namespace Performance;
 
-use Performance\Lib\ConfigHandler;
 use Performance\Lib\ConfigInterface;
 
 class Config implements ConfigInterface
 {
-    CONST CONSOLE_LIVE = 'consoleLive';                 // Determined if the console results are live or not
-    CONST POINT_LABEL_LTRIM = 'pointLabelLtrim';        // Call ltrim function on label
-    CONST POINT_LABEL_RTRIM = 'pointLabelRtrim';        // Call rtrim function on label
-    CONST ENABLE_TOOL = 'enableTool';                   // Disable tool for production
-    CONST QUERY_LOG = 'queryLog';                       // Enable query log
-
     /*
      * Create a config instance
      */
     private static $config;
 
-    private static function getConfig()
+    private static function instance()
     {
         if (!self::$config)
-            self::$config = new ConfigHandler();
+            self::$config = Performance::instance()->config;
         return self::$config;
     }
 
-    /*
-     * Change config item
-     *
-     * @param string    $item
-     * @param mixed     $value
-     */
-    public static function set($item, $value)
+    private static function enableTool()
     {
-        $config = self::getConfig();
-        $config->set($item, $value);
+        $config = self::instance();
+
+        // Check DISABLE_TOOL
+        if( ! $config->isEnableTool())
+            return false;
+
+        return true;
     }
 
     /*
-     * Get config item
-     *
-     * @param string    $item
-     * @return mixed
+     * Set config item console live
+     * @param bool $status
      */
-    public static function get($item, $default = null)
+    public static function setConsoleLive($status)
     {
-        $config = self::getConfig();
-        return $config->get($item, $default);
+        if( ! self::enableTool())
+            return;
+
+        self::$config->setConsoleLive($status);
     }
 
     /*
-     * Reset config
+     * Set config item console live
+     * @param bool $status
      */
-    public static function reset()
+    public static function setPoint($status)
     {
-        $config = self::getConfig();
-        return $config->reset();
+        if( ! self::enableTool())
+            return;
+
+        self::$config->setConsoleLive($status);
     }
+
+    /*
+     * Set config item point label LTrim
+     * @param bool $mask
+     */
+    public static function setPointLabelLTrim($mask)
+    {
+        if( ! self::enableTool())
+            return;
+
+        self::$config->setPointLabelLTrim($mask);
+    }
+
+    /*
+     * Set config item point label RTrim
+     * @param bool $mask
+     */
+    public static function setPointLabelRTrim($mask)
+    {
+        if( ! self::enableTool())
+            return;
+
+        self::$config->setPointLabelRTrim($mask);
+    }
+
+    /*
+     * Set config item point label RTrim
+     * @param mixed $value
+     */
+    public static function setEnableTool($value)
+    {
+        if( ! self::enableTool())
+            return;
+
+        self::$config->setEnableTool($value);
+    }
+
+    /*
+     * Set config item query log
+     * @param mixed $value
+     */
+    public static function setQueryLog($status)
+    {
+        if( ! self::enableTool())
+            return;
+
+        self::$config->setQueryLog($status);
+    }
+
+
 }

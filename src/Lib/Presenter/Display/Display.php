@@ -1,5 +1,6 @@
 <?php namespace Performance\Lib\Presenter\Display;
 
+use Performance\Lib\ConfigHandler;
 use Performance\Lib\Presenter\Formatter;
 
 abstract class Display implements DisplayInterface
@@ -11,12 +12,21 @@ abstract class Display implements DisplayInterface
     protected $totalMemory;
     protected $totalMemoryPeak;
     protected $printStack = [];
+    protected $config;
 
     abstract public function printMessage($message = null);
 
-    public function __construct()
+    /*
+     * Replace __CONSTRUCTOR!
+     */
+    abstract public function bootstrap();
+
+    public function __construct(ConfigHandler $config)
     {
+        $this->config = $config;
         $this->formatter = new Formatter();
+
+        $this->bootstrap();
     }
 
     public function updateTotalTimeAndMemory()
