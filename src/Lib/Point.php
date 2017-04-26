@@ -231,7 +231,8 @@ class Point implements ExportInterface
      */
     public function setDifferenceMemory()
     {
-        $this->differenceMemory = $this->stopMemoryUsage - $this->startMemoryUsage;
+        $difference = $this->stopMemoryUsage - $this->startMemoryUsage;
+        $this->differenceMemory = ($difference > 0 ) ? $difference: 0;
     }
 
     /**

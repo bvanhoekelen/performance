@@ -62,8 +62,7 @@ class WebPresenter extends Presenter
                 
                     <table class="table-point">
                     <tr>
-                        <th width="20%">Label</th>
-                        <th width="18%">Memory peak</th>
+                        <th>Label</th>
                         <th width="5%">%</th>
                         <th width="17%">Memory usage</th>
                         <th width="5%">%</th>
@@ -78,7 +77,6 @@ class WebPresenter extends Presenter
 
                         echo '<tr>'
                             . '<td class="t-l">' . $point->getLabel() . '</td>'
-                            . '<td>' . $this->formatter->memoryToHuman($point->getMemoryPeak()) . '</td>'
                             . '<td>' . $this->calculate->calculatePercentage($point->getDifferenceMemory(), $calculateTotalHolder->totalMemory) . '</td>'
                             . '<td>' . $this->formatter->memoryToHuman($point->getDifferenceMemory()) . '</td>'
                             . '<td>' . $this->calculate->calculatePercentage($point->getDifferenceTime(), $calculateTotalHolder->totalTime) . '</td>'
@@ -88,14 +86,14 @@ class WebPresenter extends Presenter
                         foreach ($point->getQueryLog() as $queryLogHolder)
                         {
                             echo '<tr>';
-                            echo'<td class="new-line-message" colspan="5"> - ' . ((strlen($queryLogHolder->query) > 70) ? substr($queryLogHolder->query,0,67).'...' : $queryLogHolder->query) . '</td>';
+                            echo'<td class="new-line-message" colspan="4"> - ' . ((strlen($queryLogHolder->query) > 70) ? substr($queryLogHolder->query,0,67).'...' : $queryLogHolder->query) . '</td>';
                             echo'<td class="new-line-message" style="text-align: right;" colspan="1">' . $queryLogHolder->time . ' ms</td>';
                             echo '</tr>';
                         }
 
                         foreach ($point->getNewLineMessage() as $message)
                         {
-                            echo '<tr><td class="new-line-message" colspan="6">' . $message . '</td></tr>';
+                            echo '<tr><td class="new-line-message" colspan="5">' . $message . '</td></tr>';
                         }
                     }
                     echo '</table>';
