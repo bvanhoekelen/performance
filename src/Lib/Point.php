@@ -154,14 +154,18 @@ class Point implements ExportInterface
     public function setLabel($label)
     {
         // Run ltrim
-        $configLtrim = $this->config->getPointLabelLTrim();
-        if($configLtrim)
-            $label = ltrim($label, $configLtrim);
+        $configLTrim = $this->config->getPointLabelLTrim();
+        if($configLTrim)
+            $label = ltrim($label, $configLTrim);
 
         // Run Rtrim
-        $configRtrim = $this->config->getPointLabelRTrim();
-        if($configRtrim)
-            $label = rtrim($label, $configRtrim);
+        $configRTrim = $this->config->getPointLabelRTrim();
+        if($configRTrim)
+            $label = rtrim($label, $configRTrim);
+
+        // Set nice label
+        if($label !== self::POINT_PRELOAD and $this->config->isPointLabelNice())
+            $label = ucfirst(str_replace('  ', ' ', preg_replace('/(?<!^)[A-Z]/', ' $0', $label)));
 
         $this->label = $label;
     }

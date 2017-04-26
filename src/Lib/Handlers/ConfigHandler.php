@@ -12,6 +12,7 @@ class ConfigHandler implements ExportInterface
     private $queryLogView;
     private $pointLabelLTrim = false;
     private $pointLabelRTrim = false;
+    private $pointLabelNice = false;
     private $presenter;
 
     /*
@@ -220,5 +221,23 @@ class ConfigHandler implements ExportInterface
             else
                 dd('Presenter ' . $mixed . ' does not exists. Use: console or web');
     }
+
+    /**
+     * @return bool
+     */
+    public function isPointLabelNice()
+    {
+        return $this->pointLabelNice;
+    }
+
+    /**
+     * @param bool $pointLabelNice
+     */
+    public function setPointLabelNice($pointLabelNice)
+    {
+        $this->pointLabelNice = (bool) $pointLabelNice;
+    }
+
+
 
 }
