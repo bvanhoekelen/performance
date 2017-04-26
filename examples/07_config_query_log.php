@@ -6,6 +6,7 @@
 
 require_once('../vendor/autoload.php');
 require_once('helper/UseEloquent.php');
+require_once('helper/user.php');
 
 use Illuminate\Database\Capsule\Manager as DB;
 
@@ -21,56 +22,39 @@ class Foo
     {
         // Enable query log
         Config::setQueryLog(true);
+        // OR
+//        Config::setQueryLog(true, 'full');
 
-        $this->selectQuery();
-        $this->taskB();
-
-//        dd(DB::getQueryLog());
+        $this->runQuerys();
 
         // Finish all tasks and show test results
         Performance::results();
     }
 
-    public function selectQuery()
+    public function runQuerys()
     {
         // Set point Task A
         Performance::point(__FUNCTION__);
 
+        // Create user
+        $user = new User();
+        $user->name = 'User';
+        $user->save();
+
+        // Get users
+        $users = User::all();
+
+        // Update user
+        $user = User::where('name', 'User')->first();
+        $user->email = 'user@user.user';
+        $user->save();
+
+        // Delete all
         $users = DB::table('user')->select('*')
-            ->where('id', '<=', '1077')
-            ->get();
-
-//        $user = DB::table('user')->select('*')
-//            ->where('name', 'Bart')
-//            ->first();
-
-//        $user->email = 'bart@gmail.com';
-
-//        $user->save();
-
-//        $users = DB::table('user')->select('*')
-//            ->where('id', '<=', '1072')
-//            ->delete();
-
-//        foreach($users as $user)
-//        {
-//            echo $user->name . PHP_EOL;
-//        }
+            ->where('name', 'User')
+            ->delete();
 
         // Finish point Task A
-        Performance::finish();
-    }
-
-    public function taskB()
-    {
-        // Set point Task B
-        Performance::point(__FUNCTION__);
-
-        //
-        // Run code
-        //
-
-        // Finish point Task B
         Performance::finish();
     }
 }

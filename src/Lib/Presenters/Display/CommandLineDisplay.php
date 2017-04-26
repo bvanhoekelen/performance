@@ -181,34 +181,38 @@ class CommandLineDisplay extends Display
 
     private function printPointQueryLogAsNewLineMessage(Point $point)
     {
-        $infoArray = [];
-
-        foreach ($point->getQueryLog() as $queryLogHolder)
+        // View type resume
+        if($this->config->getQueryLogView() == 'resume')
         {
-            $type = $queryLogHolder->queryType;
+            $infoArray = [];
 
-            if(isset($infoArray[ $type ]))
-            {
-                $infoArray[ $type ]['count']++;
-                $infoArray[ $type ]['time'] = $infoArray[ $type ]['time'] + $queryLogHolder->time ;
+            foreach ($point->getQueryLog() as $queryLogHolder) {
+                $type = $queryLogHolder->queryType;
+
+                if (isset($infoArray[$type])) {
+                    $infoArray[$type]['count']++;
+                    $infoArray[$type]['time'] = $infoArray[$type]['time'] + $queryLogHolder->time;
+                } else {
+                    $infoArray[$type]['count'] = 1;
+                    $infoArray[$type]['time'] = $queryLogHolder->time;
+                }
             }
-            else
-            {
-                $infoArray[ $type ]['count'] = 1;
-                $infoArray[ $type ]['time'] = $queryLogHolder->time ;
+
+            ksort($infoArray);
+
+            foreach ($infoArray as $key => $item) {
+                $this->printMessage('Database query ' . $key . ' ' . $item['count'] . 'x', $item['time'] . ' ms ');
+
             }
-
-
         }
 
-        ksort($infoArray);
-
-        foreach ($infoArray as $key => $item)
+        // View type full
+        if($this->config->getQueryLogView() == 'full')
         {
-            $this->printMessage( 'DB ' . $key . ' ' . $item['count'] . 'x', $item['time'] . ' ms ');
+            foreach ($point->getQueryLog() as $queryLogHolder) {
+                $this->printMessage('Database query ' . $queryLogHolder->query, $queryLogHolder->time . ' ms ');
 
+            }
         }
     }
-
-
 }

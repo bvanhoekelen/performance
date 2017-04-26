@@ -95,14 +95,15 @@ class Config implements ConfigInterface
     /*
      * Set config item query log
      * @param mixed $value
+     * @param string $viewType
      * return void
      */
-    public static function setQueryLog($status)
+    public static function setQueryLog($status, $viewType = null)
     {
         if( ! self::enableTool())
             return;
 
-        self::$config->setQueryLog($status);
+        self::$config->setQueryLog($status, $viewType);
     }
 
     /*

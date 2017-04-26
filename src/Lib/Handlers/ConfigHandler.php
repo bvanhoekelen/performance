@@ -8,6 +8,7 @@ class ConfigHandler
     private $consoleLive = false;
     private $enableTool = true;
     private $queryLog = false;
+    private $queryLogView;
     private $pointLabelLTrim = false;
     private $pointLabelRTrim = false;
     private $presenter;
@@ -18,8 +19,7 @@ class ConfigHandler
      * false = config is false
      * true = query log is set
      */
-    public $queryLogState = null;
-
+    public $queryLogState;
 
     public function __construct()
     {
@@ -119,10 +119,34 @@ class ConfigHandler
     /**
      * @param bool $queryLog
      */
-    public function setQueryLog($queryLog)
+    public function setQueryLog($queryLog, $viewOption = null)
     {
         $this->queryLog = $queryLog;
+        $this->setQueryLogView($viewOption);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getQueryLogView()
+    {
+        return $this->queryLogView;
+    }
+
+    /**
+     * @param mixed $queryLogView
+     */
+    private function setQueryLogView($queryLogView = null)
+    {
+        if($queryLogView == 'resume' or ! $queryLogView)
+            $this->queryLogView = 'resume';
+        elseif($queryLogView == 'full')
+            $this->queryLogView = $queryLogView;
+        else
+            dd('Query log view ' . $queryLogView . ' does not exists. Use: "resume" or "full"');
+    }
+
+
 
     /**
      * @return bool

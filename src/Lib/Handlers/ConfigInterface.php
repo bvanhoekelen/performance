@@ -30,7 +30,7 @@ interface ConfigInterface
      * Set config item enable tool
      * @param bool $status
      */
-    public static function setQueryLog($status);
+    public static function setQueryLog($status, $viewType = null);
 
     /*
      * Set config item presenter type

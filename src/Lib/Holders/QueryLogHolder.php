@@ -50,6 +50,8 @@ class QueryLogHolder
             $this->queryType = 'insert';
         elseif(substr($this->query, 0, 6) == 'delete')
             $this->queryType = 'delete';
+        elseif(substr($this->query, 0, 6) == 'update')
+            $this->queryType = 'update';
         else
             $this->queryType = 'unknown';
     }
