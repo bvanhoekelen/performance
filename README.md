@@ -13,7 +13,7 @@
 - Measure easily the performance of your PHP script across multiple platforms
 - Support for Laravel framework » [Laravel](https://laravel.com)
 - Support interface web, web console and command line
-- Export results to class, file or json string
+- Export results to class, file or json string » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Export-handler).
 - Print information about PHP version, max exaction time and max memory
 - Measure time, memory usage and memory peak
 - Switch automatically between interfaces
@@ -84,6 +84,7 @@ $ php your_script.php --live
 
 # Help, docs and links
 - [Wiki](https://github.com/bvanhoekelen/performance/wiki)
+- [Config items](https://github.com/bvanhoekelen/performance/wiki/Doc-config)
 - [Backlog](https://github.com/bvanhoekelen/performance/blob/master/BACKLOG.md)
 - [Change log](https://github.com/bvanhoekelen/performance/blob/master/CHANGELOG.md)
 - [Packagist](https://packagist.org/packages/bvanhoekelen/performance)

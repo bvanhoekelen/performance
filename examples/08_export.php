@@ -21,8 +21,8 @@ for($x = 0; $x < 100; $x++)
 Performance::message('This is a message');
 
 // Finish all tasks and show test results
-$export = Performance::results(); // Print and return export
-$export = Performance::export(); // Only return export
+$export = Performance::results(); // Print and return export handler
+$export = Performance::export(); // Only return export handler
 
 // Return all information
 dump($export->get());
@@ -37,4 +37,4 @@ dump($export->config()->get());
 dump($export->points()->toJson());
 
 
-dump($export->config()->toFile('export.txt'));
+dump($export->toFile('export.txt'));
