@@ -51,7 +51,7 @@ class Performance
     }
 
     /*
-     * Set message
+     * Set a message associated with the point
      *
      * @param string|null   $message
      * @param boolean|null   $newLine

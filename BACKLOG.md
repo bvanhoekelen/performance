@@ -16,15 +16,8 @@ Create your card names
 ### Bug
 ### Improvement
 ### Feature
-1. [F001](#F001) Export results to file in human JSON
-1. [F002](#F002) Export results to file in human readable format
-1. [F003](#F003) Log database queries
-    - Time and query
+1. [F001](#F001) Example
 
 # Description
-
-## [F004]()
-- Log database queries
-- Use: `DB::connection()->enableQueryLog();` and `DB::getQueryLog();`
 
 # Done

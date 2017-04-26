@@ -39,19 +39,6 @@ class Config
     }
 
     /*
-     * Set config item console live
-     * @param bool $status
-     * return void
-     */
-    public static function setPoint($status)
-    {
-        if( ! self::enableTool())
-            return;
-
-        self::$config->setConsoleLive($status);
-    }
-
-    /*
      * Set config item point label LTrim
      * @param bool $mask
      * return void

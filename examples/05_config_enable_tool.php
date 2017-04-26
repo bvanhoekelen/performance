@@ -18,6 +18,9 @@ class Foo
         // Disable tool manual
         Config::setEnableTool(false);
 
+        // Or use Laravel ENV
+        //Config::setEnableTool('ENV:APP_DEBUG');
+
         $this->taskA();
         $this->taskB();
 
