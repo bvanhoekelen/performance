@@ -58,7 +58,7 @@ class ConfigHandler implements ExportInterface
 
         // Set live option
         if(isset($options['l']) or isset($options['live']))
-            $this->consoleLiveState = true;
+            $this->consoleLive = true;
     }
 
     // Print format
