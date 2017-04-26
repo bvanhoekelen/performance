@@ -30,6 +30,7 @@ class Config implements ConfigInterface
     /*
      * Set config item console live
      * @param bool $status
+     * return void
      */
     public static function setConsoleLive($status)
     {
@@ -42,6 +43,7 @@ class Config implements ConfigInterface
     /*
      * Set config item console live
      * @param bool $status
+     * return void
      */
     public static function setPoint($status)
     {
@@ -54,6 +56,7 @@ class Config implements ConfigInterface
     /*
      * Set config item point label LTrim
      * @param bool $mask
+     * return void
      */
     public static function setPointLabelLTrim($mask)
     {
@@ -66,6 +69,7 @@ class Config implements ConfigInterface
     /*
      * Set config item point label RTrim
      * @param bool $mask
+     * return void
      */
     public static function setPointLabelRTrim($mask)
     {
@@ -78,6 +82,7 @@ class Config implements ConfigInterface
     /*
      * Set config item point label RTrim
      * @param mixed $value
+     * return void
      */
     public static function setEnableTool($value)
     {
@@ -90,6 +95,7 @@ class Config implements ConfigInterface
     /*
      * Set config item query log
      * @param mixed $value
+     * return void
      */
     public static function setQueryLog($status)
     {
@@ -97,6 +103,19 @@ class Config implements ConfigInterface
             return;
 
         self::$config->setQueryLog($status);
+    }
+
+    /*
+     * Set config item presenter
+     * @param mixed $value
+     * return void
+     */
+    public static function setPresenter($type)
+    {
+        if( ! self::enableTool())
+            return;
+
+        self::$config->setPresenter($type);
     }
 
     /*

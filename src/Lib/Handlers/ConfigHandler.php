@@ -10,7 +10,7 @@ class ConfigHandler
     private $queryLog = false;
     private $pointLabelLTrim = false;
     private $pointLabelRTrim = false;
-    private $presenterType;
+    private $presenter;
 
     /*
      * Hold state of the query log
@@ -26,7 +26,7 @@ class ConfigHandler
         // Set default
         $this->setDefaultTimeZone();
         $this->setDefaultConsoleLive();
-        $this->setDefaultPresenterType();
+        $this->setDefaultPresenter();
     }
 
     public function getAllItemNames()
@@ -53,12 +53,12 @@ class ConfigHandler
     }
 
     // Print format
-    private function setDefaultPresenterType()
+    private function setDefaultPresenter()
     {
         if (php_sapi_name() == "cli")
-            $this->setPresenterType(Presenter::PRESENTER_COMMAND_LINE);
+            $this->setPresenter(Presenter::PRESENTER_CONSOLE);
         else
-            $this->setPresenterType(Presenter::PRESENTER_WEB);
+            $this->setPresenter(Presenter::PRESENTER_WEB);
     }
 
     // Getters and setters
@@ -167,17 +167,25 @@ class ConfigHandler
     /**
      * @return mixed
      */
-    public function getPresenterType()
+    public function getPresenter()
     {
-        return $this->presenterType;
+        return $this->presenter;
     }
 
     /**
-     * @param mixed $presenterType
+     * @param mixed $presenter
      */
-    public function setPresenterType($presenterType)
+    public function setPresenter($mixed)
     {
-        $this->presenterType = $presenterType;
+        if(is_int($mixed))
+            $this->presenter = $mixed;
+        else
+            if($mixed == 'console')
+                $this->presenter = Presenter::PRESENTER_CONSOLE;
+            elseif($mixed == 'web')
+                $this->presenter = Presenter::PRESENTER_WEB;
+            else
+                dd('Presenter ' . $mixed . ' does not exists. Use: console or web');
     }
 
 }

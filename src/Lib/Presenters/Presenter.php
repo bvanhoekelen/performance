@@ -8,7 +8,7 @@ use Performance\Lib\Presenters\Display\WebDisplay;
 class Presenter {
 
     // Set print format
-    const PRESENTER_COMMAND_LINE = 1;
+    const PRESENTER_CONSOLE = 1;
     const PRESENTER_WEB = 2;
 
     // Config
@@ -46,11 +46,11 @@ class Presenter {
      */
     private function setDisplay()
     {
-        if($this->config->getPresenterType() == self::PRESENTER_COMMAND_LINE)
+        if($this->config->getPresenter() == self::PRESENTER_CONSOLE)
             $this->display = new CommandLineDisplay($this->config);
-        elseif($this->config->getPresenterType() == self::PRESENTER_WEB)
+        elseif($this->config->getPresenter() == self::PRESENTER_WEB)
             $this->display = new WebDisplay($this->config);
         else
-            dd('Unknown presenter type', $this->config->getPresenterType());
+            dd('Unknown presenter ', $this->config->getPresenter());
     }
 }

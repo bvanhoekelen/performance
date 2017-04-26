@@ -31,4 +31,10 @@ interface ConfigInterface
      * @param bool $status
      */
     public static function setQueryLog($status);
+
+    /*
+     * Set config item presenter type
+     * @param string $type
+     */
+    public static function setPresenter($type);
 }
