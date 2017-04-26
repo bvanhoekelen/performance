@@ -17,6 +17,7 @@
 - Print information about PHP version, max exaction time and max memory
 - Measure time, memory usage and memory peak
 - Switch automatically between interfaces
+- Log database query's » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log).
 - Live function » [how to use](#command-line)
 - Easy to install » [installation](#installation)
 - Clearly and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
@@ -45,6 +46,9 @@ Performance::results();
 ## Command line preview
 <p align="center"><img src="/assets/raw/php-performance-tool-command-line.png" alt="PHP performance tool for command line" /></p>
 
+See [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log).
+
+
 ## Functions
 Set measuring point with or without label
 
@@ -58,13 +62,13 @@ Finish previous measuring point
 Performance::finish();
 ```
 
-See the [function overview](/bvanhoekelen/performance/wiki/Doc-functions) for more.
-
 Finish all measuring points and return test results
 
 ```php
 Performance::results();
 ```
+
+See the [function overview](https://github.com/bvanhoekelen/performance/wiki/Doc-functions) for more.
 
 ## Command line
 
