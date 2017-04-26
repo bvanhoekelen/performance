@@ -35,3 +35,6 @@ dump($export->config()->get());
 
 // Return only points in Json
 dump($export->points()->toJson());
+
+
+dump($export->config()->toFile('export.txt'));
