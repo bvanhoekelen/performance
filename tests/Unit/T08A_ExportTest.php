@@ -32,6 +32,9 @@ class T08A_ExportTest extends \PHPUnit_Framework_TestCase
 
         // Return only points in Json
         dump($export->points()->toJson());
+
+        // Return only points in Json
+        dump($export->toFile('tests/Unit/export.txt'));
     }
 
     public function testCheckJsonForAll()

@@ -26,6 +26,12 @@ class ExportHandler
         $this->returnItem['points'] = $this->points;
     }
 
+    private function resetItems()
+    {
+        $this->points = null;
+        $this->config = null;
+        $this->returnItem = null;
+    }
 
     public function points()
     {
@@ -45,7 +51,14 @@ class ExportHandler
     public function get()
     {
         $this->checkIfAllIsSet();
-        return $this->returnItem;
+        $return = $this->returnItem;
+        $this->resetItems();
+        return $return;
+    }
+
+    public function toFile($file)
+    {
+        file_put_contents($file, $this->toJson());
     }
 
     public function toJson()
@@ -84,6 +97,9 @@ class ExportHandler
             else
                 $return = $points;
         }
+
+        // Reset
+        $this->resetItems();
 
         // Return
         return json_encode($return);
