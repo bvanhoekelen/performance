@@ -58,6 +58,8 @@ Finish previous measuring point
 Performance::finish();
 ```
 
+See the [function overview](/bvanhoekelen/performance/wiki/Doc-%C2%BB-functions) for more.
+
 Finish all measuring points and return test results
 
 ```php
