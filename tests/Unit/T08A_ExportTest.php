@@ -6,10 +6,14 @@ use Performance\Config;
 
 class T08A_ExportTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
+    }
+
     public function testConfigQueryLog()
     {
-        // Reset
-        Performance::instanceReset();
+       $this->setTestUp();
 
         // Run task A
         $this->taskA();

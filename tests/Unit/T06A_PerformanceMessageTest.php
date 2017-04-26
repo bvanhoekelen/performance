@@ -5,10 +5,15 @@ use Performance\Performance;
 
 class T06A_PerformanceMessageTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
+    }
+
     public function testStaticFunctionPoint()
     {
         // Reset
-        Performance::instanceReset();
+        $this->setTestUp();
 
         // Test static functions
         Performance::point('Label');

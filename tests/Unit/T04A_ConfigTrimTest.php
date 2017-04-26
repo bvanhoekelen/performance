@@ -5,9 +5,15 @@ use Performance\Config;
 
 class T04A_ConfigTrimTest extends \PHPUnit_Framework_TestCase
 {
-    public function testStaticFunctionPoint()
+
+    protected function setTestUp()
     {
         Performance::instanceReset();
+    }
+
+    public function testStaticFunctionPoint()
+    {
+        $this->setTestUp();
 
         // You can specify the characters you want to strip
         Config::setPointLabelLTrim('synchronize');

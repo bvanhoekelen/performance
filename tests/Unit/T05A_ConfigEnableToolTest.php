@@ -5,10 +5,15 @@ use Performance\Config;
 
 class T05A_ConfigEnableToolTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
+    }
+
     public function testStaticFunctionPoint()
     {
         // Reset
-        Performance::instanceReset();
+        $this->setTestUp();
 
         // You can specify the characters you want to strip
         Config::setEnableTool(false);

@@ -5,10 +5,14 @@ use Performance\Performance;
 
 class T03A_ConfigConsoleLive extends \PHPUnit_Framework_TestCase
 {
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
+    }
+
     public function testSetConfigItemConsoleLiveTrue()
     {
-        // Reset
-        Performance::instanceReset();
+        $this->setTestUp();
 
         // Set config item live
         Config::setConsoleLive(true);
@@ -30,7 +34,7 @@ class T03A_ConfigConsoleLive extends \PHPUnit_Framework_TestCase
     public function testSetConfigItemConsoleLiveFalse()
     {
         // Reset
-        Performance::instanceReset();
+        $this->setTestUp();
 
         // Set config item live
         Config::setConsoleLive(false);

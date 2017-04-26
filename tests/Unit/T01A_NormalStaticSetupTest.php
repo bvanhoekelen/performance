@@ -5,10 +5,15 @@ use Performance\Performance;
 
 class T01A_NormalStaticSetupTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
+    }
+
     public function testStaticFunctionPoint()
     {
         // Reset
-        Performance::instanceReset();
+        $this->setTestUp();
 
         // Test static functions
         Performance::instance();
@@ -17,5 +22,6 @@ class T01A_NormalStaticSetupTest extends \PHPUnit_Framework_TestCase
         Performance::message('message');
         Performance::finish();
         Performance::results();
+        Performance::export();
     }
 }

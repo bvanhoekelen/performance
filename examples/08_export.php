@@ -24,9 +24,6 @@ Performance::message('This is a message');
 $export = Performance::results(); // Print and return export
 $export = Performance::export(); // Only return export
 
-
-dd($export);
-
 // Return all information
 dump($export->get());
 

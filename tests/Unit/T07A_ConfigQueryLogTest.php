@@ -6,10 +6,14 @@ use Performance\Config;
 
 class T07A_ConfigQueryLogTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
+    }
+
     public function testConfigQueryLog()
     {
-        // Reset
-        Performance::instanceReset();
+        $this->setTestUp();
 
         // You can specify the characters you want to strip
         Config::setQueryLog(false);
