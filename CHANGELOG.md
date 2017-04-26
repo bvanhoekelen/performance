@@ -4,7 +4,7 @@
 
 ### Added
 - Add query log support
-- Export function
+- Export function (included to file)
 - Message function
 - Enable an disable manual or automatic base on ENV:APP_DEBUG
 - Config item Nice label
