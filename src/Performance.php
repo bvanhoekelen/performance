@@ -83,6 +83,20 @@ class Performance
     }
 
     /*
+     * Export helper
+     *
+     * @return Performance\Lib\Handlers\ExportHandler
+     */
+    public static function export()
+    {
+        if( ! self::enableTool() )
+            return;
+
+        // Run
+        return self::$performance->export();
+    }
+
+    /*
      * Return test results
      *
      * @return Performance\Lib\Handlers\ExportHandler

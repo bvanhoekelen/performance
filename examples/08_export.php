@@ -21,7 +21,11 @@ for($x = 0; $x < 100; $x++)
 Performance::message('This is a message');
 
 // Finish all tasks and show test results
-$export = Performance::results();
+$export = Performance::results(); // Print and return export
+$export = Performance::export(); // Only return export
+
+
+dd($export);
 
 // Return all information
 dump($export->get());

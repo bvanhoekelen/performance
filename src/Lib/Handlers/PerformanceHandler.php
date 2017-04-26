@@ -32,6 +32,11 @@ class PerformanceHandler
     public $config;
 
     /*
+     * Hold export
+     */
+    public $export;
+
+    /*
      *
      */
     private $messageToLabel = null;
@@ -124,7 +129,16 @@ class PerformanceHandler
         // Add results to presenter
         $this->presenter->displayResults($this->pointStack);
 
-        return new ExportHandler($this);
+        // Return export
+        return $this->export();
+    }
+
+    public function export()
+    {
+        if( ! $this->export)
+            $this->export = new ExportHandler($this);
+
+        return $this->export;
     }
 
     public function getPoints()
