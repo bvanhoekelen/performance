@@ -17,9 +17,6 @@ class Foo
     {
         // Disable tool manual
         Config::setEnableTool(false);
-        // OR use a string
-        // Disable tool by the ENV by using the APP_DEBUG value.
-//        Config::set(Config::ENABLE_TOOL, 'ENV:APP_DEBUG');
 
         $this->taskA();
         $this->taskB();
