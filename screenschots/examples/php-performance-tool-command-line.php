@@ -29,6 +29,8 @@ for($x = 0; $x < 102100; $x++)
     $a[] = md5($x);
 }
 
+Performance::message('Add custom message job done!');
+
 Performance::point();
 $a = [];
 for($x = 0; $x < 10400; $x++)

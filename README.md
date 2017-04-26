@@ -19,7 +19,7 @@
 - Switch automatically between interfaces
 - Live function » [how to use](#command-line)
 - Easy to install » [installation](#installation)
-- Cleary and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
+- Clearly and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
 - Love feedback » [backlog](https://github.com/bvanhoekelen/performance/blob/master/BACKLOG.md) or [create issues](https://github.com/bvanhoekelen/performance/issues)
 
 ## Easy to use
@@ -57,6 +57,8 @@ Finish previous measuring point
 ```php
 Performance::finish();
 ```
+
+See the [function overview](/bvanhoekelen/performance/wiki/Doc-%C2%BB-functions) for more.
 
 Finish all measuring points and return test results
 
