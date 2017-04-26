@@ -6,52 +6,49 @@ use Performance\Lib\Presenter\Display\WebDisplay;
 class Presenter {
 
     // Set print format
-    const PRINT_FORMAT_COMMAND_LINE = 1;
-    const PRINT_FORMAT_WEB = 2;
+    const PRESENTER_COMMAND_LINE = 1;
+    const PRESENTER_WEB = 2;
 
-    public $printFormat;
-    private $display;
+    // Config
     protected $config;
+
+    // Display
+    private $display;
 
     public function __construct(ConfigHandler $config)
     {
         $this->config = $config;
 
-        // Check date function
-        if( ! ini_get('date.timezone') )
-            date_default_timezone_set('UTC');
-
         // Choose display format
-        $this->setPrintFormat();
         $this->setDisplay();
     }
 
-    // Triggers
+    /*
+     * Passed trigger to results to display
+     */
     public function displayResults($pointStack)
     {
         $this->display->displayResults($pointStack);
     }
 
+    /*
+     * Passed trigger finish point to display
+     */
     public function finishPointTrigger(Point $point)
     {
         $this->display->displayFinishPoint($point);
     }
 
-    // Print format
-    private function setPrintFormat()
-    {
-        if (php_sapi_name() == "cli")
-            $this->printFormat = self::PRINT_FORMAT_COMMAND_LINE;
-        else
-            $this->printFormat = self::PRINT_FORMAT_WEB;
-    }
-
-    // Display
+    /*
+     * Set display
+     */
     private function setDisplay()
     {
-        if($this->printFormat == self::PRINT_FORMAT_COMMAND_LINE)
+        if($this->config->getPresenterType() == self::PRESENTER_COMMAND_LINE)
             $this->display = new CommandLineDisplay($this->config);
-        else
+        elseif($this->config->getPresenterType() == self::PRESENTER_WEB)
             $this->display = new WebDisplay($this->config);
+        else
+            dd('Unknown presenter type', $this->config->getPresenterType());
     }
 }

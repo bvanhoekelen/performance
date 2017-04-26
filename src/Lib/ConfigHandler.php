@@ -1,7 +1,5 @@
 <?php namespace Performance\Lib;
 
-use Performance\Config;
-
 class ConfigHandler
 {
     // Config items
@@ -10,6 +8,7 @@ class ConfigHandler
     private $queryLog = false;
     private $pointLabelLTrim = false;
     private $pointLabelRTrim = false;
+    private $presenterType;
 
     /*
      * Hold state of the query log
@@ -22,8 +21,10 @@ class ConfigHandler
 
     public function __construct()
     {
-        // Set state
-        $this->setConsoleOptions();
+        // Set default
+        $this->setDefaultTimeZone();
+        $this->setDefaultConsoleLive();
+        $this->setDefaultPresenterType();
     }
 
     public function getAllItemNames()
@@ -31,7 +32,14 @@ class ConfigHandler
         return array_keys($this->configItems);
     }
 
-    private function setConsoleOptions()
+    private function setDefaultTimeZone()
+    {
+        // Check date function
+        if( ! ini_get('date.timezone') )
+            date_default_timezone_set('UTC');
+    }
+
+    private function setDefaultConsoleLive()
     {
         $shortopts = 'l::';
         $longopts = ['live'];
@@ -40,6 +48,15 @@ class ConfigHandler
         // Set live option
         if(isset($options['l']) or isset($options['live']))
             $this->consoleLiveState = true;
+    }
+
+    // Print format
+    private function setDefaultPresenterType()
+    {
+        if (php_sapi_name() == "cli")
+            $this->setPresenterType(Presenter::PRESENTER_COMMAND_LINE);
+        else
+            $this->setPresenterType(Presenter::PRESENTER_WEB);
     }
 
     // Getters and setters
@@ -145,6 +162,20 @@ class ConfigHandler
         $this->pointLabelRTrim = $status;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPresenterType()
+    {
+        return $this->presenterType;
+    }
 
+    /**
+     * @param mixed $presenterType
+     */
+    public function setPresenterType($presenterType)
+    {
+        $this->presenterType = $presenterType;
+    }
 
 }
