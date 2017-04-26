@@ -27,20 +27,30 @@ class Point
      * @param $startTime
      * @param $startMemory
      */
-    public function __construct(ConfigHandler $config, $name, $startTime = null, $startMemory = null)
+    public function __construct(ConfigHandler $config, $name)
     {
         // Set items
         $this->config = $config;
-        $this->setActive(true);
         $this->setLabel($name);
     }
 
+    /*
+     * Start point
+     *
+     * return void
+     */
     public function start()
     {
+        $this->setActive(true);
         $this->setStartTime();
         $this->setStartMemoryUsage();
     }
 
+    /*
+     * Finish point
+     *
+     * return void
+     */
     public function finish()
     {
         $this->setActive(false);
@@ -51,6 +61,9 @@ class Point
         $this->setDifferenceMemory();
     }
 
+    /*
+     * Simple export function
+     */
     public function export()
     {
         return get_object_vars($this);
