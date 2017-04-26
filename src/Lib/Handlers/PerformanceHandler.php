@@ -36,10 +36,10 @@ class PerformanceHandler
      */
     private $messageToLabel = null;
 
-    public function __construct(ConfigHandler $configHandler)
+    public function __construct()
     {
         // Set config
-        $this->config = $configHandler;
+        $this->config = new ConfigHandler();
     }
 
     public function bootstrap()

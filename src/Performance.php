@@ -15,7 +15,7 @@ class Performance implements PerformanceInterface
     public static function instance()
     {
         if( ! self::$performance)
-            self::$performance = new PerformanceHandler(new ConfigHandler());
+            self::$performance = new PerformanceHandler();
         return self::$performance;
     }
 
