@@ -1,4 +1,4 @@
-<?php namespace Performance\Lib\Presenter\Display;
+<?php namespace Performance\Lib\Presenters\Display;
 
 use Performance\Lib\Point;
 

@@ -1,7 +1,7 @@
-<?php namespace Performance\Lib\Presenter\Display;
+<?php namespace Performance\Lib\Presenters\Display;
 
-use Performance\Lib\ConfigHandler;
-use Performance\Lib\Presenter\Formatter;
+use Performance\Lib\Handlers\ConfigHandler;
+use Performance\Lib\Presenters\Formatter;
 
 abstract class Display implements DisplayInterface
 {

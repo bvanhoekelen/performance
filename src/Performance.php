@@ -1,8 +1,8 @@
 <?php namespace Performance;
 
-use Performance\Lib\ConfigHandler;
-use Performance\Lib\PerformanceHandler;
-use Performance\Lib\PerformanceInterface;
+use Performance\Lib\Handlers\ConfigHandler;
+use Performance\Lib\Handlers\PerformanceHandler;
+use Performance\Lib\Handlers\PerformanceInterface;
 
 class Performance implements PerformanceInterface
 {

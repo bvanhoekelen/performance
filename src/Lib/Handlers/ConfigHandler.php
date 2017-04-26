@@ -1,4 +1,6 @@
-<?php namespace Performance\Lib;
+<?php namespace Performance\Lib\Handlers;
+
+use Performance\Lib\Presenters\Presenter;
 
 class ConfigHandler
 {

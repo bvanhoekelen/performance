@@ -1,4 +1,4 @@
-<?php namespace Performance\Lib;
+<?php namespace Performance\Lib\Handlers;
 
 interface ConfigInterface
 {

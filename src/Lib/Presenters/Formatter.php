@@ -1,4 +1,4 @@
-<?php namespace Performance\Lib\Presenter;
+<?php namespace Performance\Lib\Presenters;
 
 class Formatter {
 

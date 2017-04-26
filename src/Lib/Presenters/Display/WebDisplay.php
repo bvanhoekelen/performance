@@ -1,6 +1,6 @@
-<?php namespace Performance\Lib\Presenter\Display;
+<?php namespace Performance\Lib\Presenters\Display;
 
-use Performance\Lib\PerformanceHandler;
+use Performance\Lib\Handlers\PerformanceHandler;
 use Performance\Lib\Point;
 
 class WebDisplay extends Display
@@ -110,5 +110,10 @@ class WebDisplay extends Display
     public function printMessage($message = null)
     {
         // TODO: Implement printMessage() method.
+    }
+
+    public function bootstrap()
+    {
+        // TODO: Implement bootstrap() method.
     }
 }

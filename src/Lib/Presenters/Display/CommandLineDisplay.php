@@ -1,6 +1,6 @@
-<?php namespace Performance\Lib\Presenter\Display;
+<?php namespace Performance\Lib\Presenters\Display;
 
-use Performance\Lib\PerformanceHandler;
+use Performance\Lib\Handlers\PerformanceHandler;
 use Performance\Lib\Point;
 
 class CommandLineDisplay extends Display
@@ -185,20 +185,28 @@ class CommandLineDisplay extends Display
 
         foreach ($point->getQueryLog() as $queryLogHolder)
         {
-            if(isset($infoArray[$queryLogHolder->type . 'Count']))
+            $type = $queryLogHolder->queryType;
+
+            if(isset($infoArray[ $type ]))
             {
-                $infoArray[$queryLogHolder->type . 'Count']++;
-                $infoArray[$queryLogHolder->type . 'Time'] = $infoArray[$queryLogHolder->type . 'Time'] + $queryLogHolder->time ;
+                $infoArray[ $type ]['count']++;
+                $infoArray[ $type ]['time'] = $infoArray[ $type ]['time'] + $queryLogHolder->time ;
             }
             else
             {
-                $infoArray[$queryLogHolder->type . 'Count'] = 1;
-                $infoArray[$queryLogHolder->type . 'Time'] = $queryLogHolder->time ;
+                $infoArray[ $type ]['count'] = 1;
+                $infoArray[ $type ]['time'] = $queryLogHolder->time ;
             }
 
-//            dd($infoArray);
 
-            $this->printMessage($queryLogHolder->query, $queryLogHolder->time . ' ms ');
+        }
+
+        ksort($infoArray);
+
+        foreach ($infoArray as $key => $item)
+        {
+            $this->printMessage( 'DB ' . $key . ' ' . $item['count'] . 'x', $item['time'] . ' ms ');
+
         }
     }
 

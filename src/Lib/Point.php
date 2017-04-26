@@ -1,6 +1,6 @@
 <?php namespace Performance\Lib;
 
-use Performance\Config;
+use Performance\Lib\Handlers\ConfigHandler;
 
 class Point
 {

@@ -1,7 +1,9 @@
-<?php namespace Performance\Lib;
+<?php namespace Performance\Lib\Presenters;
 
-use Performance\Lib\Presenter\Display\CommandLineDisplay;
-use Performance\Lib\Presenter\Display\WebDisplay;
+use Performance\Lib\Handlers\ConfigHandler;
+use Performance\Lib\Point;
+use Performance\Lib\Presenters\Display\CommandLineDisplay;
+use Performance\Lib\Presenters\Display\WebDisplay;
 
 class Presenter {
 

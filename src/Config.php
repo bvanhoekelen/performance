@@ -1,6 +1,6 @@
 <?php namespace Performance;
 
-use Performance\Lib\ConfigInterface;
+use Performance\Lib\Handlers\ConfigInterface;
 
 class Config implements ConfigInterface
 {

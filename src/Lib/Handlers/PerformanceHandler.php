@@ -1,6 +1,8 @@
-<?php namespace Performance\Lib;
+<?php namespace Performance\Lib\Handlers;
 
 use Performance\Lib\Holders\QueryLogHolder;
+use Performance\Lib\Point;
+use Performance\Lib\Presenters\Presenter;
 
 class PerformanceHandler
 {
