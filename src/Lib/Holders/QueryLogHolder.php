@@ -44,13 +44,13 @@ class QueryLogHolder
      */
     private function checkQueryType()
     {
-        if(substr($this->query, 0, 6) == 'select')
+        if(strtolower(substr($this->query, 0, 6)) == 'select')
             $this->queryType = 'select';
-        elseif(substr($this->query, 0, 6) == 'insert')
+        elseif(strtolower(substr($this->query, 0, 6)) == 'insert')
             $this->queryType = 'insert';
-        elseif(substr($this->query, 0, 6) == 'delete')
+        elseif(strtolower(substr($this->query, 0, 6)) == 'delete')
             $this->queryType = 'delete';
-        elseif(substr($this->query, 0, 6) == 'update')
+        elseif(strtolower(substr($this->query, 0, 6)) == 'update')
             $this->queryType = 'update';
         else
             $this->queryType = 'unknown';
