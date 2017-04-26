@@ -1,5 +1,9 @@
 # Change Log
 
+## [v2.0.1](https://github.com/bvanhoekelen/performance/tree/v2.0.1) - 2017-04-27
+### Change
+- Small fixes, typos and screenshots
+
 ## [v2.0.0](https://github.com/bvanhoekelen/performance/tree/v2.0.0) - 2017-04-26
 
 ### Added
