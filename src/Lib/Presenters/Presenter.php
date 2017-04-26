@@ -2,10 +2,8 @@
 
 use Performance\Lib\Handlers\ConfigHandler;
 use Performance\Lib\Point;
-use Performance\Lib\Presenters\Display\CommandLineDisplay;
-use Performance\Lib\Presenters\Display\WebDisplay;
 
-class Presenter {
+abstract class Presenter {
 
     // Set print format
     const PRESENTER_CONSOLE = 1;
@@ -13,44 +11,33 @@ class Presenter {
 
     // Config
     protected $config;
-
-    // Display
-    private $display;
+    protected $formatter;
+    protected $calculate;
+    protected $pointStack;
 
     public function __construct(ConfigHandler $config)
     {
         $this->config = $config;
+        $this->formatter = new Formatter();
+        $this->calculate = new Calculate();
+
 
         // Choose display format
-        $this->setDisplay();
+        $this->bootstrap();
     }
+
+    /*
+     * Bootstrap sub class
+     */
+    abstract public function bootstrap();
 
     /*
      * Passed trigger to results to display
      */
-    public function displayResults($pointStack)
-    {
-        $this->display->displayResults($pointStack);
-    }
+    abstract public function displayResultsTrigger($pointStack);
 
     /*
      * Passed trigger finish point to display
      */
-    public function finishPointTrigger(Point $point)
-    {
-        $this->display->displayFinishPoint($point);
-    }
-
-    /*
-     * Set display
-     */
-    private function setDisplay()
-    {
-        if($this->config->getPresenter() == self::PRESENTER_CONSOLE)
-            $this->display = new CommandLineDisplay($this->config);
-        elseif($this->config->getPresenter() == self::PRESENTER_WEB)
-            $this->display = new WebDisplay($this->config);
-        else
-            dd('Unknown presenter ', $this->config->getPresenter());
-    }
+    abstract public function finishPointTrigger(Point $point);
 }

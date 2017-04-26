@@ -2,7 +2,9 @@
 
 use Performance\Lib\Holders\QueryLogHolder;
 use Performance\Lib\Point;
+use Performance\Lib\Presenters\ConsolePresenter;
 use Performance\Lib\Presenters\Presenter;
+use Performance\Lib\Presenters\WebPresenter;
 
 class PerformanceHandler
 {
@@ -127,7 +129,7 @@ class PerformanceHandler
         $this->finishLastPoint();
 
         // Add results to presenter
-        $this->presenter->displayResults($this->pointStack);
+        $this->presenter->displayResultsTrigger($this->pointStack);
 
         // Return export
         return $this->export();
@@ -152,8 +154,12 @@ class PerformanceHandler
 
     private function bootstrapDisplay()
     {
-        // Setup first point
-        $this->presenter = new Presenter($this->config);
+        if($this->config->getPresenter() == Presenter::PRESENTER_CONSOLE)
+            $this->presenter = new ConsolePresenter($this->config);
+        elseif($this->config->getPresenter() == Presenter::PRESENTER_WEB)
+            $this->presenter = new WebPresenter($this->config);
+        else
+            dd('Unknown presenter ', $this->config->getPresenter());
     }
 
     /*

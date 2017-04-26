@@ -22,6 +22,7 @@ class Foo
     {
         // Enable query log
         Config::setQueryLog(true);
+        Config::setPresenter('web');
         // OR
 //        Config::setQueryLog(true, 'full');
 

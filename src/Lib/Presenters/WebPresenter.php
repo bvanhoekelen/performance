@@ -1,29 +1,30 @@
-<?php namespace Performance\Lib\Presenters\Display;
+<?php namespace Performance\Lib\Presenters;
 
 use Performance\Lib\Handlers\PerformanceHandler;
 use Performance\Lib\Point;
 
-class WebDisplay extends Display
+class WebPresenter extends Presenter
 {
-    public function displayFinishPoint(Point $point)
-    {
+    public function bootstrap()
+    {}
 
-    }
+    public function finishPointTrigger(Point $point)
+    {}
 
-    public function displayResults($pointStack)
+    public function displayResultsTrigger($pointStack)
     {
-        $this->pointStage = $pointStack;
-        $this->updateTotalTimeAndMemory();
+        $this->pointStack = $pointStack;
+
         $this->displayForWebAsHtml();
         $this->displayForWebAsConsole();
     }
 
     // Private
-
     private function displayForWebAsConsole()
     {
         $data = [];
-        foreach ($this->pointStage as $point)
+        $data['config'] = $this->config->export();
+        foreach ($this->pointStack as $point)
         {
             $data[] = [
                 'label' => $point->getLabel(),
@@ -33,6 +34,7 @@ class WebDisplay extends Display
                 'raw' => $point->export()
             ];
         }
+
         echo "<script>console.log(" . json_encode($data) .")</script>";
     }
 
@@ -44,14 +46,15 @@ class WebDisplay extends Display
         echo '</style>';
 
         echo '<div class="performance">';
-            if(count($this->pointStage) > 2)
+            if(count($this->pointStack) > 2)
             {
                 $textExecutionTime = (ini_get('max_execution_time') > 1) ? ini_get('max_execution_time') . ' sec' : 'unlimited';
+                $calculateTotalHolder = $this->calculate->totalTimeAndMemory($this->pointStack);
 
                 echo'<table class="table-title">
                     <tr>
-                        <td width="50%">' . $this->formatter->memoryToHuman($this->totalMemory) . '<br><span>Max memory ' . ini_get("memory_limit") . '</span></td>
-                        <td width="50%">' . $this->formatter->timeToHuman($this->totalTime) . '<br><span>Max time ' . $textExecutionTime . ' on PHP ' . phpversion() . '</span></td>
+                        <td width="50%">' . $this->formatter->memoryToHuman($calculateTotalHolder->totalMemory) . '<br><span>Max memory ' . ini_get("memory_limit") . '</span></td>
+                        <td width="50%">' . $this->formatter->timeToHuman($calculateTotalHolder->totalTime) . '<br><span>Max time ' . $textExecutionTime . ' on PHP ' . phpversion() . '</span></td>
                     </tr>
                 </table>
                 
@@ -60,14 +63,14 @@ class WebDisplay extends Display
                     <table class="table-point">
                     <tr>
                         <th width="20%">Label</th>
-                        <th width="17%">Time</th>
+                        <th width="18%">Memory peak</th>
                         <th width="5%">%</th>
                         <th width="17%">Memory usage</th>
                         <th width="5%">%</th>
-                        <th width="18%">Memory peak</th>
+                        <th width="17%">Time</th>
                     </tr>';
 
-                    foreach (array_slice($this->pointStage, 1) as $point) {
+                    foreach (array_slice($this->pointStack, 1) as $point) {
 
                         // For real calibrate results fake printing
                         if( $point->getLabel() === Point::POINT_CALIBRATE )
@@ -75,25 +78,29 @@ class WebDisplay extends Display
 
                         echo '<tr>'
                             . '<td class="t-l">' . $point->getLabel() . '</td>'
-                            . '<td>' . $this->formatter->timeToHuman($point->getDifferenceTime()) . '</td>'
-                            . '<td>' . $this->calculatProcens($point->getDifferenceTime(), $this->totalTime) . '</td>'
-                            . '<td>' . $this->formatter->memoryToHuman($point->getDifferenceMemory()) . '</td>'
-                            . '<td>' . $this->calculatProcens($point->getDifferenceMemory(), $this->totalMemory) . '</td>'
                             . '<td>' . $this->formatter->memoryToHuman($point->getMemoryPeak()) . '</td>'
+                            . '<td>' . $this->calculate->calculatePercentage($point->getDifferenceMemory(), $calculateTotalHolder->totalMemory) . '</td>'
+                            . '<td>' . $this->formatter->memoryToHuman($point->getDifferenceMemory()) . '</td>'
+                            . '<td>' . $this->calculate->calculatePercentage($point->getDifferenceTime(), $calculateTotalHolder->totalTime) . '</td>'
+                            . '<td>' . $this->formatter->timeToHuman($point->getDifferenceTime()) . '</td>'
                             . '</tr>';
 
-
-                        if(count($point->getNewLineMessage()))
+                        foreach ($point->getQueryLog() as $queryLogHolder)
                         {
-                            foreach ($point->getNewLineMessage() as $message)
-                            {
-                                echo '<tr><td class="new-line-message" colspan="6">' . $message . '</td></tr>';
-                            }
+                            echo '<tr>';
+                            echo'<td class="new-line-message" colspan="5"> - ' . ((strlen($queryLogHolder->query) > 70) ? substr($queryLogHolder->query,0,67).'...' : $queryLogHolder->query) . '</td>';
+                            echo'<td class="new-line-message" style="text-align: right;" colspan="1">' . $queryLogHolder->time . ' ms</td>';
+                            echo '</tr>';
+                        }
+
+                        foreach ($point->getNewLineMessage() as $message)
+                        {
+                            echo '<tr><td class="new-line-message" colspan="6">' . $message . '</td></tr>';
                         }
                     }
                     echo '</table>';
 
-                    $calibratePoint = $this->pointStage[1];
+                    $calibratePoint = $this->pointStack[1];
 
                     echo '<div class="table-more-info">Performance v' . PerformanceHandler::VERSION
                         . ' PHP v' . phpversion() . ' on ' . date('Y-m-d H:i:s')
@@ -105,15 +112,5 @@ class WebDisplay extends Display
             else
                 echo '<div class="table-more-info"> <h2>There are not point set</h2>Set your first point with <var>point</var> command:<br><code>Performance::point()</code>Final you can view the results with the <var>results</var> command:<br><code>Performance::results()</code></div>';
         echo '</div>';
-    }
-
-    public function printMessage($message = null)
-    {
-        // TODO: Implement printMessage() method.
-    }
-
-    public function bootstrap()
-    {
-        // TODO: Implement bootstrap() method.
     }
 }

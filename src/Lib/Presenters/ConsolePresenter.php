@@ -1,9 +1,9 @@
-<?php namespace Performance\Lib\Presenters\Display;
+<?php namespace Performance\Lib\Presenters;
 
 use Performance\Lib\Handlers\PerformanceHandler;
 use Performance\Lib\Point;
 
-class CommandLineDisplay extends Display
+class ConsolePresenter extends Presenter
 {
     private $commandLineWidth;
     private $commandLineHeight;
@@ -15,7 +15,7 @@ class CommandLineDisplay extends Display
         $this->printStartUp();
     }
 
-    public function displayFinishPoint(Point $point)
+    public function finishPointTrigger(Point $point)
     {
         // Preload and calculate
         if($point->getLabel() === Point::POINT_PRELOAD)
@@ -34,13 +34,11 @@ class CommandLineDisplay extends Display
         $this->printPointNewLineMessage($point);
     }
 
-    public function displayResults($pointStack)
+    public function displayResultsTrigger($pointStack)
     {
-        $this->pointStage = $pointStack;
+        $this->pointStack = $pointStack;
         $this->printFinishDown();
         $this->printStack();
-
-        $this->printQueryLogFooter();
     }
 
     private function liveOrStack($line)
@@ -103,27 +101,20 @@ class CommandLineDisplay extends Display
 
     private function printFinishDown()
     {
-        $this->updateTotalTimeAndMemory();
+        $calculateTotalHolder = $this->calculate->totalTimeAndMemory($this->pointStack);
 
         if($this->commandLineWidth > 80)
-            $a = str_pad("   Total " . (count($this->pointStage) - 2) . " taken ", $this->cellWightLabel - 15) . date('m-d H:i:s') . ' ';
+            $a = str_pad("   Total " . (count($this->pointStack) - 2) . " taken ", $this->cellWightLabel - 15) . date('m-d H:i:s') . ' ';
         else
-            $a = str_pad("   Total " . (count($this->pointStage) - 2) . " taken ", $this->cellWightLabel);
+            $a = str_pad("   Total " . (count($this->pointStack) - 2) . " taken ", $this->cellWightLabel);
 
         $this->liveOrStack( str_repeat("-", $this->commandLineWidth - 1) . PHP_EOL
             . $a
-            . " " . $this->formatter->stringPad( $this->formatter->timeToHuman( $this->totalTime ) . ' ', $this->cellWightResult, ' ', STR_PAD_LEFT)
-            . " " . str_pad( $this->formatter->memoryToHuman( $this->totalMemory ) . ' ', $this->cellWightResult, ' ', STR_PAD_LEFT)
-            . " " . str_pad( $this->formatter->memoryToHuman( $this->totalMemoryPeak ) . ' ', $this->cellWightResult, ' ', STR_PAD_LEFT)
+            . " " . $this->formatter->stringPad( $this->formatter->timeToHuman( $calculateTotalHolder->totalTime ) . ' ', $this->cellWightResult, ' ', STR_PAD_LEFT)
+            . " " . str_pad( $this->formatter->memoryToHuman( $calculateTotalHolder->totalMemory ) . ' ', $this->cellWightResult, ' ', STR_PAD_LEFT)
+            . " " . str_pad( $this->formatter->memoryToHuman( $calculateTotalHolder->totalMemoryPeak ) . ' ', $this->cellWightResult, ' ', STR_PAD_LEFT)
             . PHP_EOL
             . PHP_EOL);
-    }
-
-    private function printQueryLogFooter()
-    {
-
-//        dd($this->pointStage);
-
     }
 
     private function setCommandSize()
