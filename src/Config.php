@@ -1,8 +1,6 @@
 <?php namespace Performance;
 
-use Performance\Lib\Handlers\ConfigInterface;
-
-class Config implements ConfigInterface
+class Config
 {
     /*
      * Create a config instance

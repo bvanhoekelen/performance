@@ -1,8 +1,9 @@
 <?php namespace Performance\Lib\Handlers;
 
+use Performance\Lib\Interfaces\ExportInterface;
 use Performance\Lib\Presenters\Presenter;
 
-class ConfigHandler
+class ConfigHandler implements ExportInterface
 {
     // Config items
     private $consoleLive = false;
@@ -27,6 +28,14 @@ class ConfigHandler
         $this->setDefaultTimeZone();
         $this->setDefaultConsoleLive();
         $this->setDefaultPresenter();
+    }
+
+    /*
+     * Simple export function
+     */
+    public function export()
+    {
+        return get_object_vars($this);
     }
 
     public function getAllItemNames()

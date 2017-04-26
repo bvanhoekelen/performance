@@ -1,8 +1,9 @@
 <?php namespace Performance\Lib;
 
 use Performance\Lib\Handlers\ConfigHandler;
+use Performance\Lib\Interfaces\ExportInterface;
 
-class Point
+class Point implements ExportInterface
 {
     const POINT_PRELOAD = '__POINT_PRELOAD';
     const POINT_CALIBRATE = 'Calibrate point';
@@ -66,7 +67,10 @@ class Point
      */
     public function export()
     {
-        return get_object_vars($this);
+        $vars = get_object_vars($this);
+        unset($vars['config']); // skip config
+
+        return $vars;
     }
 
     // Get and set

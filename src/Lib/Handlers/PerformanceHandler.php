@@ -114,7 +114,7 @@ class PerformanceHandler
     /*
      * Return test results
      *
-     * @return mixed
+     * @return Performance\Lib\Handlers\ExportHandler
      */
     public function results()
     {
@@ -123,6 +123,8 @@ class PerformanceHandler
 
         // Add results to presenter
         $this->presenter->displayResults($this->pointStack);
+
+        return new ExportHandler($this);
     }
 
     public function getPoints()

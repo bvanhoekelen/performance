@@ -1,10 +1,8 @@
 <?php namespace Performance;
 
-use Performance\Lib\Handlers\ConfigHandler;
 use Performance\Lib\Handlers\PerformanceHandler;
-use Performance\Lib\Handlers\PerformanceInterface;
 
-class Performance implements PerformanceInterface
+class Performance
 {
     /*
      * Create a performance instance
@@ -87,7 +85,7 @@ class Performance implements PerformanceInterface
     /*
      * Return test results
      *
-     * @return mixed
+     * @return Performance\Lib\Handlers\ExportHandler
      */
     public static function results()
     {
@@ -95,7 +93,7 @@ class Performance implements PerformanceInterface
             return;
 
         // Run
-        self::$performance->results();
+        return self::$performance->results();
     }
 
     /*
