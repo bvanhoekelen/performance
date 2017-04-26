@@ -13,10 +13,17 @@ use Performance\Performance;
 Performance::point();
 
 // Run task A
-for($x = 0; $x < 100; $x++)
-{
-//    echo ".";
-}
+usleep(7700);
+
+Performance::point();
+
+// Run task A
+usleep(3400);
+
+Performance::point();
+
+// Run task A
+usleep(270);
 
 // Finish all tasks and show test results
 Performance::results();

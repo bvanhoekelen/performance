@@ -1,5 +1,19 @@
 # Change Log
 
+## [v2.0.0](https://github.com/bvanhoekelen/performance/tree/v2.0.0) - 2017-04-26
+
+### Added
+- Add query log support
+- Export function (included to file)
+- Message function
+- Enable an disable manual or automatic base on ENV:APP_DEBUG
+- Config item Nice label
+
+### Change
+- Change config system
+- Change display to presenter
+- Big code refactoring
+
 ## [v1.0.7](https://github.com/bvanhoekelen/performance/tree/v1.0.7) - 2017-04-20
 ### Change
 - Terminal view: redesign, add tool name and change background color

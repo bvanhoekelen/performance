@@ -16,8 +16,8 @@ class Foo
     public function __construct()
     {
         // You can specify the characters you want to strip
-        Config::set(Config::POINT_LABEL_LTRIM, 'synchronize');
-        Config::set(Config::POINT_LABEL_RTRIM, 'Run');
+        Config::setPointLabelLTrim('synchronize');
+        Config::setPointLabelRTrim('Run');
 
         $this->synchronizeTaskARun();
         $this->synchronizeTaskBRun();
@@ -34,7 +34,7 @@ class Foo
 
         //
         // Run code
-        sleep(1);
+        usleep(2000);
         //
 
         // Finish point Task A
@@ -48,7 +48,7 @@ class Foo
 
         //
         // Run code
-        sleep(1);
+        usleep(2000);
         //
 
         // Finish point Task B
@@ -62,7 +62,7 @@ class Foo
 
         //
         // Run code
-        sleep(1);
+        usleep(2000);
         //
 
         // Finish point Task C

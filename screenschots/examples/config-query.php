@@ -1,21 +1,26 @@
-<?php namespace Tests\Unit;
+<?php
+
+require_once('../../vendor/autoload.php');
+require_once('../../examples/helper/UseEloquent.php');
+require_once('../../examples/helper/user.php');
 
 use Performance\Performance;
 use Performance\Config;
 
-class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
+use Illuminate\Database\Capsule\Manager as DB;
+
+// Bootstrap class
+$foo = new Foo();
+
+class Foo
 {
-
-    protected function setUp()
-    {
-        Config::reset();
-    }
-
-    public function testStaticFunctionPoint()
+    public function __construct()
     {
         // You can specify the characters you want to strip
-        Config::set(Config::POINT_LABEL_LTRIM, 'synchronize');
-        Config::set(Config::POINT_LABEL_RTRIM, 'Run');
+        Config::setQueryLog(true);
+//        Config::setQueryLog(true, 'full');
+        Config::setPointLabelNice(true);
+        Config::setPointLabelRTrim('Run');
 
         $this->synchronizeTaskARun();
         $this->synchronizeTaskBRun();
@@ -25,20 +30,30 @@ class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
         Performance::results();
     }
 
-    // Create task
-
     public function synchronizeTaskARun()
     {
         // Set point Task A
         Performance::point(__FUNCTION__);
 
-        //
-        // Run code
-//        sleep(1);
-        usleep(2000);
-        //
+        // Create user
+        $user = new User();
+        $user->name = 'User';
+        $user->save();
 
-        // Finish point Task C
+        // Get users
+        $users = User::all();
+
+        // Update user
+        $user = User::where('name', 'User')->first();
+        $user->email = 'user@user.user';
+        $user->save();
+
+        // Delete all
+        $users = DB::table('user')->select('*')
+            ->where('name', 'User')
+            ->delete();
+
+        // Finish point Task A
         Performance::finish();
     }
 
@@ -49,7 +64,6 @@ class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
 
         //
         // Run code
-        usleep(2000);
         //
 
         // Finish point Task B
@@ -63,7 +77,6 @@ class ConfigLtirmRtrimTest extends \PHPUnit_Framework_TestCase
 
         //
         // Run code
-        usleep(2000);
         //
 
         // Finish point Task C

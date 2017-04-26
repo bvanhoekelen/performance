@@ -1,11 +1,14 @@
 <?php namespace Performance\Lib;
 
-use Performance\Config;
+use Performance\Lib\Handlers\ConfigHandler;
+use Performance\Lib\Interfaces\ExportInterface;
 
-class Point
+class Point implements ExportInterface
 {
     const POINT_PRELOAD = '__POINT_PRELOAD';
     const POINT_CALIBRATE = 'Calibrate point';
+
+    private $config;
 
     private $active;
     private $label;
@@ -16,6 +19,8 @@ class Point
     private $memoryPeak;
     private $differenceTime;
     private $differenceMemory;
+    private $queryLog = [];
+    private $newLineMessage = [];
 
     /**
      * Point constructor.
@@ -23,19 +28,30 @@ class Point
      * @param $startTime
      * @param $startMemory
      */
-    public function __construct($name, $startTime = null, $startMemory = null)
+    public function __construct(ConfigHandler $config, $name)
     {
         // Set items
-        $this->setActive(true);
+        $this->config = $config;
         $this->setLabel($name);
     }
 
+    /*
+     * Start point
+     *
+     * return void
+     */
     public function start()
     {
+        $this->setActive(true);
         $this->setStartTime();
         $this->setStartMemoryUsage();
     }
 
+    /*
+     * Finish point
+     *
+     * return void
+     */
     public function finish()
     {
         $this->setActive(false);
@@ -46,9 +62,15 @@ class Point
         $this->setDifferenceMemory();
     }
 
+    /*
+     * Simple export function
+     */
     public function export()
     {
-        return get_object_vars($this);
+        $vars = get_object_vars($this);
+        unset($vars['config']); // skip config
+
+        return $vars;
     }
 
     // Get and set
@@ -132,14 +154,18 @@ class Point
     public function setLabel($label)
     {
         // Run ltrim
-        $configLtrim = Config::get(Config::POINT_LABEL_LTRIM);
-        if($configLtrim)
-            $label = ltrim($label, $configLtrim);
+        $configLTrim = $this->config->getPointLabelLTrim();
+        if($configLTrim)
+            $label = ltrim($label, $configLTrim);
 
         // Run Rtrim
-        $configRtrim = Config::get(Config::POINT_LABEL_RTRIM);
-        if($configRtrim)
-            $label = rtrim($label, $configRtrim);
+        $configRTrim = $this->config->getPointLabelRTrim();
+        if($configRTrim)
+            $label = rtrim($label, $configRTrim);
+
+        // Set nice label
+        if($label !== self::POINT_PRELOAD and $this->config->isPointLabelNice())
+            $label = ucfirst(str_replace('  ', ' ', preg_replace('/(?<!^)[A-Z]/', ' $0', $label)));
 
         $this->label = $label;
     }
@@ -205,10 +231,40 @@ class Point
      */
     public function setDifferenceMemory()
     {
-        $this->differenceMemory = $this->stopMemoryUsage - $this->startMemoryUsage;
+        $difference = $this->stopMemoryUsage - $this->startMemoryUsage;
+        $this->differenceMemory = ($difference > 0 ) ? $difference: 0;
     }
 
+    /**
+     * @return array
+     */
+    public function getQueryLog()
+    {
+        return $this->queryLog;
+    }
 
+    /**
+     * @param array $queryLog
+     */
+    public function setQueryLog($queryLog)
+    {
+        $this->queryLog = $queryLog;
+    }
 
+    /**
+     * @return array
+     */
+    public function getNewLineMessage()
+    {
+        return $this->newLineMessage;
+    }
+
+    /**
+     * @param string $newLineMessage
+     */
+    public function addNewLineMessage($newLineMessage)
+    {
+        $this->newLineMessage[] = $newLineMessage;
+    }
 
 }
