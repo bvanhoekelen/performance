@@ -15,9 +15,8 @@ class Foo
 {
     public function __construct()
     {
-        // You can specify the characters you want to strip
-        Config::setPointLabelLTrim('synchronize');
-        Config::setPointLabelRTrim('Run');
+        // The point label nice wil converter 'CamelCase' to 'Camel case'
+        Config::setPointLabelNice(true);
 
         $this->synchronizeTaskARun();
         $this->synchronizeTaskBRun();

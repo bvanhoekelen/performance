@@ -1,20 +1,38 @@
 <?php namespace Performance;
 
-use Performance\Lib\PerformanceHandler;
-use Performance\Lib\PerformanceInterface;
+use Performance\Lib\Handlers\PerformanceHandler;
 
-class Performance implements PerformanceInterface
+class Performance
 {
     /*
      * Create a performance instance
      */
     private static $performance;
+    private static $bootstrap = false;
 
-    private static function getPerformance()
+    public static function instance()
     {
         if( ! self::$performance)
             self::$performance = new PerformanceHandler();
         return self::$performance;
+    }
+
+    private static function enableTool()
+    {
+        $performance = self::instance();
+
+        // Check DISABLE_TOOL
+        if( ! $performance->config->isEnableTool())
+            return false;
+
+        // Check bootstrap
+        if( ! self::$bootstrap)
+        {
+            $performance->bootstrap();
+            self::$bootstrap = true;
+        }
+
+        return true;
     }
 
     /*
@@ -25,14 +43,29 @@ class Performance implements PerformanceInterface
      */
     public static function point($label = null)
     {
-        // Check DISABLE_TOOL
-        if( ! Config::get(Config::ENABLE_TOOL))
+        if( ! self::enableTool() )
             return;
 
         // Run
-        $performance = self::getPerformance();
-        $performance->point($label);
+        self::$performance->point($label);
     }
+
+    /*
+     * Set message
+     *
+     * @param string|null   $message
+     * @param boolean|null   $newLine
+     * @return void
+     */
+    public static function message($message = null, $newLine = true)
+    {
+        if( ! self::enableTool() or ! $message)
+            return;
+
+        // Run
+        self::$performance->message($message, $newLine);
+    }
+
 
     /*
      * Finish measuring point X
@@ -42,26 +75,50 @@ class Performance implements PerformanceInterface
      */
     public static function finish()
     {
-        // Check DISABLE_TOOL
-        if( ! Config::get(Config::ENABLE_TOOL))
+        if( ! self::enableTool() )
             return;
 
-        $performance = self::getPerformance();
-        $performance->finish();
+        // Run
+        self::$performance->finish();
+    }
+
+    /*
+     * Export helper
+     *
+     * @return Performance\Lib\Handlers\ExportHandler
+     */
+    public static function export()
+    {
+        if( ! self::enableTool() )
+            return;
+
+        // Run
+        return self::$performance->export();
     }
 
     /*
      * Return test results
      *
-     * @return mixed
+     * @return Performance\Lib\Handlers\ExportHandler
      */
     public static function results()
     {
-        // Check DISABLE_TOOL
-        if( ! Config::get(Config::ENABLE_TOOL))
+        if( ! self::enableTool() )
             return;
 
-        $performance = self::getPerformance();
-        $performance->results();
+        // Run
+        return self::$performance->results();
+    }
+
+    /*
+     * Reset
+     */
+    public static function instanceReset()
+    {
+        // Run
+        Config::instanceReset();
+        self::$performance = null;
+        self::$bootstrap = false;
+
     }
 }

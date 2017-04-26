@@ -16,10 +16,7 @@ class Foo
     public function __construct()
     {
         // Disable tool manual
-        Config::set(Config::ENABLE_TOOL, false);
-        // OR use a string
-        // Disable tool by the ENV by using the APP_DEBUG value.
-        Config::set(Config::ENABLE_TOOL, 'ENV:APP_DEBUG');
+        Config::setEnableTool(false);
 
         $this->taskA();
         $this->taskB();
@@ -35,7 +32,7 @@ class Foo
 
         //
         // Run code
-        sleep(1);
+        usleep(2000);
         //
 
         // Finish point Task A
@@ -49,7 +46,7 @@ class Foo
 
         //
         // Run code
-        sleep(1);
+        usleep(2000);
         //
 
         // Finish point Task B

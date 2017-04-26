@@ -1,24 +1,25 @@
-<?php
+<?php namespace Tests\Unit;
 
-/*
- * Require Performance
- */
-
-require_once('../vendor/autoload.php');
 use Performance\Performance;
 use Performance\Config;
 
-// Bootstrap class
-$foo = new Foo();
-
-class Foo
+class T04A_ConfigTrimTest extends \PHPUnit_Framework_TestCase
 {
-    public function __construct()
+
+    protected function setTestUp()
     {
+        Performance::instanceReset();
+    }
+
+    public function testStaticFunctionPoint()
+    {
+        $this->setTestUp();
+
         // You can specify the characters you want to strip
         Config::setPointLabelLTrim('synchronize');
         Config::setPointLabelRTrim('Run');
 
+        // Run test tasks
         $this->synchronizeTaskARun();
         $this->synchronizeTaskBRun();
         $this->synchronizeTaskCRun();
@@ -27,7 +28,19 @@ class Foo
         Performance::results();
     }
 
-    public function synchronizeTaskARun()
+    public function testTrimFunction()
+    {
+        $points = Performance::instance()->getPoints();
+
+        $this->assertEquals($points[2]->getLabel(), 'TaskA');
+        $this->assertEquals($points[3]->getLabel(), 'TaskB');
+        $this->assertEquals($points[4]->getLabel(), 'TaskC');
+    }
+
+
+    // Create task
+
+    private function synchronizeTaskARun()
     {
         // Set point Task A
         Performance::point(__FUNCTION__);
@@ -37,11 +50,11 @@ class Foo
         usleep(2000);
         //
 
-        // Finish point Task A
+        // Finish point Task C
         Performance::finish();
     }
 
-    public function synchronizeTaskBRun()
+    private function synchronizeTaskBRun()
     {
         // Set point Task B
         Performance::point(__FUNCTION__);
@@ -55,7 +68,7 @@ class Foo
         Performance::finish();
     }
 
-    public function synchronizeTaskCRun()
+    private function synchronizeTaskCRun()
     {
         // Set point Task C
         Performance::point(__FUNCTION__);
