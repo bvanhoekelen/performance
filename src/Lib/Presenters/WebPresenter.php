@@ -64,7 +64,7 @@ class WebPresenter extends Presenter
                     <tr>
                         <th>Label</th>
                         <th width="5%">%</th>
-                        <th width="17%">Memory usage</th>
+                        <th width="17%">Memory</th>
                         <th width="5%">%</th>
                         <th width="17%">Time</th>
                     </tr>';
