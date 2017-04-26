@@ -25,13 +25,13 @@ class Foo
         // OR
 //        Config::setQueryLog(true, 'full');
 
-        $this->runQuerys();
+        $this->taskA();
 
         // Finish all tasks and show test results
         Performance::results();
     }
 
-    public function runQuerys()
+    public function taskA()
     {
         // Set point Task A
         Performance::point(__FUNCTION__);
