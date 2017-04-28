@@ -34,11 +34,6 @@ class PerformanceHandler
     public $config;
 
     /*
-     * Hold export
-     */
-    public $export;
-
-    /*
      *
      */
     private $messageToLabel = null;
@@ -137,10 +132,7 @@ class PerformanceHandler
 
     public function export()
     {
-        if( ! $this->export)
-            $this->export = new ExportHandler($this);
-
-        return $this->export;
+        return new ExportHandler($this);
     }
 
     public function getPoints()
