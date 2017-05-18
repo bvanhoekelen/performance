@@ -24,7 +24,7 @@ class QueryLogHolder
         $this->bindings = isset($sql->bindings) ? $sql->bindings : [];
 
         $connection = $sql->connection;
-        $config = method_exists($connection, 'getConfig') ? $sql->connection->getConfig() : [];
+        $config = method_exists($connection, 'getConfig') ? $sql->connection->getConfig(null) : []; // null fix change https://github.com/illuminate/database/commit/ba465fbda006d70265362012653b4e97667c867b#diff-eba180ff89e23df156c82c995be952df
         $this->connectionName = method_exists($connection, 'getName') ? $sql->connection->getName() : [];
         if (method_exists($connection, 'getConfig')) {
             $this->database = isset($config['database']) ? $config['database'] : null;
