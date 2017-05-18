@@ -11,7 +11,7 @@ class PerformanceHandler
     /*
      * Version
      */
-    const VERSION = '2.0.1';
+    const VERSION = '2.0.2';
 
     /*
      * Hold point stack
@@ -32,11 +32,6 @@ class PerformanceHandler
      * Hold the config class
      */
     public $config;
-
-    /*
-     * Hold export
-     */
-    public $export;
 
     /*
      *
@@ -137,10 +132,7 @@ class PerformanceHandler
 
     public function export()
     {
-        if( ! $this->export)
-            $this->export = new ExportHandler($this);
-
-        return $this->export;
+        return new ExportHandler($this);
     }
 
     public function getPoints()

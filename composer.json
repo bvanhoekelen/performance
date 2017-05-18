@@ -44,5 +44,8 @@
         "psr-4": {
             "Performance\\": "src/"
         }
+    },
+    "archive": {
+        "exclude": ["assets"]
     }
 }
