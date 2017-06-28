@@ -13,6 +13,7 @@ class ConfigHandler implements ExportInterface
     private $pointLabelLTrim = false;
     private $pointLabelRTrim = false;
     private $pointLabelNice = false;
+    private $runInformation = false;
     private $presenter;
 
     /*
@@ -237,6 +238,25 @@ class ConfigHandler implements ExportInterface
     {
         $this->pointLabelNice = (bool) $pointLabelNice;
     }
+
+    /**
+     * Set run information
+     * @param bool $status
+     */
+    public function setRunInformation($status)
+    {
+        $this->runInformation = (bool) $status;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRunInformation()
+    {
+        return $this->runInformation;
+    }
+
+
 
 
 

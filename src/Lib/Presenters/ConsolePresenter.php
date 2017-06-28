@@ -82,7 +82,14 @@ class ConsolePresenter extends Presenter
             . " " . terminal_style('     PHP PERFORMANCE TOOL     ', null, 'gray') . $queryLogIndication . $liveIndication . PHP_EOL
             . " Created by B. van Hoekelen version " .  PerformanceHandler::VERSION . " PHP v" . phpversion() . PHP_EOL
             . " Max memory " . ini_get("memory_limit") . ", max execution time " . $textExecutionTime . " on " . date('Y-m-d H:i:s') . PHP_EOL
-            . PHP_EOL);
+        );
+
+        // Print run information
+        if($this->config->isRunInformation())
+            $this->liveOrStack(" Run by user " . $this->information->getCurrentUser() . " on process id " . $this->information->getCurrentProcessId() . PHP_EOL);
+
+        // Set new line
+        $this->liveOrStack(PHP_EOL);
 
         // Print head
         $this->printHeadLine();

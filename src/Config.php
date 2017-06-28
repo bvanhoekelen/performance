@@ -118,6 +118,19 @@ class Config
     }
 
     /*
+     * Set config point label nice
+     * @param bool $status
+     * return void
+     */
+    public static function setRunInformation($status)
+    {
+        if( ! self::enableTool())
+            return;
+
+        self::$config->setRunInformation($status);
+    }
+
+    /*
      * Reset
      */
     public static function instanceReset()
