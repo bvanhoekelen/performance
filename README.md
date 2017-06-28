@@ -15,9 +15,10 @@
 - Support interface web, web console and command line
 - Export results to class, file or json string » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Export-handler).
 - Print information about PHP version, max exaction time and max memory
+- Display current user and process id [how to display username and process id](https://github.com/bvanhoekelen/performance/wiki/Config-run-informantion)
 - Measure time, memory usage and memory peak
 - Switch automatically between interfaces
-- Log database query's » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log).
+- Log database query's » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log)
 - Live function » [how to use](#command-line)
 - Easy to install » [installation](#installation)
 - Clearly and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
