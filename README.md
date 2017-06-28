@@ -13,11 +13,12 @@
 - Measure easily the performance of your PHP script across multiple platforms
 - Support for Laravel framework » [Laravel](https://laravel.com)
 - Support interface web, web console and command line
-- Export results to class, file or json string » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Export-handler).
+- Export results to class, file or json string » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Export-handler)
 - Print information about PHP version, max exaction time and max memory
+- Display current user and process id » [how to display username and process id](https://github.com/bvanhoekelen/performance/wiki/Config-run-information)
 - Measure time, memory usage and memory peak
 - Switch automatically between interfaces
-- Log database query's » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log).
+- Log database query's » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log)
 - Live function » [how to use](#command-line)
 - Easy to install » [installation](#installation)
 - Clearly and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
@@ -78,7 +79,7 @@ Run the performance test for the command line
 // Normal
 $ php your_script.php
 
-// Or Live version
+// Or live version
 $ php your_script.php --live 
 ```
 

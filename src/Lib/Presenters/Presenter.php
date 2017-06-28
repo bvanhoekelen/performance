@@ -1,6 +1,7 @@
 <?php namespace Performance\Lib\Presenters;
 
 use Performance\Lib\Handlers\ConfigHandler;
+use Performance\Lib\Holders\InformationHolder;
 use Performance\Lib\Point;
 
 abstract class Presenter {
@@ -14,13 +15,14 @@ abstract class Presenter {
     protected $formatter;
     protected $calculate;
     protected $pointStack;
+    protected $information;
 
     public function __construct(ConfigHandler $config)
     {
         $this->config = $config;
         $this->formatter = new Formatter();
         $this->calculate = new Calculate();
-
+        $this->information = new InformationHolder($config);
 
         // Choose display format
         $this->bootstrap();

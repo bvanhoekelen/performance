@@ -1,5 +1,9 @@
 # Change Log
 
+## [v2.1.0](https://github.com/bvanhoekelen/performance/tree/v2.0.1) - 2017-06-28
+### Added
+- Run user and process id information.
+
 ## [v2.0.2](https://github.com/bvanhoekelen/performance/tree/v2.0.2) - 2017-05-18
 ### Bug fix
 - Fix Too few arguments to function error. See: https://github.com/illuminate/database/commit/ba465fbda006d70265362012653b4e97667c867b#diff-eba180ff89e23df156c82c995be952df
