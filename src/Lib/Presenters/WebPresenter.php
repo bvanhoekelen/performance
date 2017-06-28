@@ -102,9 +102,12 @@ class WebPresenter extends Presenter
 
                     echo '<div class="table-more-info">Performance v' . PerformanceHandler::VERSION
                         . ' PHP v' . phpversion() . ' on ' . date('Y-m-d H:i:s')
-                        . '<br>Calibrate point: '
-                        . $this->formatter->timeToHuman($calibratePoint->getDifferenceTime())
-                        . '</div>';
+                        . '<br>Calibrate point: ' . $this->formatter->timeToHuman($calibratePoint->getDifferenceTime());
+
+                    if($this->config->isRunInformation())
+                        echo "<br> Run by user " . $this->information->getCurrentUser() . " on process id " . $this->information->getCurrentProcessId();
+
+                    echo '</div>';
                 echo '</div>';
             }
             else
