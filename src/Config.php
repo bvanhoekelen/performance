@@ -137,6 +137,4 @@ class Config
     {
         self::$config = null;
     }
-
-
 }

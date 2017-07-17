@@ -9,7 +9,6 @@ class Point implements ExportInterface
     const POINT_CALIBRATE = 'Calibrate point';
 
     private $config;
-
     private $active;
     private $label;
     private $startTime;
@@ -266,5 +265,4 @@ class Point implements ExportInterface
     {
         $this->newLineMessage[] = $newLineMessage;
     }
-
 }
