@@ -18,6 +18,4 @@ class CalculateTotalHolder
         $this->totalMemory = $totalMemory;
         $this->totalMemoryPeak = $totalMemoryPeak;
     }
-
-
 }

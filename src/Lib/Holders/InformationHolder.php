@@ -1,6 +1,5 @@
 <?php namespace Performance\Lib\Holders;
 
-
 use Performance\Lib\Handlers\ConfigHandler;
 
 class InformationHolder
@@ -51,7 +50,6 @@ class InformationHolder
         // Set unknown
         $this->currentUser = '?';
         $this->currentProcessId = '?';
-
 
         // Set current user
         try{

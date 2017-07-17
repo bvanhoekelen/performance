@@ -285,7 +285,5 @@ class PerformanceHandler
 
         // Reset
         $this->messageToLabel = '';
-
     }
-
 }

@@ -91,7 +91,6 @@ class ExportHandler
                 $points[] = $point->export();
             }
 
-
             if($multiExport)
                 $return['points'] = $points;
             else
@@ -104,6 +103,4 @@ class ExportHandler
         // Return
         return json_encode($return);
     }
-
 }
-

@@ -2,7 +2,6 @@
 
 use Performance\Lib\Holders\CalculateTotalHolder;
 
-
 class Calculate
 {
     /*
@@ -21,7 +20,7 @@ class Calculate
             $max_memory += $point->getDifferenceMemory();
         }
 
-        return new CalculateTotalHolder($max_time, $max_memory, memory_get_peak_usage(true));;
+        return new CalculateTotalHolder($max_time, $max_memory, memory_get_peak_usage(true));
     }
 
     /*

@@ -5,11 +5,9 @@ use Performance\Lib\Point;
 
 class WebPresenter extends Presenter
 {
-    public function bootstrap()
-    {}
+    public function bootstrap(){}
 
-    public function finishPointTrigger(Point $point)
-    {}
+    public function finishPointTrigger(Point $point){}
 
     public function displayResultsTrigger($pointStack)
     {

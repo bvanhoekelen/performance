@@ -2,9 +2,7 @@
 
 class Formatter {
 
-    public function __construct()
-    {
-    }
+    public function __construct(){}
 
     public function timeToHuman($microTime, $unit = 'auto', $decimals = 2)
     {

@@ -161,12 +161,10 @@ class ConsolePresenter extends Presenter
     private function printPointNewLineMessage(Point $point)
     {
         if(count($point->getNewLineMessage()))
-        {
             foreach ($point->getNewLineMessage() as $message)
             {
                 $this->printMessage($message);
             }
-        }
     }
 
     public function printMessage($message = null, $time = '-- ', $memory = '-- ', $peak = '-- ')
