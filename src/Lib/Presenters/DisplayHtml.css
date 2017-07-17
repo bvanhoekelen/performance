@@ -1,11 +1,11 @@
-.performance *{
+#performance-tool *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: Times;
 }
 
-.performance{
+#performance-tool{
     display: block;
     position: fixed;
     border: solid #ccc 1px;
@@ -25,7 +25,7 @@
     body{
         margin-bottom: 350px;
     }
-    .performance {
+    #performance-tool {
         bottom: 0px;
         left: 0;
         right: 0;
@@ -34,68 +34,83 @@
     }
 }
 
-.performance .overflow{
+#performance-tool .overflow{
     overflow: auto;
     height: 77%;
     border-top: solid #bababa 1px;
 }
 
-.performance .table-title{
+#performance-tool .table-title{
     width: 100%;
     background-color: #fff;
 }
-.performance .table-title td{
+#performance-tool .table-title td{
     text-align: center;
     padding: 8px;
     font-size: 28px;
 }
-.performance .table-point .t-l{
+#performance-tool .table-point .t-l{
     text-align: left;
 }
-.performance .table-point .new-line-message{
+#performance-tool .table-point .new-line-message{
     color: #333;
     text-align: left;
     padding-left: 14px;
 }
 
-.performance .table-title td span{
+#performance-tool .table-title td span{
     font-size: 12px;
 }
 
-.performance .table-point {
+#performance-tool .table-point {
     width: 100%;
 }
 
-.performance .table-point th{
+#performance-tool .table-point th{
     background-color: #e2e2e2;
 
 }
 
-.performance .table-point tr:nth-child(odd) {
+#performance-tool .table-point tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
-.performance .table-point tr:hover{
+#performance-tool .table-point tr:hover{
     background-color: #e2e2e2;
 
 }
 
-.performance .table-point td{
+#performance-tool .table-point td{
     padding: 4px;
     text-align: right;
 }
 
-.performance .table-more-info{
+#performance-tool .table-more-info{
     border-top: solid #ccc 2px;
     color: #555;
     padding: 14px 10px;
     text-align: center;
 }
 
-.performance code {
+#performance-tool code {
     background-color: #2b542c;
     margin: 20px;
     padding: 20px;
     display: block;
     background:#F8F8FF;
     border:black dashed 1px;
+}
+
+#performance-btn-close{
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0px;
+    padding: 10px;
+    color: #ccc;
+    text-decoration: none;
+    border-radius: 100%;
+}
+
+#performance-btn-close:hover{
+    color: #e09a0f;
 }
