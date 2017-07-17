@@ -1,6 +1,10 @@
 # Change Log
 
-## [v2.1.0](https://github.com/bvanhoekelen/performance/tree/v2.0.1) - 2017-06-28
+## [v2.2.0](https://github.com/bvanhoekelen/performance/tree/v2.2.0) - 2017-07-17
+### Added
+- In the web interface can be hidden and the preference is store.
+
+## [v2.1.0](https://github.com/bvanhoekelen/performance/tree/v2.1.0) - 2017-06-28
 ### Added
 - Run user and process id information.
 
