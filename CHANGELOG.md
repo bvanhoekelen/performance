@@ -1,5 +1,10 @@
 # Change Log
 
+## [v2.2.1](https://github.com/bvanhoekelen/performance/tree/v2.2.1) - 2017-08-17
+### Change
+- Performance installation package uses less storage space.
+- Add .gitattributes for ignore export the folder (assets, examples and screenshots).
+
 ## [v2.2.0](https://github.com/bvanhoekelen/performance/tree/v2.2.0) - 2017-07-17
 ### Added
 - In the web interface can be hidden and the preference is store.
