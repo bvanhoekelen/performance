@@ -172,6 +172,9 @@ class PerformanceHandler
      */
     private function finishLastPoint()
     {
+        // Measurements are more accurate
+        $stopTime = microtime(true);
+
         if(count($this->pointStack))
         {
             // Get point
@@ -186,6 +189,7 @@ class PerformanceHandler
                 $this->checkAndSetMessageInToLabel($point);
 
                 // Finish point
+                $point->setStopTime($stopTime);
                 $point->finish();
 
                 // Trigger presenter listener
