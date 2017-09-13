@@ -19,6 +19,11 @@ class PerformanceHandler
     private $pointStack = [];
 
     /*
+     * Hold sub point stack
+     */
+    private $multiPointStack = [];
+
+    /*
      *  Hold presenter
      */
     private $presenter;
@@ -61,11 +66,14 @@ class PerformanceHandler
      * @param string|null   $label
      * @return void
      */
-    public function point($label = null)
+    public function point($label = null, $isSubPoint = false)
     {
         // Check if point already exists
-        $this->finishLastPoint();
-        $this->checkIfPointLabelExists($label);
+        if($isSubPoint)
+            $this->finishLastPoint();
+
+        // Check sub point
+        $this->checkIfPointLabelExists($label, $isSubPoint);
 
         // Set label
         if(is_null($label))
@@ -75,7 +83,10 @@ class PerformanceHandler
         $point = new Point($this->config, $label);
 
         // Create and add point to stack
-        $this->addPointToStack($point);
+        if($isSubPoint)
+            $this->multiPointStack[] = $point;
+        else
+            $this->pointStack[] = $point;
 
         // Start point
         $point->start();
@@ -152,17 +163,6 @@ class PerformanceHandler
             $this->presenter = new WebPresenter($this->config);
         else
             dd('Unknown presenter ', $this->config->getPresenter());
-    }
-
-    /*
-     * Add point to stack
-     *
-     * @param Point   $point
-     * @return void
-     */
-    private function addPointToStack(Point $point)
-    {
-        $this->pointStack[] = $point;
     }
 
     /*
