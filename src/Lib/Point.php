@@ -54,7 +54,7 @@ class Point implements ExportInterface
     public function finish()
     {
         $this->setActive(false);
-        $this->setStopTime();
+        $this->setStopTimeIfNotExists();
         $this->setStopMemoryUsage();
         $this->setMemoryPeak();
         $this->setDifferenceTime();
@@ -117,6 +117,14 @@ class Point implements ExportInterface
     /**
      * @param mixed $stopTime
      */
+    public function setStopTimeIfNotExists($stopTime = null)
+    {
+        if(is_null($this->stopTime)) $this->setStopTime($stopTime);
+    }
+
+    /**
+     * @param mixed $stopTime
+     */
     public function setStopTime($stopTime = null)
     {
         $this->stopTime = ($stopTime) ? $stopTime : microtime(true);
@@ -137,7 +145,6 @@ class Point implements ExportInterface
     {
         $this->stopMemoryUsage = ($stopMemoryUsage) ? $stopMemoryUsage : memory_get_usage(true);
     }
-
 
     /**
      * @return mixed
