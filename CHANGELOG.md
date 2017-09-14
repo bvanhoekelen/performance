@@ -4,7 +4,7 @@
 ### Change
 - Increase accuracy for time measurement on normal points.
 ### Added
-- Multiple point support, see https://github.com/bvanhoekelen/performance/issues/5
+- Multiple point support, see wiki or issue https://github.com/bvanhoekelen/performance/issues/5
 
 ## [v2.2.1](https://github.com/bvanhoekelen/performance/tree/v2.2.1) - 2017-08-17
 ### Change

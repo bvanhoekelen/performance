@@ -71,16 +71,16 @@ class Performance
     /*
      * Finish measuring point X
      *
-     * @param string|null   $multiPointLabel
+     * @param string|null   $multiplePointLabel
      * @return void
      */
-    public static function finish($multiPointLabel = null)
+    public static function finish($multiplePointLabel = null)
     {
         if( ! self::enableTool() )
             return;
 
         // Run
-        self::$performance->finish($multiPointLabel);
+        self::$performance->finish($multiplePointLabel);
     }
 
     /*
