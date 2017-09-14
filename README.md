@@ -55,7 +55,7 @@ See [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/
 Set measuring point with or without label
 
 ```php
-Performance::point( <optional:label>, <optional:isMultiplePoint> );
+Performance::point( <optional:label> );
 ```
 
 Finish previous measuring point 
