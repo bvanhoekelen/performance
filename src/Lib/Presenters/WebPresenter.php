@@ -72,7 +72,7 @@ class WebPresenter extends Presenter
                         foreach (array_slice($this->pointStack, 1) as $point) {
 
                             // For real calibrate results fake printing
-                            if( $point->getLabel() === Point::POINT_CALIBRATE )
+                            if( $point->getLabel() === Point::POINT_PRELOAD or $point->getLabel() === Point::POINT_MULTIPLE_PRELOAD)
                                 continue;
 
                             echo '<tr>'

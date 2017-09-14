@@ -30,7 +30,7 @@ class T06A_PerformanceMessageTest extends \PHPUnit_Framework_TestCase
     public function testMessageAddToLabel()
     {
         $points = Performance::instance()->getPoints();
-        $point = $points[2];
+        $point = $points[3];
 
         $this->assertEquals('Label - add to label', $point->getLabel());
     }
@@ -38,7 +38,7 @@ class T06A_PerformanceMessageTest extends \PHPUnit_Framework_TestCase
     public function testMessageAddToNewLine()
     {
         $points = Performance::instance()->getPoints();
-        $lines = $points[2]->getNewLineMessage();
+        $lines = $points[3]->getNewLineMessage();
 
         $this->assertEquals('New line #1', $lines[0]);
         $this->assertEquals('New line #2', $lines[1]);

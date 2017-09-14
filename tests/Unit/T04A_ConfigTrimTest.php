@@ -32,9 +32,9 @@ class T04A_ConfigTrimTest extends \PHPUnit_Framework_TestCase
     {
         $points = Performance::instance()->getPoints();
 
-        $this->assertEquals($points[2]->getLabel(), 'TaskA');
-        $this->assertEquals($points[3]->getLabel(), 'TaskB');
-        $this->assertEquals($points[4]->getLabel(), 'TaskC');
+        $this->assertEquals($points[3]->getLabel(), 'TaskA');
+        $this->assertEquals($points[4]->getLabel(), 'TaskB');
+        $this->assertEquals($points[5]->getLabel(), 'TaskC');
     }
 
 
