@@ -32,10 +32,10 @@ class T09A_ConfigNiceLabelTest extends \PHPUnit_Framework_TestCase
     {
         $points = Performance::instance()->getPoints();
 
-        $this->assertEquals($points[2]->getLabel(), 'Synchronize Task A Run');
-        $this->assertEquals($points[3]->getLabel(), 'Synchronize Task B Run');
-        $this->assertEquals($points[4]->getLabel(), 'Synchronize Task C Run');
-        $this->assertEquals($points[5]->getLabel(), 'Point Wit Text - And - aaa');
+        $this->assertEquals($points[3]->getLabel(), 'Synchronize Task A Run');
+        $this->assertEquals($points[4]->getLabel(), 'Synchronize Task B Run');
+        $this->assertEquals($points[5]->getLabel(), 'Synchronize Task C Run');
+        $this->assertEquals($points[6]->getLabel(), 'Point Wit Text - And - aaa');
     }
 
 
