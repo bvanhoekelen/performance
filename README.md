@@ -16,6 +16,7 @@
 - Export results to class, file or json string » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Export-handler)
 - Print information about PHP version, max exaction time and max memory
 - Display current user and process id » [how to display username and process id](https://github.com/bvanhoekelen/performance/wiki/Config-run-information)
+- Support multiple points » [how to use multiple points](https://github.com/bvanhoekelen/performance/wiki/Multiple-points)
 - Measure time, memory usage and memory peak
 - Switch automatically between interfaces
 - Log database query's » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log)
