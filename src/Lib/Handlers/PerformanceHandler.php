@@ -11,7 +11,7 @@ class PerformanceHandler
     /*
      * Version
      */
-    const VERSION = '2.2.1';
+    const VERSION = '2.3.1';
 
     /*
      * Store current point
@@ -125,20 +125,20 @@ class PerformanceHandler
     /*
      * Finish measuring point X
      *
-     * @param string|null   $multiPointLabel
+     * @param string|null   $multiplePointLabel
      * @return void
      */
-    public function finish($multiPointLabel = null)
+    public function finish($multiplePointLabel = null)
     {
         $this->finishLastPoint();
 
-        if($multiPointLabel)
+        if($multiplePointLabel)
         {
-            if( ! isset($this->multiPointStack[$multiPointLabel]))
-                dd("Can't finish multiple point '" . $multiPointLabel ."'. ");
+            if( ! isset($this->multiPointStack[$multiplePointLabel]))
+                dd("Can't finish multiple point '" . $multiplePointLabel ."'. ");
 
-            $point = $this->multiPointStack[$multiPointLabel];
-            unset($this->multiPointStack[$multiPointLabel]);
+            $point = $this->multiPointStack[$multiplePointLabel];
+            unset($this->multiPointStack[$multiplePointLabel]);
 
             if($point->isActive()) {
                 // Finish point
