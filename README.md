@@ -40,6 +40,7 @@ Performance::point();
 Performance::results();
 
 ```
+See the [function overview](https://github.com/bvanhoekelen/performance/wiki/Doc-functions) for more functions.
 
 ## Web preview
 <p align="center"><img src="/assets/raw/php-performance-tool-web-support.png" alt="PHP performance tool for web" /></p>
@@ -54,7 +55,7 @@ See [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/
 Set measuring point with or without label
 
 ```php
-Performance::point( <optional:label> );
+Performance::point( <optional:label>, <optional:isMultiplePoint> );
 ```
 
 Finish previous measuring point 
