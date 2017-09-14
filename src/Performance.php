@@ -39,22 +39,23 @@ class Performance
      * Set measuring point X
      *
      * @param string|null   $label
+     * @param string|null   $isMultiplePoint
      * @return void
      */
-    public static function point($label = null)
+    public static function point($label = null, $isMultiplePoint = false)
     {
         if( ! self::enableTool() )
             return;
 
         // Run
-        self::$performance->point($label);
+        self::$performance->point($label, $isMultiplePoint);
     }
 
     /*
      * Set a message associated with the point
      *
      * @param string|null   $message
-     * @param boolean|null   $newLine
+     * @param boolean|null  $newLine
      * @return void
      */
     public static function message($message = null, $newLine = true)
@@ -70,16 +71,16 @@ class Performance
     /*
      * Finish measuring point X
      *
-     * @param string|null   $label
+     * @param string|null   $multiplePointLabel
      * @return void
      */
-    public static function finish()
+    public static function finish($multiplePointLabel = null)
     {
         if( ! self::enableTool() )
             return;
 
         // Run
-        self::$performance->finish();
+        self::$performance->finish($multiplePointLabel);
     }
 
     /*

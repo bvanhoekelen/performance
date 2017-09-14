@@ -11,12 +11,22 @@ class PerformanceHandler
     /*
      * Version
      */
-    const VERSION = '2.2.1';
+    const VERSION = '2.3.1';
+
+    /*
+     * Store current point
+     */
+    private $currentPoint;
 
     /*
      * Hold point stack
      */
     private $pointStack = [];
+
+    /*
+     * Hold sub point stack
+     */
+    private $multiPointStack = [];
 
     /*
      *  Hold presenter
@@ -59,23 +69,33 @@ class PerformanceHandler
      * Set measuring point X
      *
      * @param string|null   $label
+     * @param string|null   $isMultiplePoint
      * @return void
      */
-    public function point($label = null)
+    public function point($label = null, $isMultiplePoint = false)
     {
         // Check if point already exists
-        $this->finishLastPoint();
-        $this->checkIfPointLabelExists($label);
+        if( ! $isMultiplePoint)
+            $this->finishLastPoint();
+
+        // Check sub point
+        $this->checkIfPointLabelExists($label, $isMultiplePoint);
 
         // Set label
         if(is_null($label))
             $label = 'Task ' . (count($this->pointStack) - 1);
 
         // Create point
-        $point = new Point($this->config, $label);
+        $point = new Point($this->config, $label, $isMultiplePoint);
 
         // Create and add point to stack
-        $this->addPointToStack($point);
+        if($isMultiplePoint)
+        {
+            $this->multiPointStack[$label] = $point;
+            $this->message('Start multiple point ' . $label);
+        }
+        else
+            $this->currentPoint = $point;
 
         // Start point
         $point->start();
@@ -90,7 +110,7 @@ class PerformanceHandler
      */
     public function message($message, $newLine = true)
     {
-        $point = end($this->pointStack);
+        $point = $this->currentPoint;
 
         // Skip
         if( ! $point or ! $point->isActive())
@@ -105,12 +125,33 @@ class PerformanceHandler
     /*
      * Finish measuring point X
      *
-     * @param string|null   $label
+     * @param string|null   $multiplePointLabel
      * @return void
      */
-    public function finish()
+    public function finish($multiplePointLabel = null)
     {
         $this->finishLastPoint();
+
+        if($multiplePointLabel)
+        {
+            if( ! isset($this->multiPointStack[$multiplePointLabel]))
+                dd("Can't finish multiple point '" . $multiplePointLabel ."'. ");
+
+            $point = $this->multiPointStack[$multiplePointLabel];
+            unset($this->multiPointStack[$multiplePointLabel]);
+
+            if($point->isActive()) {
+                // Finish point
+                $point->finish();
+
+                // Trigger presenter listener
+                $this->presenter->finishPointTrigger($point);
+            }
+
+            //
+            $this->pointStack[] = $point;
+
+        }
     }
 
     /*
@@ -122,6 +163,9 @@ class PerformanceHandler
     {
         // Finish all
         $this->finishLastPoint();
+
+        // Finish all multiple points
+        $this->finishAllMultiplePoints();
 
         // Add results to presenter
         $this->presenter->displayResultsTrigger($this->pointStack);
@@ -155,27 +199,19 @@ class PerformanceHandler
     }
 
     /*
-     * Add point to stack
-     *
-     * @param Point   $point
-     * @return void
-     */
-    private function addPointToStack(Point $point)
-    {
-        $this->pointStack[] = $point;
-    }
-
-    /*
      * Finish all point in the stack
      *
      * @return void
      */
     private function finishLastPoint()
     {
-        if(count($this->pointStack))
+        // Measurements are more accurate
+        $stopTime = microtime(true);
+
+        if($this->currentPoint)
         {
             // Get point
-            $point = end($this->pointStack);
+            $point = $this->currentPoint;
 
             if($point->isActive())
             {
@@ -186,7 +222,10 @@ class PerformanceHandler
                 $this->checkAndSetMessageInToLabel($point);
 
                 // Finish point
+                $point->setStopTime($stopTime);
                 $point->finish();
+
+                $this->pointStack[] = $point;
 
                 // Trigger presenter listener
                 $this->presenter->finishPointTrigger($point);
@@ -194,10 +233,33 @@ class PerformanceHandler
         }
     }
 
-    private function checkIfPointLabelExists($label)
+    private function finishAllMultiplePoints()
+    {
+        // Measurements are more accurate
+        $stopTime = microtime(true);
+
+        if(count($this->multiPointStack))
+        {
+            foreach ($this->multiPointStack as $point)
+            {
+                $point->setStopTime($stopTime);
+                $point->finish();
+                $this->pointStack[] = $point;
+
+                // Trigger presenter listener
+                $this->presenter->finishPointTrigger($point);
+            }
+        }
+    }
+
+    /*
+     * Check if label already exists
+     */
+    private function checkIfPointLabelExists($label, $isMultiPoint)
     {
         $labelExists = false;
-        foreach ($this->pointStack as $point)
+        $stack = ($isMultiPoint) ? $this->multiPointStack : $this->pointStack;
+        foreach ($stack as $point)
         {
             if($point->getLabel() == $label)
             {
@@ -216,6 +278,8 @@ class PerformanceHandler
     private function preload()
     {
         $this->point( Point::POINT_PRELOAD );
+        $this->point( Point::POINT_MULTIPLE_PRELOAD, true );
+        $this->finish(POINT::POINT_MULTIPLE_PRELOAD); // Needs!
         $this->point( Point::POINT_CALIBRATE );
     }
 

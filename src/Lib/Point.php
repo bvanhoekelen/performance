@@ -6,9 +6,11 @@ use Performance\Lib\Interfaces\ExportInterface;
 class Point implements ExportInterface
 {
     const POINT_PRELOAD = '__POINT_PRELOAD';
+    const POINT_MULTIPLE_PRELOAD = '__MULTIPLE_POINT_PRELOAD';
     const POINT_CALIBRATE = 'Calibrate point';
 
     private $config;
+    private $isMultiplePoint;
     private $active;
     private $label;
     private $startTime;
@@ -27,11 +29,12 @@ class Point implements ExportInterface
      * @param $startTime
      * @param $startMemory
      */
-    public function __construct(ConfigHandler $config, $name)
+    public function __construct(ConfigHandler $config, $name, $isMultiplePoint)
     {
         // Set items
         $this->config = $config;
         $this->setLabel($name);
+        $this->setIsMultiplePoint($isMultiplePoint);
     }
 
     /*
@@ -54,7 +57,7 @@ class Point implements ExportInterface
     public function finish()
     {
         $this->setActive(false);
-        $this->setStopTime();
+        $this->setStopTimeIfNotExists();
         $this->setStopMemoryUsage();
         $this->setMemoryPeak();
         $this->setDifferenceTime();
@@ -117,6 +120,14 @@ class Point implements ExportInterface
     /**
      * @param mixed $stopTime
      */
+    public function setStopTimeIfNotExists($stopTime = null)
+    {
+        if(is_null($this->stopTime)) $this->setStopTime($stopTime);
+    }
+
+    /**
+     * @param mixed $stopTime
+     */
     public function setStopTime($stopTime = null)
     {
         $this->stopTime = ($stopTime) ? $stopTime : microtime(true);
@@ -137,7 +148,6 @@ class Point implements ExportInterface
     {
         $this->stopMemoryUsage = ($stopMemoryUsage) ? $stopMemoryUsage : memory_get_usage(true);
     }
-
 
     /**
      * @return mixed
@@ -163,7 +173,7 @@ class Point implements ExportInterface
             $label = rtrim($label, $configRTrim);
 
         // Set nice label
-        if($label !== self::POINT_PRELOAD and $this->config->isPointLabelNice())
+        if($label !== self::POINT_PRELOAD and $label !== self::POINT_MULTIPLE_PRELOAD and $this->config->isPointLabelNice())
             $label = ucfirst(str_replace('  ', ' ', preg_replace('/(?<!^)[A-Z]/', ' $0', $label)));
 
         $this->label = $label;
@@ -264,5 +274,21 @@ class Point implements ExportInterface
     public function addNewLineMessage($newLineMessage)
     {
         $this->newLineMessage[] = $newLineMessage;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isMultiplePoint()
+    {
+        return $this->isMultiplePoint;
+    }
+
+    /**
+     * @param boolean $isMultiplePoint
+     */
+    public function setIsMultiplePoint($isMultiplePoint)
+    {
+        $this->isMultiplePoint = (boolean) $isMultiplePoint;
     }
 }

@@ -1,5 +1,11 @@
 # Change Log
 
+## [v2.3.1](https://github.com/bvanhoekelen/performance/tree/v2.3.1) - 2017-09-14
+### Change
+- Increase accuracy for time measurement on normal points.
+### Added
+- Multiple point support, see wiki or issue https://github.com/bvanhoekelen/performance/issues/5
+
 ## [v2.2.1](https://github.com/bvanhoekelen/performance/tree/v2.2.1) - 2017-08-17
 ### Change
 - Performance installation package uses less storage space.

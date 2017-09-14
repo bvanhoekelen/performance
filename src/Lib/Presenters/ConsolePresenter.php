@@ -18,12 +18,12 @@ class ConsolePresenter extends Presenter
     public function finishPointTrigger(Point $point)
     {
         // Preload and calculate
-        if($point->getLabel() === Point::POINT_PRELOAD)
+        if($point->getLabel() === Point::POINT_PRELOAD OR $point->getLabel() === Point::POINT_MULTIPLE_PRELOAD)
             return;
 
         $this->liveOrStack(
             str_pad(mb_strimwidth( " > " . $point->getLabel(), 0, $this->cellWightLabel, '..'), $this->cellWightLabel)
-            . ' ' . $this->formatter->stringPad( $this->formatter->timeToHuman( $point->getDifferenceTime() ). ' ', $this->cellWightResult, " ")
+            . ' ' . $this->formatter->stringPad( ($point->isMultiplePoint() ? '~' : '')  .  $this->formatter->timeToHuman( $point->getDifferenceTime() ). ' ', $this->cellWightResult, ' ')
             . '|' . str_pad( $this->formatter->memoryToHuman( $point->getDifferenceMemory() ) . ' ', $this->cellWightResult, " ", STR_PAD_LEFT)
             . '|' . str_pad( $this->formatter->memoryToHuman( $point->getMemoryPeak() ) . ' ', $this->cellWightResult, " ", STR_PAD_LEFT) . PHP_EOL);
 
