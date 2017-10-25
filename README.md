@@ -19,7 +19,7 @@
 - Support multiple points » [how to use multiple points](https://github.com/bvanhoekelen/performance/wiki/Multiple-points)
 - Measure time, memory usage and memory peak
 - Switch automatically between interfaces
-- Log database query's » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log)
+- Log database queries » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log)
 - Live function » [how to use](#command-line)
 - Easy to install » [installation](#installation)
 - Clearly and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
