@@ -22,19 +22,19 @@ class T08A_ExportTest extends \PHPUnit_Framework_TestCase
         $export = Performance::results();
 
         // Return all information
-        dump($export->get());
+        print_r($export->get());
 
         // Return all information in Json
-        dump($export->toJson());
+	    print_r($export->toJson());
 
         // Return only config
-        dump($export->config()->get());
+	    print_r($export->config()->get());
 
         // Return only points in Json
-        dump($export->points()->toJson());
+	    print_r($export->points()->toJson());
 
         // Return only points in Json
-        dump($export->toFile('tests/Unit/export.txt'));
+	    print_r($export->toFile('tests/Unit/export.txt'));
     }
 
     public function testCheckJsonForAll()

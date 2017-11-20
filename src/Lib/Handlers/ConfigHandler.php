@@ -112,11 +112,13 @@ class ConfigHandler implements ExportInterface
             // Determinable stat on ENV
             if(isset($split[1]) and $split[0] == 'ENV' and function_exists('env'))
                 $this->enableTool = (bool) env($split[1]);
-            else
-                dd('Config::DISABLE_TOOL value string not supported! Check if ENV and value exists', $value, $split);
+            else{
+            	print_r($split);
+                die('Config::DISABLE_TOOL value string "' . $value . '" not supported! Check if ENV and value exists' . PHP_EOL);
+            }
         }
         else
-            dd('Config::DISABLE_TOOL value not supported!', $value);
+	        die('Config::DISABLE_TOOL value "' . $value . '" not supported!' . PHP_EOL);
     }
 
     /**
@@ -154,7 +156,7 @@ class ConfigHandler implements ExportInterface
         elseif($queryLogView == 'full')
             $this->queryLogView = $queryLogView;
         else
-            dd('Query log view ' . $queryLogView . ' does not exists. Use: "resume" or "full"');
+            die('Query log view ' . $queryLogView . ' does not exists. Use: "resume" or "full"' . PHP_EOL);
     }
 
 
@@ -220,7 +222,7 @@ class ConfigHandler implements ExportInterface
             elseif($mixed == 'web')
                 $this->presenter = Presenter::PRESENTER_WEB;
             else
-                dd('Presenter ' . $mixed . ' does not exists. Use: console or web');
+                die('Presenter ' . $mixed . ' does not exists. Use: console or web' . PHP_EOL);
     }
 
     /**
