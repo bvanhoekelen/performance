@@ -32,7 +32,6 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "larapack/dd": "1.*",
         "bvanhoekelen/terminal-style": "^1.0"
     },
     "require-dev": {
