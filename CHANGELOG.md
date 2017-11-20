@@ -1,5 +1,16 @@
 # Change Log
 
+## [v2.3.2](https://github.com/bvanhoekelen/performance/tree/v2.3.2) - 2017-11-20
+### Change
+- Change error messages.
+- dd() and dump() to die and print_r
+
+### Remove
+- Larapack/dd dependency. See https://github.com/bvanhoekelen/performance/issues/7
+
+### Special thanks to
+- https://github.com/vesper8 feedback on Larapack/dd dependency
+
 ## [v2.3.1](https://github.com/bvanhoekelen/performance/tree/v2.3.1) - 2017-09-14
 ### Change
 - Increase accuracy for time measurement on normal points.
