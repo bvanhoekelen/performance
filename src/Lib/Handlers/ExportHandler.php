@@ -58,7 +58,7 @@ class ExportHandler
 
     public function toFile($file)
     {
-        file_put_contents($file, $this->toJson());
+        return file_put_contents($file, $this->toJson());
     }
 
     public function toJson()
