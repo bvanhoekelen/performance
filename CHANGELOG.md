@@ -1,5 +1,11 @@
 # Change Log
 
+## [v2.3.4](https://github.com/bvanhoekelen/performance/tree/v2.3.4) - 2018-02-08
+### Remove
+- Remove default time zone UTC. This has to be set by the user in php.ini
+### Change
+- Fix example 8, change dump of print_r
+
 ## [v2.3.2](https://github.com/bvanhoekelen/performance/tree/v2.3.2) - 2017-11-20
 ### Change
 - Change error messages.

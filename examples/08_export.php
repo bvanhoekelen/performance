@@ -25,16 +25,16 @@ $export = Performance::results(); // Print and return export handler
 $export = Performance::export(); // Only return export handler
 
 // Return all information
-dump($export->get());
+print_r($export->get());
 
 // Return all information in Json
-dump($export->toJson());
+print_r($export->toJson());
 
 // Return only config
-dump($export->config()->get());
+print_r($export->config()->get());
 
 // Return only points in Json
-dump($export->points()->toJson());
+print_r($export->points()->toJson());
 
-
-dump($export->toFile('export.txt'));
+// Return file_put_contents() results
+print_r($export->toFile('export.txt'));

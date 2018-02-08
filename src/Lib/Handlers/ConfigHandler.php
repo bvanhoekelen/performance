@@ -27,7 +27,6 @@ class ConfigHandler implements ExportInterface
     public function __construct()
     {
         // Set default
-        $this->setDefaultTimeZone();
         $this->setDefaultConsoleLive();
         $this->setDefaultPresenter();
     }
@@ -43,13 +42,6 @@ class ConfigHandler implements ExportInterface
     public function getAllItemNames()
     {
         return array_keys($this->configItems);
-    }
-
-    private function setDefaultTimeZone()
-    {
-        // Check date function
-        if( ! ini_get('date.timezone'))
-            date_default_timezone_set('UTC');
     }
 
     private function setDefaultConsoleLive()
