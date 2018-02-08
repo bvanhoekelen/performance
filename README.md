@@ -1,7 +1,7 @@
 # ⏱ PHP Performance tool 🛠
 
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000&style=flat-square)](https://github.com/bvanhoekelen/performance/blob/master/LICENSE)
-[![Packagist Prerelease](https://img.shields.io/packagist/vpre/bvanhoekelen/performance.svg?style=flat-square)](https://packagist.org/packages/bvanhoekelen/performance)
+[![GitHub release](https://img.shields.io/github/release/bvanhoekelen/performance.svg?style=flat-square)](https://github.com/bvanhoekelen/performance/releases)
 [![Packagist](https://img.shields.io/packagist/dt/bvanhoekelen/performance.svg?style=flat-square)](https://packagist.org/packages/bvanhoekelen/performance)
 [![Github issues](https://img.shields.io/github/issues/bvanhoekelen/performance.svg?style=flat-square)](https://github.com/bvanhoekelen/performance/issues)
 [![Travis branch](https://img.shields.io/travis/bvanhoekelen/performance/master.svg?style=flat-square)](https://travis-ci.org/bvanhoekelen/performance)
