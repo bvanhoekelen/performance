@@ -1,8 +1,15 @@
 <?php namespace Performance\Lib\Presenters;
 
+use Performance\Lib\Handlers\ConfigHandler;
+use Performance\Lib\Holders\QueryLineHolder;
+use Performance\Lib\Point;
+
 class Formatter {
 
-    public function __construct(){}
+	private $config;
+    public function __construct(ConfigHandler $config){
+    	$this->config = $config;
+    }
 
     public function timeToHuman($microTime, $unit = 'auto', $decimals = 2)
     {
@@ -88,4 +95,56 @@ class Formatter {
 
         return str_repeat($pad_string, $space) . $input;
     }
+
+	public function createPointQueryLogLineList(Point $point)
+	{
+		$lineArray = [];
+		if(!$point->getQueryLog())
+		{
+			return $lineArray;
+		}
+
+		if($this->config->getQueryLogView() == 'resume')
+		{
+			$buildLineList = [];
+			foreach ($point->getQueryLog() as $queryLogHolder) {
+				$type = $queryLogHolder->queryType;
+				if (isset($buildLineList[$type]))
+				{
+					$buildLineList[$type]['count']++;
+					$buildLineList[$type]['time'] = $buildLineList[$type]['time'] + $queryLogHolder->time;
+				}
+				else
+				{
+					$buildLineList[$type]['count'] = 1;
+					$buildLineList[$type]['time'] = $queryLogHolder->time;
+				}
+			}
+			ksort($buildLineList);
+			foreach ($buildLineList as $key => $item) {
+				$queryLineHolder = new QueryLineHolder();
+				$queryLineHolder->setLine('Database query ' . $key . ' ' . $item['count'] . 'x');
+				$queryLineHolder->setTime($item['time']);
+				$lineArray[] = $queryLineHolder;
+			}
+		}
+
+		// View type full
+		if($this->config->getQueryLogView() == 'full')
+		{
+			foreach ($point->getQueryLog() as $queryLogHolder) {
+				$queryLineHolder = new QueryLineHolder();
+				$queryLineHolder->setLine($queryLogHolder->query);
+				$queryLineHolder->setTime($queryLogHolder->time);
+				$lineArray[] = $queryLineHolder;
+			}
+		}
+
+		return $lineArray;
+	}
+
+	public function formatStringWidth($string, $width)
+	{
+		return ((strlen($string) > $width) ? substr($string,0, $width - 3).'...' : $string);
+	}
 }
