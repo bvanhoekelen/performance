@@ -46,8 +46,7 @@ class WebPresenter extends Presenter
         echo '<div id="performance-tool">';
             echo '<a id="performance-btn-close" href="#" onclick="performanceDisplayToggle(null)">&#9660;</a>';
             echo '<div id="hiddenContent">';
-                if(count($this->pointStack) > 2)
-                {
+                if(count($this->pointStack) > 2) {
                     $textExecutionTime = (ini_get('max_execution_time') > 1) ? ini_get('max_execution_time') . ' sec' : 'unlimited';
                     $calculateTotalHolder = $this->calculate->totalTimeAndMemory($this->pointStack);
 
@@ -69,7 +68,8 @@ class WebPresenter extends Presenter
                             <th width="17%">Time</th>
                         </tr>';
 
-                        foreach (array_slice($this->pointStack, 1) as $point) {
+                        foreach (array_slice($this->pointStack, 1) as $point)
+                        {
 
                             // For real calibrate results fake printing
                             if( $point->getLabel() === Point::POINT_PRELOAD or $point->getLabel() === Point::POINT_MULTIPLE_PRELOAD)
@@ -83,14 +83,12 @@ class WebPresenter extends Presenter
                                 . '<td>' . $this->formatter->timeToHuman($point->getDifferenceTime()) . '</td>'
                                 . '</tr>';
 
-                            foreach ($point->getQueryLog() as $queryLogHolder)
-                            {
-                                echo '<tr>';
-                                echo'<td class="new-line-message" colspan="4"> - ' . ((strlen($queryLogHolder->query) > 70) ? substr($queryLogHolder->query,0,67).'...' : $queryLogHolder->query) . '</td>';
-                                echo'<td class="new-line-message" style="text-align: right;" colspan="1">' . $queryLogHolder->time . ' ms</td>';
-                                echo '</tr>';
-                            }
-
+	                        foreach($this->formatter->createPointQueryLogLineList($point) as $queryLineHolder){
+		                        echo '<tr>';
+		                        echo '<td class="new-line-message" colspan="3"> - ' . $this->formatter->formatStringWidth($queryLineHolder->getLine(), 70) . '</td>';
+		                        echo '<td class="new-line-message" style="text-align: right;" colspan="2">' . $queryLineHolder->getTime() . ' ms</td>';
+		                        echo '</tr>';
+	                        }
                             foreach ($point->getNewLineMessage() as $message)
                             {
                                 echo '<tr><td class="new-line-message" colspan="5">' . $message . '</td></tr>';

@@ -28,7 +28,10 @@ class ConsolePresenter extends Presenter
             . '|' . str_pad( $this->formatter->memoryToHuman( $point->getMemoryPeak() ) . ' ', $this->cellWightResult, " ", STR_PAD_LEFT) . PHP_EOL);
 
         // Print query log resume
-        $this->printPointQueryLogAsNewLineMessage($point);
+	    foreach ($this->formatter->createPointQueryLogLineList($point) as $queryLineHolder)
+	    {
+		    $this->printMessage($queryLineHolder->getLine(), $queryLineHolder->getTime() . ' ms ');
+	    }
 
         // Print point new line message
         $this->printPointNewLineMessage($point);
@@ -131,8 +134,8 @@ class ConsolePresenter extends Presenter
 
         if($this->commandLineWidth < 60)
             $this->commandLineWidth = 60;
-        if ($this->commandLineWidth > 100)
-            $this->commandLineWidth = 100;
+        if ($this->commandLineWidth > 140)
+            $this->commandLineWidth = 140;
 
         /*
          *  |<------------------------------- ( Terminal wight ) ---------------------------------->|
@@ -173,42 +176,5 @@ class ConsolePresenter extends Presenter
             . ' ' . str_pad($time, $this->cellWightResult, ' ', STR_PAD_LEFT)
             . '|' . str_pad($memory, $this->cellWightResult, ' ', STR_PAD_LEFT)
             . '|' . str_pad($peak, $this->cellWightResult, ' ', STR_PAD_LEFT) , 'dark-gray'). PHP_EOL );
-    }
-
-    private function printPointQueryLogAsNewLineMessage(Point $point)
-    {
-        // View type resume
-        if($this->config->getQueryLogView() == 'resume')
-        {
-            $infoArray = [];
-
-            foreach ($point->getQueryLog() as $queryLogHolder) {
-                $type = $queryLogHolder->queryType;
-
-                if (isset($infoArray[$type])) {
-                    $infoArray[$type]['count']++;
-                    $infoArray[$type]['time'] = $infoArray[$type]['time'] + $queryLogHolder->time;
-                } else {
-                    $infoArray[$type]['count'] = 1;
-                    $infoArray[$type]['time'] = $queryLogHolder->time;
-                }
-            }
-
-            ksort($infoArray);
-
-            foreach ($infoArray as $key => $item) {
-                $this->printMessage('Database query ' . $key . ' ' . $item['count'] . 'x', $item['time'] . ' ms ');
-
-            }
-        }
-
-        // View type full
-        if($this->config->getQueryLogView() == 'full')
-        {
-            foreach ($point->getQueryLog() as $queryLogHolder) {
-                $this->printMessage('Database query ' . $queryLogHolder->query, $queryLogHolder->time . ' ms ');
-
-            }
-        }
     }
 }

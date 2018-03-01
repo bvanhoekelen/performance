@@ -20,7 +20,7 @@ abstract class Presenter {
     public function __construct(ConfigHandler $config)
     {
         $this->config = $config;
-        $this->formatter = new Formatter();
+        $this->formatter = new Formatter($config);
         $this->calculate = new Calculate();
         $this->information = new InformationHolder($config);
 
