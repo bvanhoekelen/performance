@@ -35,6 +35,7 @@
         "bvanhoekelen/terminal-style": "^1.0"
     },
     "require-dev": {
+        "larapack/dd": "1.*",
         "phpunit/phpunit": "^5.7",
         "illuminate/database": "^5.4",
         "illuminate/events": "^5.4"
