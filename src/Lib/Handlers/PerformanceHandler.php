@@ -11,7 +11,7 @@ class PerformanceHandler
     /*
      * Version
      */
-    const VERSION = '2.3.4';
+    const VERSION = '2.3.5';
 
     /*
      * Store current point
