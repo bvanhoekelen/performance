@@ -1,5 +1,13 @@
 # Change Log
 
+## [v2.3.5](https://github.com/bvanhoekelen/performance/tree/v2.3.5) - 2018-03-01
+### Add
+- SQL query log for web presenter 
+### Change
+- Max screen width to 140
+ ### Fix
+ - Wrong time rounding by SQL query log
+
 ## [v2.3.4](https://github.com/bvanhoekelen/performance/tree/v2.3.4) - 2018-02-08
 ### Remove
 - Remove default time zone UTC. This has to be set by the user in php.ini

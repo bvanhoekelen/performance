@@ -51,6 +51,14 @@ See the [function overview](https://github.com/bvanhoekelen/performance/wiki/Doc
 
 See [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log).
 
+## Web console
+<p align="center"><img src="/assets/raw/php-performance-tool-full-data-review.png" alt="PHP performance tool with full date review" /></p>
+
+See [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log).
+
+See [how to export data](https://github.com/bvanhoekelen/performance/wiki/Export-handler).
+
+See [more info over data review](https://github.com/bvanhoekelen/performance/wiki/Config-presenter).
 
 ## Functions
 Set measuring point with or without label

@@ -34,7 +34,7 @@ class Foo
     public function taskA()
     {
         // Set point Task A
-        Performance::point(__FUNCTION__);
+        Performance::point('Run database query\'s');
 
         // Create user
         $user = new User();
