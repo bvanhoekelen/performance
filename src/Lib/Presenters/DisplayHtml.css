@@ -19,6 +19,7 @@
     background-color: #FFF;
     border-radius: 4px;
     border-top: solid 8px #e09a0f;
+    overflow: auto;
 }
 
 @media (max-width: 540px) {
