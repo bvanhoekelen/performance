@@ -1,5 +1,9 @@
 # Change Log
 
+## [v2.3.6](https://github.com/bvanhoekelen/performance/tree/v2.3.6) - 2018-10-05
+ ### Fix
+ - Add `overflow: auto` to result box
+
 ## [v2.3.5](https://github.com/bvanhoekelen/performance/tree/v2.3.5) - 2018-03-01
 ### Add
 - SQL query log for web presenter 
