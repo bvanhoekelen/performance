@@ -22,6 +22,7 @@
 - Log database queries » [how to use query logging](https://github.com/bvanhoekelen/performance/wiki/Config-query-log)
 - Live function » [how to use](#command-line)
 - Easy to install » [installation](#installation)
+- Support PHP version 5.6, 7.0, 7.1, 7.2
 - Clearly and active wiki » [Wiki](https://github.com/bvanhoekelen/performance/wiki)
 - Love feedback » [backlog](https://github.com/bvanhoekelen/performance/blob/master/BACKLOG.md) or [create issues](https://github.com/bvanhoekelen/performance/issues)
 
