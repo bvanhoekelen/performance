@@ -65,7 +65,10 @@ class ConsolePresenter extends Presenter
     {
         // Get size
         $this->setCommandSize();
-        $this->clearScreen();
+        if($this->config->isClearScreen())
+        {
+            $this->clearScreen();
+        }
 
         // Live indication
         $liveIndication = ($this->config->isConsoleLive()) ? terminal_style(' LIVE ', 'gray', 'red') : '';

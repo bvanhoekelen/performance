@@ -130,6 +130,19 @@ class Config
         self::$config->setRunInformation($status);
     }
 
+	/*
+	 * Set config point label nice
+	 * @param bool $status
+	 * return void
+	 */
+	public static function setClearScreen($status)
+	{
+		if( ! self::enableTool())
+			return;
+
+		self::$config->setClearScreen($status);
+	}
+
     /*
      * Reset
      */

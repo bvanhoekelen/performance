@@ -14,6 +14,7 @@ class ConfigHandler implements ExportInterface
     private $pointLabelRTrim = false;
     private $pointLabelNice = false;
     private $runInformation = false;
+    private $clearScreen = true;
     private $presenter;
 
     /*
@@ -249,4 +250,18 @@ class ConfigHandler implements ExportInterface
     {
         return $this->runInformation;
     }
+
+	/**
+	 * @return bool
+	 */
+	public function isClearScreen() {
+		return $this->clearScreen;
+	}
+
+	/**
+	 * @param bool $clearScreen
+	 */
+	public function setClearScreen($clearScreen) {
+		$this->clearScreen = (bool) $clearScreen;
+	}
 }
