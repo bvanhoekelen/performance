@@ -1,5 +1,9 @@
 # Change Log
 
+## [v2.4.0](https://github.com/bvanhoekelen/performance/tree/v2.4.0) - 2018-12-11
+### Add
+ - Config item `Config::setClearScreen()` to prevent cleaning screen
+ 
 ## [v2.3.6](https://github.com/bvanhoekelen/performance/tree/v2.3.6) - 2018-10-05
 ### Fix
  - Add `overflow: auto` to result box
