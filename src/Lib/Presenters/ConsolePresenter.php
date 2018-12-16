@@ -5,10 +5,10 @@ use Performance\Lib\Point;
 
 class ConsolePresenter extends Presenter
 {
-    private $commandLineWidth;
-    private $commandLineHeight;
-    private $cellWightResult;
-    private $cellWightLabel;
+    protected $commandLineWidth;
+    protected $commandLineHeight;
+    protected $cellWightResult;
+    protected $cellWightLabel;
 
     public function bootstrap()
     {
@@ -44,7 +44,7 @@ class ConsolePresenter extends Presenter
         $this->printStack();
     }
 
-    private function liveOrStack($line)
+    protected function liveOrStack($line)
     {
         if($this->config->isConsoleLive())
             echo $line;
@@ -52,7 +52,7 @@ class ConsolePresenter extends Presenter
             $this->printStack[] = $line;
     }
 
-    private function printStack()
+    protected function printStack()
     {
         if( ! $this->config->isConsoleLive())
             foreach ($this->printStack as $line)
@@ -61,7 +61,7 @@ class ConsolePresenter extends Presenter
             }
     }
 
-    private function printStartUp()
+    protected function printStartUp()
     {
         // Get size
         $this->setCommandSize();
@@ -102,7 +102,7 @@ class ConsolePresenter extends Presenter
 
     }
 
-    private function printHeadLine()
+    protected function printHeadLine()
     {
         $this->liveOrStack(
             str_pad("   Label", $this->cellWightLabel)
@@ -112,7 +112,7 @@ class ConsolePresenter extends Presenter
             . str_repeat("-", $this->commandLineWidth - 1) . PHP_EOL);
     }
 
-    private function printFinishDown()
+    protected function printFinishDown()
     {
         $calculateTotalHolder = $this->calculate->totalTimeAndMemory($this->pointStack);
 
@@ -130,7 +130,7 @@ class ConsolePresenter extends Presenter
             . PHP_EOL);
     }
 
-    private function setCommandSize()
+    protected function setCommandSize()
     {
         $this->commandLineWidth = exec('tput cols');
         $this->commandLineHeight = exec('tput lines');
@@ -156,7 +156,7 @@ class ConsolePresenter extends Presenter
         $this->cellWightLabel = $this->commandLineWidth - 40;
     }
 
-    private function clearScreen()
+    protected function clearScreen()
     {
         if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
             system('cls');
@@ -164,7 +164,7 @@ class ConsolePresenter extends Presenter
             system('clear');
     }
 
-    private function printPointNewLineMessage(Point $point)
+    protected function printPointNewLineMessage(Point $point)
     {
         if(count($point->getNewLineMessage()))
             foreach ($point->getNewLineMessage() as $message)

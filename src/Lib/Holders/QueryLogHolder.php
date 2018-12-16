@@ -42,7 +42,7 @@ class QueryLogHolder
     /*
      * Set query type
      */
-    private function checkQueryType()
+    protected function checkQueryType()
     {
         if(strtolower(substr($this->query, 0, 6)) == 'select')
             $this->queryType = 'select';

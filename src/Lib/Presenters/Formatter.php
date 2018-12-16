@@ -6,7 +6,7 @@ use Performance\Lib\Point;
 
 class Formatter {
 
-	private $config;
+	protected $config;
     public function __construct(ConfigHandler $config){
     	$this->config = $config;
     }

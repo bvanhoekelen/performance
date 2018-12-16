@@ -7,8 +7,8 @@ class Performance
     /*
      * Create a performance instance
      */
-    private static $performance;
-    private static $bootstrap = false;
+    protected static $performance;
+    protected static $bootstrap = false;
 
     public static function instance()
     {
@@ -17,7 +17,7 @@ class Performance
         return static::$performance;
     }
 
-    private static function enableTool()
+    protected static function enableTool()
     {
         $performance = static::instance();
 

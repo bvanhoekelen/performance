@@ -5,11 +5,11 @@ use Performance\Lib\Handlers\ConfigHandler;
 class InformationHolder
 {
     // Config
-    private $config;
+    protected $config;
 
     // Run information holder
-    private $currentUser;
-    private $currentProcessId;
+    protected $currentUser;
+    protected $currentProcessId;
 
     public function __construct(ConfigHandler $config)
     {
@@ -39,13 +39,13 @@ class InformationHolder
 // Private
 //
 
-    private function activateConfig()
+    protected function activateConfig()
     {
         if($this->config->isRunInformation())
             $this->setRunInformation();
     }
 
-    private function setRunInformation()
+    protected function setRunInformation()
     {
         // Set unknown
         $this->currentUser = '?';

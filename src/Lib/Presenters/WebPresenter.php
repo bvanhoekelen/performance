@@ -18,7 +18,7 @@ class WebPresenter extends Presenter
     }
 
     // Private
-    private function displayForWebAsConsole()
+    protected function displayForWebAsConsole()
     {
         $data = [];
         $data['config'] = $this->config->export();
@@ -36,7 +36,7 @@ class WebPresenter extends Presenter
         echo "<script>console.log(" . json_encode($data) .")</script>";
     }
 
-    private function displayForWebAsHtml()
+    protected function displayForWebAsHtml()
     {
         // Set total time
         echo '<style>';

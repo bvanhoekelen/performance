@@ -5,16 +5,16 @@ class Config
     /*
      * Create a config instance
      */
-    private static $config;
+    protected static $config;
 
-    private static function instance()
+    protected static function instance()
     {
         if (!static::$config)
             static::$config = Performance::instance()->config;
         return static::$config;
     }
 
-    private static function enableTool()
+    protected static function enableTool()
     {
         $config = static::instance();
 

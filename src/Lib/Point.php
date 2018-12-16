@@ -9,19 +9,19 @@ class Point implements ExportInterface
     const POINT_MULTIPLE_PRELOAD = '__MULTIPLE_POINT_PRELOAD';
     const POINT_CALIBRATE = 'Calibrate point';
 
-    private $config;
-    private $isMultiplePoint;
-    private $active;
-    private $label;
-    private $startTime;
-    private $startMemoryUsage;
-    private $stopTime;
-    private $stopMemoryUsage;
-    private $memoryPeak;
-    private $differenceTime;
-    private $differenceMemory;
-    private $queryLog = [];
-    private $newLineMessage = [];
+    protected $config;
+    protected $isMultiplePoint;
+    protected $active;
+    protected $label;
+    protected $startTime;
+    protected $startMemoryUsage;
+    protected $stopTime;
+    protected $stopMemoryUsage;
+    protected $memoryPeak;
+    protected $differenceTime;
+    protected $differenceMemory;
+    protected $queryLog = [];
+    protected $newLineMessage = [];
 
     /**
      * Point constructor.

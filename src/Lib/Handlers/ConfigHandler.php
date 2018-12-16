@@ -6,16 +6,16 @@ use Performance\Lib\Presenters\Presenter;
 class ConfigHandler implements ExportInterface
 {
     // Config items
-    private $consoleLive = false;
-    private $enableTool = true;
-    private $queryLog = false;
-    private $queryLogView;
-    private $pointLabelLTrim = false;
-    private $pointLabelRTrim = false;
-    private $pointLabelNice = false;
-    private $runInformation = false;
-    private $clearScreen = true;
-    private $presenter;
+    protected $consoleLive = false;
+    protected $enableTool = true;
+    protected $queryLog = false;
+    protected $queryLogView;
+    protected $pointLabelLTrim = false;
+    protected $pointLabelRTrim = false;
+    protected $pointLabelNice = false;
+    protected $runInformation = false;
+    protected $clearScreen = true;
+    protected $presenter;
 
     /*
      * Hold state of the query log
@@ -45,7 +45,7 @@ class ConfigHandler implements ExportInterface
         return array_keys($this->configItems);
     }
 
-    private function setDefaultConsoleLive()
+    protected function setDefaultConsoleLive()
     {
         $shortopts = 'l::';
         $longopts = ['live'];
@@ -57,7 +57,7 @@ class ConfigHandler implements ExportInterface
     }
 
     // Print format
-    private function setDefaultPresenter()
+    protected function setDefaultPresenter()
     {
         if (php_sapi_name() == "cli")
             $this->setPresenter(Presenter::PRESENTER_CONSOLE);
@@ -142,7 +142,7 @@ class ConfigHandler implements ExportInterface
     /**
      * @param mixed $queryLogView
      */
-    private function setQueryLogView($queryLogView = null)
+    protected function setQueryLogView($queryLogView = null)
     {
         if($queryLogView == 'resume' or ! $queryLogView)
             $this->queryLogView = 'resume';

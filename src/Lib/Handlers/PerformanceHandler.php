@@ -16,22 +16,22 @@ class PerformanceHandler
     /*
      * Store current point
      */
-    private $currentPoint;
+    protected $currentPoint;
 
     /*
      * Hold point stack
      */
-    private $pointStack = [];
+    protected $pointStack = [];
 
     /*
      * Hold sub point stack
      */
-    private $multiPointStack = [];
+    protected $multiPointStack = [];
 
     /*
      *  Hold presenter
      */
-    private $presenter;
+    protected $presenter;
 
     /*
      * Hold the query log items
@@ -46,7 +46,7 @@ class PerformanceHandler
     /*
      *
      */
-    private $messageToLabel = null;
+    protected $messageToLabel = null;
 
     public function __construct()
     {
@@ -188,7 +188,7 @@ class PerformanceHandler
 // PRIVATE
 //
 
-    private function bootstrapDisplay()
+    protected function bootstrapDisplay()
     {
         if($this->config->getPresenter() == Presenter::PRESENTER_CONSOLE)
             $this->presenter = new ConsolePresenter($this->config);
@@ -203,7 +203,7 @@ class PerformanceHandler
      *
      * @return void
      */
-    private function finishLastPoint()
+    protected function finishLastPoint()
     {
         // Measurements are more accurate
         $stopTime = microtime(true);
@@ -233,7 +233,7 @@ class PerformanceHandler
         }
     }
 
-    private function finishAllMultiplePoints()
+    protected function finishAllMultiplePoints()
     {
         // Measurements are more accurate
         $stopTime = microtime(true);
@@ -255,7 +255,7 @@ class PerformanceHandler
     /*
      * Check if label already exists
      */
-    private function checkIfPointLabelExists($label, $isMultiPoint)
+    protected function checkIfPointLabelExists($label, $isMultiPoint)
     {
         $labelExists = false;
         $stack = ($isMultiPoint) ? $this->multiPointStack : $this->pointStack;
@@ -275,7 +275,7 @@ class PerformanceHandler
     /*
      * Preload wil setup te point class
      */
-    private function preload()
+    protected function preload()
     {
         $this->point( Point::POINT_PRELOAD );
         $this->point( Point::POINT_MULTIPLE_PRELOAD, true );
@@ -286,7 +286,7 @@ class PerformanceHandler
     /*
      * Check if query log is possible
      */
-    private function setConfigQueryLogState()
+    protected function setConfigQueryLogState()
     {
         // Check if state is set
         if( ! is_null($this->config->queryLogState))
@@ -326,7 +326,7 @@ class PerformanceHandler
     /*
      * Move query log items to point
      */
-    private function setQueryLogItemsToPoint(Point $point)
+    protected function setQueryLogItemsToPoint(Point $point)
     {
         // Skip if query log is disabled
         if($this->config->queryLogState !== true)
@@ -339,7 +339,7 @@ class PerformanceHandler
     /*
      * Update point label with message
      */
-    private function checkAndSetMessageInToLabel(Point $point)
+    protected function checkAndSetMessageInToLabel(Point $point)
     {
         if( ! $this->messageToLabel)
             return;

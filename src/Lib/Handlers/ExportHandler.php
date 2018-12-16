@@ -2,18 +2,18 @@
 
 class ExportHandler
 {
-    private $performance;
-    private $returnItem;
+    protected $performance;
+    protected $returnItem;
 
-    private $points;
-    private $config;
+    protected $points;
+    protected $config;
 
     public function __construct(PerformanceHandler $performance)
     {
         $this->performance = $performance;
     }
 
-    private function checkIfAllIsSet()
+    protected function checkIfAllIsSet()
     {
         if( $this->returnItem )
             return;
@@ -26,7 +26,7 @@ class ExportHandler
         $this->returnItem['points'] = $this->points;
     }
 
-    private function resetItems()
+    protected function resetItems()
     {
         $this->points = null;
         $this->config = null;

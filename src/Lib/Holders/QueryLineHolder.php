@@ -1,8 +1,8 @@
 <?php namespace Performance\Lib\Holders;
 
 class QueryLineHolder{
-	private $line;
-	private $time;
+	protected $line;
+	protected $time;
 
 	/**
 	 * @return string
