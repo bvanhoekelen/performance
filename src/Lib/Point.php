@@ -173,7 +173,7 @@ class Point implements ExportInterface
             $label = rtrim($label, $configRTrim);
 
         // Set nice label
-        if($label !== self::POINT_PRELOAD and $label !== self::POINT_MULTIPLE_PRELOAD and $this->config->isPointLabelNice())
+        if($label !== static::POINT_PRELOAD and $label !== static::POINT_MULTIPLE_PRELOAD and $this->config->isPointLabelNice())
             $label = ucfirst(str_replace('  ', ' ', preg_replace('/(?<!^)[A-Z]/', ' $0', $label)));
 
         $this->label = $label;

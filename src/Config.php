@@ -9,14 +9,14 @@ class Config
 
     private static function instance()
     {
-        if (!self::$config)
-            self::$config = Performance::instance()->config;
-        return self::$config;
+        if (!static::$config)
+            static::$config = Performance::instance()->config;
+        return static::$config;
     }
 
     private static function enableTool()
     {
-        $config = self::instance();
+        $config = static::instance();
 
         // Check DISABLE_TOOL
         if( ! $config->isEnableTool())
@@ -32,10 +32,10 @@ class Config
      */
     public static function setConsoleLive($status)
     {
-        if( ! self::enableTool())
+        if( ! static::enableTool())
             return;
 
-        self::$config->setConsoleLive($status);
+        static::$config->setConsoleLive($status);
     }
 
     /*
@@ -45,10 +45,10 @@ class Config
      */
     public static function setPointLabelLTrim($mask)
     {
-        if( ! self::enableTool())
+        if( ! static::enableTool())
             return;
 
-        self::$config->setPointLabelLTrim($mask);
+        static::$config->setPointLabelLTrim($mask);
     }
 
     /*
@@ -58,10 +58,10 @@ class Config
      */
     public static function setPointLabelRTrim($mask)
     {
-        if( ! self::enableTool())
+        if( ! static::enableTool())
             return;
 
-        self::$config->setPointLabelRTrim($mask);
+        static::$config->setPointLabelRTrim($mask);
     }
 
     /*
@@ -71,10 +71,10 @@ class Config
      */
     public static function setEnableTool($value)
     {
-        if( ! self::enableTool())
+        if( ! static::enableTool())
             return;
 
-        self::$config->setEnableTool($value);
+        static::$config->setEnableTool($value);
     }
 
     /*
@@ -85,10 +85,10 @@ class Config
      */
     public static function setQueryLog($status, $viewType = null)
     {
-        if( ! self::enableTool())
+        if( ! static::enableTool())
             return;
 
-        self::$config->setQueryLog($status, $viewType);
+        static::$config->setQueryLog($status, $viewType);
     }
 
     /*
@@ -98,10 +98,10 @@ class Config
      */
     public static function setPresenter($type)
     {
-        if( ! self::enableTool())
+        if( ! static::enableTool())
             return;
 
-        self::$config->setPresenter($type);
+        static::$config->setPresenter($type);
     }
 
     /*
@@ -111,10 +111,10 @@ class Config
      */
     public static function setPointLabelNice($status)
     {
-        if( ! self::enableTool())
+        if( ! static::enableTool())
             return;
 
-        self::$config->setPointLabelNice($status);
+        static::$config->setPointLabelNice($status);
     }
 
     /*
@@ -124,10 +124,10 @@ class Config
      */
     public static function setRunInformation($status)
     {
-        if( ! self::enableTool())
+        if( ! static::enableTool())
             return;
 
-        self::$config->setRunInformation($status);
+        static::$config->setRunInformation($status);
     }
 
 	/*
@@ -137,10 +137,10 @@ class Config
 	 */
 	public static function setClearScreen($status)
 	{
-		if( ! self::enableTool())
+		if( ! static::enableTool())
 			return;
 
-		self::$config->setClearScreen($status);
+		static::$config->setClearScreen($status);
 	}
 
     /*
@@ -148,6 +148,6 @@ class Config
      */
     public static function instanceReset()
     {
-        self::$config = null;
+        static::$config = null;
     }
 }

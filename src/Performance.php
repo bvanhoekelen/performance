@@ -12,24 +12,24 @@ class Performance
 
     public static function instance()
     {
-        if( ! self::$performance)
-            self::$performance = new PerformanceHandler();
-        return self::$performance;
+        if( ! static::$performance)
+            static::$performance = new PerformanceHandler();
+        return static::$performance;
     }
 
     private static function enableTool()
     {
-        $performance = self::instance();
+        $performance = static::instance();
 
         // Check DISABLE_TOOL
         if( ! $performance->config->isEnableTool())
             return false;
 
         // Check bootstrap
-        if( ! self::$bootstrap)
+        if( ! static::$bootstrap)
         {
             $performance->bootstrap();
-            self::$bootstrap = true;
+            static::$bootstrap = true;
         }
 
         return true;
@@ -44,11 +44,11 @@ class Performance
      */
     public static function point($label = null, $isMultiplePoint = false)
     {
-        if( ! self::enableTool() )
+        if( ! static::enableTool() )
             return;
 
         // Run
-        self::$performance->point($label, $isMultiplePoint);
+        static::$performance->point($label, $isMultiplePoint);
     }
 
     /*
@@ -60,11 +60,11 @@ class Performance
      */
     public static function message($message = null, $newLine = true)
     {
-        if( ! self::enableTool() or ! $message)
+        if( ! static::enableTool() or ! $message)
             return;
 
         // Run
-        self::$performance->message($message, $newLine);
+        static::$performance->message($message, $newLine);
     }
 
 
@@ -76,11 +76,11 @@ class Performance
      */
     public static function finish($multiplePointLabel = null)
     {
-        if( ! self::enableTool() )
+        if( ! static::enableTool() )
             return;
 
         // Run
-        self::$performance->finish($multiplePointLabel);
+        static::$performance->finish($multiplePointLabel);
     }
 
     /*
@@ -90,11 +90,11 @@ class Performance
      */
     public static function export()
     {
-        if( ! self::enableTool() )
+        if( ! static::enableTool() )
             return;
 
         // Run
-        return self::$performance->export();
+        return static::$performance->export();
     }
 
     /*
@@ -104,11 +104,11 @@ class Performance
      */
     public static function results()
     {
-        if( ! self::enableTool() )
+        if( ! static::enableTool() )
             return;
 
         // Run
-        return self::$performance->results();
+        return static::$performance->results();
     }
 
     /*
@@ -118,8 +118,8 @@ class Performance
     {
         // Run
         Config::instanceReset();
-        self::$performance = null;
-        self::$bootstrap = false;
+        static::$performance = null;
+        static::$bootstrap = false;
 
     }
 }
