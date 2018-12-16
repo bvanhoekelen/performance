@@ -14,7 +14,7 @@ class QueryLogHolder
     public $prefix;
     public $connectionName;
 
-    /*
+    /**
      * Create holder object
      */
     function __construct($sql)
@@ -39,7 +39,7 @@ class QueryLogHolder
         $this->checkQueryType();
     }
 
-    /*
+    /**
      * Set query type
      */
     protected function checkQueryType()

@@ -4,7 +4,7 @@ use Performance\Lib\Handlers\PerformanceHandler;
 
 class Performance
 {
-    /*
+    /**
      * Create a performance instance
      */
     protected static $performance;
@@ -35,7 +35,7 @@ class Performance
         return true;
     }
 
-    /*
+    /**
      * Set measuring point X
      *
      * @param string|null   $label
@@ -51,7 +51,7 @@ class Performance
         static::$performance->point($label, $isMultiplePoint);
     }
 
-    /*
+    /**
      * Set a message associated with the point
      *
      * @param string|null   $message
@@ -68,7 +68,7 @@ class Performance
     }
 
 
-    /*
+    /**
      * Finish measuring point X
      *
      * @param string|null   $multiplePointLabel
@@ -83,7 +83,7 @@ class Performance
         static::$performance->finish($multiplePointLabel);
     }
 
-    /*
+    /**
      * Export helper
      *
      * @return Performance\Lib\Handlers\ExportHandler
@@ -97,7 +97,7 @@ class Performance
         return static::$performance->export();
     }
 
-    /*
+    /**
      * Return test results
      *
      * @return Performance\Lib\Handlers\ExportHandler
@@ -111,7 +111,7 @@ class Performance
         return static::$performance->results();
     }
 
-    /*
+    /**
      * Reset
      */
     public static function instanceReset()

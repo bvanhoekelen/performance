@@ -8,42 +8,42 @@ use Performance\Lib\Presenters\WebPresenter;
 
 class PerformanceHandler
 {
-    /*
+    /**
      * Version
      */
     const VERSION = '2.4.0';
 
-    /*
+    /**
      * Store current point
      */
     protected $currentPoint;
 
-    /*
+    /**
      * Hold point stack
      */
     protected $pointStack = [];
 
-    /*
+    /**
      * Hold sub point stack
      */
     protected $multiPointStack = [];
 
-    /*
+    /**
      *  Hold presenter
      */
     protected $presenter;
 
-    /*
+    /**
      * Hold the query log items
      */
     public $queryLogStack = [];
 
-    /*
+    /**
      * Hold the config class
      */
     public $config;
 
-    /*
+    /**
      *
      */
     protected $messageToLabel = null;
@@ -65,7 +65,7 @@ class PerformanceHandler
         $this->preload();
     }
 
-    /*
+    /**
      * Set measuring point X
      *
      * @param string|null   $label
@@ -101,7 +101,7 @@ class PerformanceHandler
         $point->start();
     }
 
-    /*
+    /**
      * Set message
      *
      * @param string|null   $message
@@ -122,7 +122,7 @@ class PerformanceHandler
             $this->messageToLabel .= $message;
     }
 
-    /*
+    /**
      * Finish measuring point X
      *
      * @param string|null   $multiplePointLabel
@@ -154,7 +154,7 @@ class PerformanceHandler
         }
     }
 
-    /*
+    /**
      * Return test results
      *
      * @return Performance\Lib\Handlers\ExportHandler
@@ -198,7 +198,7 @@ class PerformanceHandler
             die('Unknown presenter ' . $this->config->getPresenter() . PHP_EOL);
     }
 
-    /*
+    /**
      * Finish all point in the stack
      *
      * @return void
@@ -252,7 +252,7 @@ class PerformanceHandler
         }
     }
 
-    /*
+    /**
      * Check if label already exists
      */
     protected function checkIfPointLabelExists($label, $isMultiPoint)
@@ -272,7 +272,7 @@ class PerformanceHandler
             die(" Label " . $label . " already exists! Choose new point label." . PHP_EOL);
     }
 
-    /*
+    /**
      * Preload wil setup te point class
      */
     protected function preload()
@@ -283,7 +283,7 @@ class PerformanceHandler
         $this->point( Point::POINT_CALIBRATE );
     }
 
-    /*
+    /**
      * Check if query log is possible
      */
     protected function setConfigQueryLogState()
@@ -323,7 +323,7 @@ class PerformanceHandler
         }
     }
 
-    /*
+    /**
      * Move query log items to point
      */
     protected function setQueryLogItemsToPoint(Point $point)
@@ -336,7 +336,7 @@ class PerformanceHandler
         $this->queryLogStack = [];
     }
 
-    /*
+    /**
      * Update point label with message
      */
     protected function checkAndSetMessageInToLabel(Point $point)

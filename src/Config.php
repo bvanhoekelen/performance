@@ -2,7 +2,7 @@
 
 class Config
 {
-    /*
+    /**
      * Create a config instance
      */
     protected static $config;
@@ -25,7 +25,7 @@ class Config
         return true;
     }
 
-    /*
+    /**
      * Set config item console live
      * @param bool $status
      * return void
@@ -38,7 +38,7 @@ class Config
         static::$config->setConsoleLive($status);
     }
 
-    /*
+    /**
      * Set config item point label LTrim
      * @param bool $mask
      * return void
@@ -51,7 +51,7 @@ class Config
         static::$config->setPointLabelLTrim($mask);
     }
 
-    /*
+    /**
      * Set config item point label RTrim
      * @param bool $mask
      * return void
@@ -64,7 +64,7 @@ class Config
         static::$config->setPointLabelRTrim($mask);
     }
 
-    /*
+    /**
      * Set config item point label RTrim
      * @param mixed $value
      * return void
@@ -77,7 +77,7 @@ class Config
         static::$config->setEnableTool($value);
     }
 
-    /*
+    /**
      * Set config item query log
      * @param mixed $value
      * @param string $viewType
@@ -91,7 +91,7 @@ class Config
         static::$config->setQueryLog($status, $viewType);
     }
 
-    /*
+    /**
      * Set config item presenter
      * @param mixed $value
      * return void
@@ -104,7 +104,7 @@ class Config
         static::$config->setPresenter($type);
     }
 
-    /*
+    /**
      * Set config point label nice
      * @param bool $status
      * return void
@@ -117,7 +117,7 @@ class Config
         static::$config->setPointLabelNice($status);
     }
 
-    /*
+    /**
      * Set config point label nice
      * @param bool $status
      * return void
@@ -130,7 +130,7 @@ class Config
         static::$config->setRunInformation($status);
     }
 
-	/*
+	/**
 	 * Set config point label nice
 	 * @param bool $status
 	 * return void
@@ -143,7 +143,7 @@ class Config
 		static::$config->setClearScreen($status);
 	}
 
-    /*
+    /**
      * Reset
      */
     public static function instanceReset()

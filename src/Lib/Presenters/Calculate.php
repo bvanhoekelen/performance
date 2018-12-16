@@ -4,7 +4,7 @@ use Performance\Lib\Holders\CalculateTotalHolder;
 
 class Calculate
 {
-    /*
+    /**
      * Calculate total memory
      *
      * return Performance\Lib\Holders\CalculateTotalHolder;
@@ -23,7 +23,7 @@ class Calculate
         return new CalculateTotalHolder($max_time, $max_memory, memory_get_peak_usage(true));
     }
 
-    /*
+    /**
      * Calculate percentage
      */
     public function calculatePercentage($pointDifference, $total)

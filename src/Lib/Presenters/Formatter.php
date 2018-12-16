@@ -80,7 +80,7 @@ class Formatter {
         return sprintf('%.' . $decimals . 'f ' . $unit, $value);
     }
 
-    /*
+    /**
      * Fix problem 'μs'
      */
     public function stringPad($input, $pad_length, $pad_string = ' ')

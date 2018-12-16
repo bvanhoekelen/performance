@@ -140,7 +140,7 @@ class ConsolePresenter extends Presenter
         if ($this->commandLineWidth > 140)
             $this->commandLineWidth = 140;
 
-        /*
+        /**
          *  |<------------------------------- ( Terminal wight ) ---------------------------------->|
          *  | <---------------- (38 - wight) ---------------><---------------- 39 --------------->| | < terminal border
          *  |    Label                                       .    Time    .   Memory   .    Peak    |

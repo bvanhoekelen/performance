@@ -28,17 +28,17 @@ abstract class Presenter {
         $this->bootstrap();
     }
 
-    /*
+    /**
      * Bootstrap sub class
      */
     abstract public function bootstrap();
 
-    /*
+    /**
      * Passed trigger to results to display
      */
     abstract public function displayResultsTrigger($pointStack);
 
-    /*
+    /**
      * Passed trigger finish point to display
      */
     abstract public function finishPointTrigger(Point $point);

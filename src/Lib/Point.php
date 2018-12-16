@@ -37,7 +37,7 @@ class Point implements ExportInterface
         $this->setIsMultiplePoint($isMultiplePoint);
     }
 
-    /*
+    /**
      * Start point
      *
      * return void
@@ -49,7 +49,7 @@ class Point implements ExportInterface
         $this->setStartMemoryUsage();
     }
 
-    /*
+    /**
      * Finish point
      *
      * return void
@@ -64,7 +64,7 @@ class Point implements ExportInterface
         $this->setDifferenceMemory();
     }
 
-    /*
+    /**
      * Simple export function
      */
     public function export()

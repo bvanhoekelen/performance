@@ -17,7 +17,7 @@ class ConfigHandler implements ExportInterface
     protected $clearScreen = true;
     protected $presenter;
 
-    /*
+    /**
      * Hold state of the query log
      * null = not set
      * false = config is false
@@ -32,7 +32,7 @@ class ConfigHandler implements ExportInterface
         $this->setDefaultPresenter();
     }
 
-    /*
+    /**
      * Simple export function
      */
     public function export()
