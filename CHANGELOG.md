@@ -1,5 +1,13 @@
 # Change Log
 
+## Unreleased
+## Change
+- Use `protected` instead of `private`
+- Use `static` instead of `self`
+- use `/**` for comments
+- use `throw new exception` instead of `die`
+- Require php version 5.6 and higher
+
 ## [v2.4.0](https://github.com/bvanhoekelen/performance/tree/v2.4.0) - 2018-12-11
 ### Add
  - Config item `Config::setClearScreen()` to prevent cleaning screen
