@@ -1,6 +1,8 @@
 # Change Log
 
 ## Unreleased
+
+## [v2.5.0](https://github.com/bvanhoekelen/performance/tree/v2.5.0) - 2019-03-31
 ## Change
 - Use `protected` instead of `private`
 - Use `static` instead of `self`
