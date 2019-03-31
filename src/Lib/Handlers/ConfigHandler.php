@@ -107,11 +107,11 @@ class ConfigHandler implements ExportInterface
                 $this->enableTool = (bool) env($split[1]);
             else{
             	print_r($split);
-                die('Config::DISABLE_TOOL value string "' . $value . '" not supported! Check if ENV and value exists' . PHP_EOL);
+            	throw new \Exception("Config::DISABLE_TOOL value string '" . $value . "' not supported! Check if ENV and value exists.");
             }
         }
         else
-	        die('Config::DISABLE_TOOL value "' . $value . '" not supported!' . PHP_EOL);
+        	throw new \Exception("Config::DISABLE_TOOL value '" . $value . "' not supported!");
     }
 
     /**
@@ -149,7 +149,7 @@ class ConfigHandler implements ExportInterface
         elseif($queryLogView == 'full')
             $this->queryLogView = $queryLogView;
         else
-            die('Query log view ' . $queryLogView . ' does not exists. Use: "resume" or "full"' . PHP_EOL);
+        	throw new \InvalidArgumentException("Query log view '". $queryLogView . "' does not exists, use: 'resume' or 'full'");
     }
 
 
@@ -215,7 +215,7 @@ class ConfigHandler implements ExportInterface
             elseif($mixed == 'web')
                 $this->presenter = Presenter::PRESENTER_WEB;
             else
-                die('Presenter ' . $mixed . ' does not exists. Use: console or web' . PHP_EOL);
+            	throw new \InvalidArgumentException("Presenter '" . $mixed . "' does not exists. Use: console or web.");
     }
 
     /**

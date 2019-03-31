@@ -135,7 +135,7 @@ class PerformanceHandler
         if($multiplePointLabel)
         {
             if( ! isset($this->multiPointStack[$multiplePointLabel]))
-                die("Can't finish multiple point '" . $multiplePointLabel . "'. " . PHP_EOL);
+            	throw new \InvalidArgumentException("Can't finish multiple point '" . $multiplePointLabel . "'.");
 
             $point = $this->multiPointStack[$multiplePointLabel];
             unset($this->multiPointStack[$multiplePointLabel]);
@@ -195,7 +195,7 @@ class PerformanceHandler
         elseif($this->config->getPresenter() == Presenter::PRESENTER_WEB)
             $this->presenter = new WebPresenter($this->config);
         else
-            die('Unknown presenter ' . $this->config->getPresenter() . PHP_EOL);
+        	throw new \Exception("Unknown presenter '" . $this->config->getPresenter() ."'");
     }
 
     /**
@@ -269,7 +269,7 @@ class PerformanceHandler
         }
 
         if($labelExists)
-            die(" Label " . $label . " already exists! Choose new point label." . PHP_EOL);
+        	throw new \InvalidArgumentException("label '" . $label . "' already exists, choose new point label.");
     }
 
     /**
