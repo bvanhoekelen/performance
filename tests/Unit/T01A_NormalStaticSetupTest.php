@@ -1,15 +1,16 @@
-<?php namespace Tests\Unit;
+<?php
 
-use Performance\Config;
+declare(strict_types=1);
+
+namespace Tests\Unit;
+
 use Performance\Performance;
 
 class T01A_NormalStaticSetupTest extends \PHPUnit_Framework_TestCase
 {
-    protected function setTestUp()
-    {
-        Performance::instanceReset();
-    }
-
+    /**
+     * @throws \Exception
+     */
     public function testStaticFunctionPoint()
     {
         // Reset
@@ -23,5 +24,10 @@ class T01A_NormalStaticSetupTest extends \PHPUnit_Framework_TestCase
         Performance::finish();
         Performance::results();
         Performance::export();
+    }
+
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
     }
 }

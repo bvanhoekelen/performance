@@ -1,6 +1,6 @@
 composer.phar
 examples/export.txt
-tests/Unit/export.txt
+tests/Unit/Fixtures/export.txt
 /vendor/
 /.idea
 .DS_Store

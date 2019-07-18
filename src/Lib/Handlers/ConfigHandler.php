@@ -169,16 +169,16 @@ class ConfigHandler implements ExportInterface
      */
     public function setEnableTool($value)
     {
-        if (is_bool($value)) {
+        if (\is_bool($value)) {
             $this->enableTool = $value;
-        } elseif (is_string($value)) {
+        } elseif (\is_string($value)) {
             $split = explode(':', $value);
 
             // Determinable stat on ENV
             if (isset($split[ 1 ]) && $split[ 0 ] === 'ENV' && function_exists('env')) {
                 $this->enableTool = (bool)env($split[ 1 ]);
             } else {
-                print_r($split);
+                \print_r($split);
                 throw new ConfigException("Config::DISABLE_TOOL value string '" . $value . "' not supported! Check if ENV and value exists.");
             }
         } else {
@@ -276,11 +276,11 @@ class ConfigHandler implements ExportInterface
     }
 
     /**
-     * @param int $mixed
+     * @param $mixed
      */
-    public function setPresenter($mixed):void
+    public function setPresenter($mixed): void
     {
-        if (is_int($mixed)) {
+        if (\is_int($mixed)) {
             $this->presenter = $mixed;
         } elseif ($mixed === 'console') {
             $this->presenter = Presenter::PRESENTER_CONSOLE;

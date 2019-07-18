@@ -1,14 +1,13 @@
-<?php namespace Tests\Unit;
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit;
 
 use Performance\Performance;
 
 class T14A_UseExceptionsTest extends \PHPUnit_Framework_TestCase
 {
-    protected function setTestUp()
-    {
-        Performance::instanceReset();
-    }
-
     public function testPointInvalidArgumentException()
     {
         $this->setTestUp();
@@ -19,5 +18,10 @@ class T14A_UseExceptionsTest extends \PHPUnit_Framework_TestCase
         Performance::point('A');
 
         Performance::results();
+    }
+
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
     }
 }

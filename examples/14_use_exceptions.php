@@ -5,8 +5,9 @@
  */
 
 require_once('../vendor/autoload.php');
-use Performance\Performance;
+
 use Performance\Config;
+use Performance\Performance;
 
 
 Config::setClearScreen(false);
@@ -19,9 +20,9 @@ Config::setClearScreen(false);
 Performance::point('A');
 
 try {
-	Performance::point('A');
+    Performance::point('A');
 } catch (Exception $e) {
-	print_r($e);
+    print_r($e);
 }
 
 

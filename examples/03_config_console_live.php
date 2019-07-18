@@ -5,8 +5,9 @@
  */
 
 require_once('../vendor/autoload.php');
-use Performance\Performance;
+
 use Performance\Config;
+use Performance\Performance;
 
 /*
  * Set config item
@@ -19,8 +20,7 @@ Config::setConsoleLive(true);
 Performance::point();
 
 // Run task A
-for($x = 0; $x < 100; $x++)
-{
+for ($x = 0; $x < 100; $x++) {
     echo ".";
 }
 

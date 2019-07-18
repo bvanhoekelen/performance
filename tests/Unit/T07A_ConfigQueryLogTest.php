@@ -1,16 +1,15 @@
-<?php namespace Tests\Unit;
+<?php
 
-use Performance\Performance;
+declare(strict_types=1);
+
+namespace Tests\Unit;
+
 use Performance\Config;
+use Performance\Performance;
 
 
 class T07A_ConfigQueryLogTest extends \PHPUnit_Framework_TestCase
 {
-    protected function setTestUp()
-    {
-        Performance::instanceReset();
-    }
-
     public function testConfigQueryLog()
     {
         $this->setTestUp();
@@ -29,13 +28,10 @@ class T07A_ConfigQueryLogTest extends \PHPUnit_Framework_TestCase
         Performance::results();
     }
 
-    public function testConfigQueryLogIsTrue()
+    protected function setTestUp()
     {
-        $configItem = Performance::instance()->config->isQueryLog();
-        $this->assertFalse($configItem);
+        Performance::instanceReset();
     }
-
-    // Create task
 
     private function taskA()
     {
@@ -49,5 +45,13 @@ class T07A_ConfigQueryLogTest extends \PHPUnit_Framework_TestCase
 
         // Finish point Task A
         Performance::finish();
+    }
+
+    // Create task
+
+    public function testConfigQueryLogIsTrue()
+    {
+        $configItem = Performance::instance()->config->isQueryLog();
+        $this->assertFalse($configItem);
     }
 }

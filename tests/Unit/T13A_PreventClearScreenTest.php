@@ -1,15 +1,14 @@
-<?php namespace Tests\Unit;
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit;
 
 use Performance\Config;
 use Performance\Performance;
 
 class T13A_PreventClearScreenTest extends \PHPUnit_Framework_TestCase
 {
-    protected function setTestUp()
-    {
-        Performance::instanceReset();
-    }
-
     public function testConfigRunInformation()
     {
         $this->setTestUp();
@@ -21,11 +20,16 @@ class T13A_PreventClearScreenTest extends \PHPUnit_Framework_TestCase
         Performance::results();
     }
 
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
+    }
+
     public function testPointLabelNiceFunction()
     {
 
-	    $configItem = Performance::instance()->config->isClearScreen();
-	    $this->assertFalse($configItem);
+        $configItem = Performance::instance()->config->isClearScreen();
+        $this->assertFalse($configItem);
 
     }
 }

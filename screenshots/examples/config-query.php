@@ -2,7 +2,7 @@
 
 require_once('../../vendor/autoload.php');
 require_once('../../examples/helper/UseEloquent.php');
-require_once('../../examples/helper/user.php');
+require_once('../../examples/helper/User.php');
 
 use Performance\Performance;
 use Performance\Config;

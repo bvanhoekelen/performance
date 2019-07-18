@@ -1,15 +1,17 @@
-<?php namespace Tests\Unit;
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit;
 
 use Performance\Config;
 use Performance\Performance;
 
 class T03A_ConfigConsoleLive extends \PHPUnit_Framework_TestCase
 {
-    protected function setTestUp()
-    {
-        Performance::instanceReset();
-    }
-
+    /**
+     * @throws \Exception
+     */
     public function testSetConfigItemConsoleLiveTrue()
     {
         $this->setTestUp();
@@ -31,6 +33,14 @@ class T03A_ConfigConsoleLive extends \PHPUnit_Framework_TestCase
         $this->assertTrue($config->isConsoleLive());
     }
 
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
+    }
+
+    /**
+     * @throws \Exception
+     */
     public function testSetConfigItemConsoleLiveFalse()
     {
         // Reset
