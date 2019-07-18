@@ -76,11 +76,6 @@ class ConfigHandler implements ExportInterface
     /**
      * @var
      */
-    private $configItems;
-
-    /**
-     * @var
-     */
     private $pointLabelTrim;
 
     /**
@@ -93,9 +88,6 @@ class ConfigHandler implements ExportInterface
         $this->setDefaultPresenter();
     }
 
-    /**
-     *
-     */
     protected function setDefaultConsoleLive()
     {
         $shortOpts = 'l::';
@@ -108,9 +100,6 @@ class ConfigHandler implements ExportInterface
         }
     }
 
-    /**
-     *
-     */
     protected function setDefaultPresenter()
     {
         if (php_sapi_name() === "cli") {
@@ -129,14 +118,6 @@ class ConfigHandler implements ExportInterface
     {
         $vars = get_object_vars($this);
         return $vars ?? [];
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllItemNames()
-    {
-        return array_keys($this->configItems);
     }
 
     /**
@@ -176,13 +157,13 @@ class ConfigHandler implements ExportInterface
 
             // Determinable stat on ENV
             if (isset($split[ 1 ]) && $split[ 0 ] === 'ENV' && function_exists('env')) {
-                $this->enableTool = (bool)env($split[ 1 ]);
+                $this->enableTool = (bool)\env($split[ 1 ]);
             } else {
                 \print_r($split);
-                throw new ConfigException("Config::DISABLE_TOOL value string '" . $value . "' not supported! Check if ENV and value exists.");
+                throw new ConfigException('Config::DISABLE_TOOL value string ' . $value . ' not supported! Check if ENV and value exists.');
             }
         } else {
-            throw new ConfigException("Config::DISABLE_TOOL value '" . $value . "' not supported!");
+            throw new ConfigException('Config::DISABLE_TOOL value ' . $value . ' not supported!');
         }
     }
 
@@ -222,7 +203,7 @@ class ConfigHandler implements ExportInterface
         } elseif ($queryLogView === 'full') {
             $this->queryLogView = $queryLogView;
         } else {
-            throw new InvalidArgumentException("Query log view '" . $queryLogView . "' does not exists, use: 'resume' or 'full'");
+            throw new InvalidArgumentException('Query log view ' . $queryLogView . ' does not exists, use: \'resume\' or \'full\'');
         }
     }
 
@@ -287,7 +268,7 @@ class ConfigHandler implements ExportInterface
         } elseif ($mixed === 'web') {
             $this->presenter = Presenter::PRESENTER_WEB;
         } else {
-            throw new InvalidArgumentException("Presenter '" . $mixed . "' does not exists. Use: console or web.");
+            throw new InvalidArgumentException('Presenter ' . $mixed . ' does not exists. Use: console or web.');
         }
     }
 
@@ -302,9 +283,9 @@ class ConfigHandler implements ExportInterface
     /**
      * @param bool $pointLabelNice
      */
-    public function setPointLabelNice($pointLabelNice)
+    public function setPointLabelNice(bool $pointLabelNice)
     {
-        $this->pointLabelNice = (bool)$pointLabelNice;
+        $this->pointLabelNice = $pointLabelNice;
     }
 
     /**
@@ -319,9 +300,9 @@ class ConfigHandler implements ExportInterface
      * Set run information
      * @param bool $status
      */
-    public function setRunInformation($status)
+    public function setRunInformation(bool $status)
     {
-        $this->runInformation = (bool)$status;
+        $this->runInformation = $status;
     }
 
     /**
@@ -335,8 +316,8 @@ class ConfigHandler implements ExportInterface
     /**
      * @param bool $clearScreen
      */
-    public function setClearScreen($clearScreen)
+    public function setClearScreen(bool $clearScreen)
     {
-        $this->clearScreen = (bool)$clearScreen;
+        $this->clearScreen = $clearScreen;
     }
 }
