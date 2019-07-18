@@ -1,15 +1,14 @@
-<?php namespace Tests\Unit;
+<?php
 
-use Performance\Performance;
+declare(strict_types=1);
+
+namespace Tests\Unit;
+
 use Performance\Config;
+use Performance\Performance;
 
 class T05A_ConfigEnableToolTest extends \PHPUnit_Framework_TestCase
 {
-    protected function setTestUp()
-    {
-        Performance::instanceReset();
-    }
-
     public function testStaticFunctionPoint()
     {
         // Reset
@@ -25,19 +24,10 @@ class T05A_ConfigEnableToolTest extends \PHPUnit_Framework_TestCase
         Performance::results();
     }
 
-    public function testSkipTool()
+    protected function setTestUp()
     {
-        $points = Performance::instance()->getPoints();
-        $this->assertEquals(0, count($points));
+        Performance::instanceReset();
     }
-
-    public function testConfigEnableToolIsFalse()
-    {
-        $configItem = Performance::instance()->config->isEnableTool();
-        $this->assertFalse($configItem);
-    }
-
-    // Create task
 
     private function taskA()
     {
@@ -65,5 +55,19 @@ class T05A_ConfigEnableToolTest extends \PHPUnit_Framework_TestCase
 
         // Finish point Task B
         Performance::finish();
+    }
+
+    // Create task
+
+    public function testSkipTool()
+    {
+        $points = Performance::instance()->getPoints();
+        $this->assertEquals(0, count($points));
+    }
+
+    public function testConfigEnableToolIsFalse()
+    {
+        $configItem = Performance::instance()->config->isEnableTool();
+        $this->assertFalse($configItem);
     }
 }

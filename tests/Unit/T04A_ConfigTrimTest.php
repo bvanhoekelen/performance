@@ -1,16 +1,18 @@
-<?php namespace Tests\Unit;
+<?php
 
-use Performance\Performance;
+declare(strict_types=1);
+
+namespace Tests\Unit;
+
 use Performance\Config;
+use Performance\Performance;
 
 class T04A_ConfigTrimTest extends \PHPUnit_Framework_TestCase
 {
 
-    protected function setTestUp()
-    {
-        Performance::instanceReset();
-    }
-
+    /**
+     * @throws \Exception
+     */
     public function testStaticFunctionPoint()
     {
         $this->setTestUp();
@@ -28,18 +30,14 @@ class T04A_ConfigTrimTest extends \PHPUnit_Framework_TestCase
         Performance::results();
     }
 
-    public function testTrimFunction()
+    protected function setTestUp()
     {
-        $points = Performance::instance()->getPoints();
-
-        $this->assertEquals($points[3]->getLabel(), 'TaskA');
-        $this->assertEquals($points[4]->getLabel(), 'TaskB');
-        $this->assertEquals($points[5]->getLabel(), 'TaskC');
+        Performance::instanceReset();
     }
 
-
-    // Create task
-
+    /**
+     * @throws \Exception
+     */
     private function synchronizeTaskARun()
     {
         // Set point Task A
@@ -54,6 +52,12 @@ class T04A_ConfigTrimTest extends \PHPUnit_Framework_TestCase
         Performance::finish();
     }
 
+
+    // Create task
+
+    /**
+     * @throws \Exception
+     */
     private function synchronizeTaskBRun()
     {
         // Set point Task B
@@ -68,6 +72,9 @@ class T04A_ConfigTrimTest extends \PHPUnit_Framework_TestCase
         Performance::finish();
     }
 
+    /**
+     * @throws \Exception
+     */
     private function synchronizeTaskCRun()
     {
         // Set point Task C
@@ -80,5 +87,14 @@ class T04A_ConfigTrimTest extends \PHPUnit_Framework_TestCase
 
         // Finish point Task C
         Performance::finish();
+    }
+
+    public function testTrimFunction()
+    {
+        $points = Performance::instance()->getPoints();
+
+        $this->assertEquals($points[ 3 ]->getLabel(), 'TaskA');
+        $this->assertEquals($points[ 4 ]->getLabel(), 'TaskB');
+        $this->assertEquals($points[ 5 ]->getLabel(), 'TaskC');
     }
 }

@@ -1,16 +1,38 @@
-<?php namespace Performance\Lib\Holders;
+<?php
+
+declare(strict_types=1);
+
+namespace Performance\Lib\Holders;
 
 use Performance\Lib\Handlers\ConfigHandler;
 
+/**
+ * Class InformationHolder
+ * @package Performance\Lib\Holders
+ */
 class InformationHolder
 {
-    // Config
+    /**
+     * @var ConfigHandler
+     */
     protected $config;
 
     // Run information holder
+
+    /**
+     * @var
+     */
     protected $currentUser;
+
+    /**
+     * @var
+     */
     protected $currentProcessId;
 
+    /**
+     * InformationHolder constructor.
+     * @param ConfigHandler $config
+     */
     public function __construct(ConfigHandler $config)
     {
         $this->config = $config;
@@ -19,10 +41,30 @@ class InformationHolder
         $this->activateConfig();
     }
 
+    protected function activateConfig(): void
+    {
+        if ($this->config->isRunInformation()) {
+            $this->setRunInformation();
+        }
+    }
+
+    protected function setRunInformation()
+    {
+        // Set unknown
+        $this->currentUser = '?';
+        $this->currentProcessId = '?';
+
+        // Set current user
+        $this->currentUser = get_current_user();
+
+        // Set current process id
+        $this->currentProcessId = getmypid();
+    }
+
     /**
      * @return mixed
      */
-    public function getCurrentUser()
+    public function getCurrentUser(): string
     {
         return $this->currentUser;
     }
@@ -33,32 +75,5 @@ class InformationHolder
     public function getCurrentProcessId()
     {
         return $this->currentProcessId;
-    }
-
-//
-// Private
-//
-
-    protected function activateConfig()
-    {
-        if($this->config->isRunInformation())
-            $this->setRunInformation();
-    }
-
-    protected function setRunInformation()
-    {
-        // Set unknown
-        $this->currentUser = '?';
-        $this->currentProcessId = '?';
-
-        // Set current user
-        try{
-            $this->currentUser = get_current_user();
-        }catch (\ErrorException $exception) {}
-
-        // Set current user
-        try{
-            $this->currentProcessId = getmypid();
-        }catch (\ErrorException $exception) {}
     }
 }

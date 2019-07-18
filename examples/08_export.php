@@ -5,6 +5,7 @@
  */
 
 require_once('../vendor/autoload.php');
+
 use Performance\Performance;
 
 /*
@@ -13,8 +14,7 @@ use Performance\Performance;
 
 Performance::point();
 // Run task A
-for($x = 0; $x < 100; $x++)
-{
+for ($x = 0; $x < 100; $x++) {
     echo ".";
 }
 
@@ -37,4 +37,4 @@ print_r($export->config()->get());
 print_r($export->points()->toJson());
 
 // Return file_put_contents() results
-print_r($export->toFile('export.txt'));
+print_r($export->toFile('tests/Unit/Fixtures/export.txt'));

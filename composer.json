@@ -1,51 +1,55 @@
 {
-    "name": "bvanhoekelen/performance",
-    "description": "PHP performance tool analyser your script on time, memory usage and db query. Support Laravel and Composer for web, web console and command line interfaces.",
-    "keywords": [
-        "php",
-        "performance",
-        "performance tool",
-        "php performance tool",
-        "php performance analyser",
-        "php-performance",
-        "database",
-        "query",
-        "query analyser",
-        "query log",
-        "database query log",
-        "laravel",
-        "analyser",
-        "compressor",
-        "web",
-        "terminal",
-        "command line",
-        "export",
-        "memory",
-        "time"
-    ],
-    "license": "Apache-2.0",
-    "authors": [
-        {
-            "name": "B. van Hoekelen",
-            "homepage": "https://github.com/bvanhoekelen/performance"
-        }
-    ],
-    "require": {
-        "php": ">=5.6.0",
-        "bvanhoekelen/terminal-style": "^1.0"
-    },
-    "require-dev": {
-        "larapack/dd": "1.*",
-        "phpunit/phpunit": "^5.7",
-        "illuminate/database": "^5.4",
-        "illuminate/events": "^5.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Performance\\": "src/"
-        }
-    },
-    "archive": {
-        "exclude": ["assets"]
+  "name": "bvanhoekelen/performance",
+  "description": "PHP performance tool analyser your script on time, memory usage and db query. Support Laravel and Composer for web, web console and command line interfaces.",
+  "keywords": [
+    "php",
+    "performance",
+    "performance tool",
+    "php performance tool",
+    "php performance analyser",
+    "php-performance",
+    "database",
+    "query",
+    "query analyser",
+    "query log",
+    "database query log",
+    "laravel",
+    "analyser",
+    "compressor",
+    "web",
+    "terminal",
+    "command line",
+    "export",
+    "memory",
+    "time"
+  ],
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "B. van Hoekelen",
+      "homepage": "https://github.com/bvanhoekelen/performance"
     }
+  ],
+  "require": {
+    "php": ">=7.1.0",
+    "bvanhoekelen/terminal-style": "^1.0",
+    "ext-json": "*",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "larapack/dd": "1.*",
+    "phpunit/phpunit": "^5.7",
+    "illuminate/database": "^5.4",
+    "illuminate/events": "^5.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Performance\\": "src/"
+    }
+  },
+  "archive": {
+    "exclude": [
+      "assets"
+    ]
+  }
 }

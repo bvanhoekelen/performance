@@ -5,8 +5,9 @@
  */
 
 require_once('../vendor/autoload.php');
-use Performance\Performance;
+
 use Performance\Config;
+use Performance\Performance;
 
 /*
  * Set config item
@@ -20,8 +21,7 @@ Config::setRunInformation(true);
 Performance::point();
 
 // Run task A
-for($x = 0; $x < 100; $x++)
-{
+for ($x = 0; $x < 100; $x++) {
     echo ".";
     usleep(3000);
 }

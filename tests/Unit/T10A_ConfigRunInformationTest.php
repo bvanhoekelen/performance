@@ -1,15 +1,14 @@
-<?php namespace Tests\Unit;
+<?php
 
-use Performance\Performance;
+declare(strict_types=1);
+
+namespace Tests\Unit;
+
 use Performance\Config;
+use Performance\Performance;
 
 class T10A_ConfigRunInformationTest extends \PHPUnit_Framework_TestCase
 {
-
-    protected function setTestUp()
-    {
-        Performance::instanceReset();
-    }
 
     public function testConfigRunInformation()
     {
@@ -23,6 +22,11 @@ class T10A_ConfigRunInformationTest extends \PHPUnit_Framework_TestCase
 
         // Finish all tasks and show test results
         Performance::results();
+    }
+
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
     }
 
     // Create task

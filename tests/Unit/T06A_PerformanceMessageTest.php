@@ -1,15 +1,13 @@
-<?php namespace Tests\Unit;
+<?php
 
-use Performance\Config;
+declare(strict_types=1);
+
+namespace Tests\Unit;
+
 use Performance\Performance;
 
 class T06A_PerformanceMessageTest extends \PHPUnit_Framework_TestCase
 {
-    protected function setTestUp()
-    {
-        Performance::instanceReset();
-    }
-
     public function testStaticFunctionPoint()
     {
         // Reset
@@ -27,10 +25,15 @@ class T06A_PerformanceMessageTest extends \PHPUnit_Framework_TestCase
         Performance::results();
     }
 
+    protected function setTestUp()
+    {
+        Performance::instanceReset();
+    }
+
     public function testMessageAddToLabel()
     {
         $points = Performance::instance()->getPoints();
-        $point = $points[3];
+        $point = $points[ 3 ];
 
         $this->assertEquals('Label - add to label', $point->getLabel());
     }
@@ -38,9 +41,9 @@ class T06A_PerformanceMessageTest extends \PHPUnit_Framework_TestCase
     public function testMessageAddToNewLine()
     {
         $points = Performance::instance()->getPoints();
-        $lines = $points[3]->getNewLineMessage();
+        $lines = $points[ 3 ]->getNewLineMessage();
 
-        $this->assertEquals('New line #1', $lines[0]);
-        $this->assertEquals('New line #2', $lines[1]);
+        $this->assertEquals('New line #1', $lines[ 0 ]);
+        $this->assertEquals('New line #2', $lines[ 1 ]);
     }
 }

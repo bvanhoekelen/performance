@@ -1,15 +1,14 @@
-<?php namespace Tests\Unit;
+<?php
 
-use Performance\Performance;
+declare(strict_types=1);
+
+namespace Tests\Unit;
+
 use Performance\Config;
+use Performance\Performance;
 
 class T09A_ConfigNiceLabelTest extends \PHPUnit_Framework_TestCase
 {
-
-    protected function setTestUp()
-    {
-        Performance::instanceReset();
-    }
 
     public function testConfigNiceLabel()
     {
@@ -28,18 +27,10 @@ class T09A_ConfigNiceLabelTest extends \PHPUnit_Framework_TestCase
         Performance::results();
     }
 
-    public function testPointLabelNiceFunction()
+    protected function setTestUp()
     {
-        $points = Performance::instance()->getPoints();
-
-        $this->assertEquals($points[3]->getLabel(), 'Synchronize Task A Run');
-        $this->assertEquals($points[4]->getLabel(), 'Synchronize Task B Run');
-        $this->assertEquals($points[5]->getLabel(), 'Synchronize Task C Run');
-        $this->assertEquals($points[6]->getLabel(), 'Point Wit Text - And - aaa');
+        Performance::instanceReset();
     }
-
-
-    // Create task
 
     private function synchronizeTaskARun()
     {
@@ -54,6 +45,9 @@ class T09A_ConfigNiceLabelTest extends \PHPUnit_Framework_TestCase
         // Finish point Task C
         Performance::finish();
     }
+
+
+    // Create task
 
     private function synchronizeTaskBRun()
     {
@@ -81,5 +75,15 @@ class T09A_ConfigNiceLabelTest extends \PHPUnit_Framework_TestCase
 
         // Finish point Task C
         Performance::finish();
+    }
+
+    public function testPointLabelNiceFunction()
+    {
+        $points = Performance::instance()->getPoints();
+
+        $this->assertEquals($points[ 3 ]->getLabel(), 'Synchronize Task A Run');
+        $this->assertEquals($points[ 4 ]->getLabel(), 'Synchronize Task B Run');
+        $this->assertEquals($points[ 5 ]->getLabel(), 'Synchronize Task C Run');
+        $this->assertEquals($points[ 6 ]->getLabel(), 'Point Wit Text - And - aaa');
     }
 }

@@ -5,6 +5,7 @@
  */
 
 require_once('../vendor/autoload.php');
+
 use Performance\Performance;
 
 /*
@@ -17,8 +18,7 @@ Performance::point();
 Performance::point('Na mij');
 
 // Run task A
-for($x = 0; $x < 100; $x++)
-{
+for ($x = 0; $x < 100; $x++) {
     echo ".";
 }
 

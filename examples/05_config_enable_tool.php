@@ -5,8 +5,9 @@
  */
 
 require_once('../vendor/autoload.php');
-use Performance\Performance;
+
 use Performance\Config;
+use Performance\Performance;
 
 // Bootstrap class
 $foo = new Foo();

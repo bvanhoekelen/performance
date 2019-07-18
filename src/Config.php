@@ -1,41 +1,57 @@
-<?php namespace Performance;
+<?php
+
+declare(strict_types=1);
+
+namespace Performance;
+
+use Performance\Lib\Handlers\ConfigHandler;
+use Performance\Lib\Handlers\PerformanceHandler;
 
 class Config
 {
     /**
-     * Create a config instance
+     * @var Config|PerformanceHandler
      */
     protected static $config;
 
-    protected static function instance()
-    {
-        if (!static::$config)
-            static::$config = Performance::instance()->config;
-        return static::$config;
-    }
-
-    protected static function enableTool()
-    {
-        $config = static::instance();
-
-        // Check DISABLE_TOOL
-        if( ! $config->isEnableTool())
-            return false;
-
-        return true;
-    }
-
     /**
      * Set config item console live
+     *
      * @param bool $status
      * return void
      */
     public static function setConsoleLive($status)
     {
-        if( ! static::enableTool())
+        if (!static::enableTool()) {
             return;
+        }
 
         static::$config->setConsoleLive($status);
+    }
+
+    protected static function enableTool()
+    {
+        /** @var ConfigHandler $config */
+        $config = static::instance();
+
+        // Check DISABLE_TOOL
+        if (!$config->isEnableTool()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return PerformanceHandler
+     */
+    protected static function instance()
+    {
+        if (!static::$config) {
+            static::$config = Performance::instance()->config;
+        }
+
+        return static::$config;
     }
 
     /**
@@ -45,8 +61,9 @@ class Config
      */
     public static function setPointLabelLTrim($mask)
     {
-        if( ! static::enableTool())
+        if (!static::enableTool()) {
             return;
+        }
 
         static::$config->setPointLabelLTrim($mask);
     }
@@ -58,8 +75,9 @@ class Config
      */
     public static function setPointLabelRTrim($mask)
     {
-        if( ! static::enableTool())
+        if (!static::enableTool()) {
             return;
+        }
 
         static::$config->setPointLabelRTrim($mask);
     }
@@ -71,35 +89,37 @@ class Config
      */
     public static function setEnableTool($value)
     {
-        if( ! static::enableTool())
+        if (!static::enableTool()) {
             return;
+        }
 
         static::$config->setEnableTool($value);
     }
 
     /**
      * Set config item query log
-     * @param mixed $value
+     * @param bool $status
      * @param string $viewType
      * return void
      */
-    public static function setQueryLog($status, $viewType = null)
+    public static function setQueryLog(bool $status, $viewType = null)
     {
-        if( ! static::enableTool())
+        if (!static::enableTool()) {
             return;
+        }
 
         static::$config->setQueryLog($status, $viewType);
     }
 
     /**
      * Set config item presenter
-     * @param mixed $value
-     * return void
+     * @param string $type
      */
-    public static function setPresenter($type)
+    public static function setPresenter(string $type)
     {
-        if( ! static::enableTool())
+        if (!static::enableTool()) {
             return;
+        }
 
         static::$config->setPresenter($type);
     }
@@ -111,8 +131,9 @@ class Config
      */
     public static function setPointLabelNice($status)
     {
-        if( ! static::enableTool())
+        if (!static::enableTool()) {
             return;
+        }
 
         static::$config->setPointLabelNice($status);
     }
@@ -124,24 +145,26 @@ class Config
      */
     public static function setRunInformation($status)
     {
-        if( ! static::enableTool())
+        if (!static::enableTool()) {
             return;
+        }
 
         static::$config->setRunInformation($status);
     }
 
-	/**
-	 * Set config point label nice
-	 * @param bool $status
-	 * return void
-	 */
-	public static function setClearScreen($status)
-	{
-		if( ! static::enableTool())
-			return;
+    /**
+     * Set config point label nice
+     * @param bool $status
+     * return void
+     */
+    public static function setClearScreen($status)
+    {
+        if (!static::enableTool()) {
+            return;
+        }
 
-		static::$config->setClearScreen($status);
-	}
+        static::$config->setClearScreen($status);
+    }
 
     /**
      * Reset

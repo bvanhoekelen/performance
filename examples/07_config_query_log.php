@@ -6,12 +6,11 @@
 
 require_once('../vendor/autoload.php');
 require_once('helper/UseEloquent.php');
-require_once('helper/user.php');
+require_once('helper/User.php');
 
 use Illuminate\Database\Capsule\Manager as DB;
-
-use Performance\Performance;
 use Performance\Config;
+use Performance\Performance;
 
 // Bootstrap class
 $foo = new Foo();
