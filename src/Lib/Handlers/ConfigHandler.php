@@ -4,9 +4,19 @@ declare(strict_types=1);
 
 namespace Performance\Lib\Handlers;
 
+use function env;
+use function explode;
+use function function_exists;
+use function get_object_vars;
 use InvalidArgumentException;
+use function is_bool;
+use function is_int;
+use function is_string;
 use Performance\Lib\Interfaces\ExportInterface;
 use Performance\Lib\Presenters\Presenter;
+use function php_sapi_name;
+use function print_r;
+
 
 /**
  * Class ConfigHandler
@@ -72,11 +82,6 @@ class ConfigHandler implements ExportInterface
      * @var
      */
     protected $presenter;
-
-    /**
-     * @var
-     */
-    private $pointLabelTrim;
 
     /**
      * ConfigHandler constructor.
@@ -150,16 +155,16 @@ class ConfigHandler implements ExportInterface
      */
     public function setEnableTool($value)
     {
-        if (\is_bool($value)) {
+        if (is_bool($value)) {
             $this->enableTool = $value;
-        } elseif (\is_string($value)) {
+        } elseif (is_string($value)) {
             $split = explode(':', $value);
 
             // Determinable stat on ENV
             if (isset($split[ 1 ]) && $split[ 0 ] === 'ENV' && function_exists('env')) {
-                $this->enableTool = (bool)\env($split[ 1 ]);
+                $this->enableTool = (bool)env($split[ 1 ]);
             } else {
-                \print_r($split);
+                print_r($split);
                 throw new ConfigException('Config::DISABLE_TOOL value string ' . $value . ' not supported! Check if ENV and value exists.');
             }
         } else {
@@ -207,45 +212,42 @@ class ConfigHandler implements ExportInterface
         }
     }
 
-
     /**
      * @return bool
      */
-    public function isPointLabelTrim()
-    {
-        return $this->pointLabelTrim;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPointLabelLTrim()
+    public function getPointLabelLTrim(): bool
     {
         return $this->pointLabelLTrim;
     }
 
     /**
      * @param $status
+     * @return ConfigHandler
      */
-    public function setPointLabelLTrim($status)
+    public function setPointLabelLTrim($status): self
     {
         $this->pointLabelLTrim = $status;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
-    public function getPointLabelRTrim()
+    public function getPointLabelRTrim(): bool
     {
         return $this->pointLabelRTrim;
     }
 
     /**
      * @param $status
+     * @return ConfigHandler
      */
-    public function setPointLabelRTrim($status)
+    public function setPointLabelRTrim($status): self
     {
         $this->pointLabelRTrim = $status;
+
+        return $this;
     }
 
     /**
@@ -258,10 +260,11 @@ class ConfigHandler implements ExportInterface
 
     /**
      * @param $mixed
+     * @return ConfigHandler
      */
-    public function setPresenter($mixed): void
+    public function setPresenter($mixed): self
     {
-        if (\is_int($mixed)) {
+        if (is_int($mixed)) {
             $this->presenter = $mixed;
         } elseif ($mixed === 'console') {
             $this->presenter = Presenter::PRESENTER_CONSOLE;
@@ -270,6 +273,8 @@ class ConfigHandler implements ExportInterface
         } else {
             throw new InvalidArgumentException('Presenter ' . $mixed . ' does not exists. Use: console or web.');
         }
+
+        return $this;
     }
 
     /**

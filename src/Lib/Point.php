@@ -188,41 +188,43 @@ class Point implements ExportInterface
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->active;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getStopTime()
+    public function getStopTime(): int
     {
         return $this->stopTime;
     }
 
     /**
-     * @param mixed $stopTime
+     * @param int|null $stopTime
+     * @return Point
      */
-    public function setStopTime($stopTime = null)
+    public function setStopTime(?int $stopTime = null):self
     {
         $this->stopTime = ($stopTime) ? $stopTime : microtime(true);
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getStopMemoryUsage()
+    public function getStopMemoryUsage(): int
     {
         return $this->stopMemoryUsage;
     }
 
     /**
-     * @param null $stopMemoryUsage
+     * @param int|null $stopMemoryUsage
+     * @return Point
      */
-    public function setStopMemoryUsage($stopMemoryUsage = null)
+    public function setStopMemoryUsage(?int $stopMemoryUsage = null):self
     {
         $this->stopMemoryUsage = ($stopMemoryUsage) ? $stopMemoryUsage : memory_get_usage(true);
     }

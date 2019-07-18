@@ -9,21 +9,33 @@ use Performance\Lib\Handlers\ConfigException;
 use Performance\Lib\Handlers\ConfigHandler;
 use PHPUnit_Framework_TestCase;
 
+/**
+ * Class ConfigHandlerTest
+ * @package tests\src\Lib\Handlers
+ *
+ * @covers \Performance\Lib\Handlers\ConfigHandler::export
+ * @covers \Performance\Lib\Handlers\ConfigHandler::setClearScreen
+ * @covers \Performance\Lib\Handlers\ConfigHandler::setConsoleLive
+ * @covers \Performance\Lib\Handlers\ConfigHandler::setEnableTool
+ * @covers \Performance\Lib\Handlers\ConfigHandler::setPointLabelLTrim
+ * @covers \Performance\Lib\Handlers\ConfigHandler::setPointLabelRTrim
+ * @covers \Performance\Lib\Handlers\ConfigHandler::setPointLabelNice
+ * @covers \Performance\Lib\Handlers\ConfigHandler::setQueryLog
+ * @covers \Performance\Lib\Handlers\ConfigHandler::setRunInformation
+ */
 class ConfigHandlerTest extends PHPUnit_Framework_TestCase
 {
-    const QUERY_LOG_STATE = 'queryLogState';
-    const CONSOLE_LIVE = 'consoleLive';
-    const ENABLE_TOOL = 'enableTool';
-    const QUERY_LOG = 'queryLog';
-    const QUERY_LOG_VIEW = 'queryLogView';
-    const POINT_LABEL_L_TRIM = 'pointLabelLTrim';
-    const POINT_LABEL_R_TRIM = 'pointLabelRTrim';
-    const POINT_LABEL_NICE = 'pointLabelNice';
-    const RUN_INFORMATION = 'runInformation';
-    const CLEAR_SCREEN = 'clearScreen';
-    const PRESENTER = 'presenter';
-    const CONFIG_ITEMS = 'configItems';
-    const POINT_LABEL_TRIM = 'pointLabelTrim';
+    private const QUERY_LOG_STATE = 'queryLogState';
+    private const CONSOLE_LIVE = 'consoleLive';
+    private const ENABLE_TOOL = 'enableTool';
+    private const QUERY_LOG = 'queryLog';
+    private const QUERY_LOG_VIEW = 'queryLogView';
+    private const POINT_LABEL_L_TRIM = 'pointLabelLTrim';
+    private const POINT_LABEL_R_TRIM = 'pointLabelRTrim';
+    private const POINT_LABEL_NICE = 'pointLabelNice';
+    private const RUN_INFORMATION = 'runInformation';
+    private const CLEAR_SCREEN = 'clearScreen';
+    private const PRESENTER = 'presenter';
 
     /**
      * @var ConfigHandler
@@ -53,7 +65,6 @@ class ConfigHandlerTest extends PHPUnit_Framework_TestCase
             self::RUN_INFORMATION => false,
             self::CLEAR_SCREEN => true,
             self::PRESENTER => 1,
-            self::POINT_LABEL_TRIM => null,
         ];
 
         //Act
@@ -82,7 +93,6 @@ class ConfigHandlerTest extends PHPUnit_Framework_TestCase
             self::RUN_INFORMATION => true,
             self::CLEAR_SCREEN => false,
             self::PRESENTER => 1,
-            self::POINT_LABEL_TRIM => null,
         ];
         $this->instance->setClearScreen(false);
         $this->instance->setConsoleLive(true);
@@ -134,7 +144,6 @@ class ConfigHandlerTest extends PHPUnit_Framework_TestCase
             self::RUN_INFORMATION => false,
             self::CLEAR_SCREEN => true,
             self::PRESENTER => 1,
-            self::POINT_LABEL_TRIM => null,
         ];
         $this->instance->setQueryLog(true, 'full');
 
@@ -204,7 +213,6 @@ class ConfigHandlerTest extends PHPUnit_Framework_TestCase
             self::RUN_INFORMATION => false,
             self::CLEAR_SCREEN => true,
             self::PRESENTER => 2,
-            self::POINT_LABEL_TRIM => null,
         ];
 
         $this->instance->setPresenter('web');

@@ -50,6 +50,7 @@ class PerformanceHandler
 
     /**
      * Hold sub point stack
+     * @var Point[]
      */
     protected $multiPointStack = [];
 
@@ -310,9 +311,9 @@ class PerformanceHandler
     {
         $this->finishLastPoint();
 
-        if ($multiplePointLabel) {
+        if ($multiplePointLabel === null) {
             if (!isset($this->multiPointStack[ $multiplePointLabel ])) {
-                throw new InvalidArgumentException("Can't finish multiple point '" . $multiplePointLabel . "'.");
+                throw new InvalidArgumentException('Can\'t finish multiple point ' . $multiplePointLabel . '.');
             }
 
             $point = $this->multiPointStack[ $multiplePointLabel ];
