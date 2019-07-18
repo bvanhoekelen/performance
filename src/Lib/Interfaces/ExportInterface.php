@@ -1,6 +1,19 @@
-<?php namespace Performance\Lib\Interfaces;
+<?php
 
+declare(strict_types=1);
+
+namespace Performance\Lib\Interfaces;
+
+/**
+ * Interface ExportInterface
+ * @package Performance\Lib\Interfaces
+ */
 interface ExportInterface
 {
-    public function export();
+    /**
+     * Simple export function
+     *
+     * @return  array
+     */
+    public function export(): array;
 }

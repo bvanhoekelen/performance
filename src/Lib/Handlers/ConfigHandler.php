@@ -1,22 +1,20 @@
-<?php namespace Performance\Lib\Handlers;
+<?php
 
+declare(strict_types=1);
+
+namespace Performance\Lib\Handlers;
+
+use InvalidArgumentException;
 use Performance\Lib\Interfaces\ExportInterface;
 use Performance\Lib\Presenters\Presenter;
 
+/**
+ * Class ConfigHandler
+ * @package Performance\Lib\Handlers
+ */
 class ConfigHandler implements ExportInterface
 {
     // Config items
-    protected $consoleLive = false;
-    protected $enableTool = true;
-    protected $queryLog = false;
-    protected $queryLogView;
-    protected $pointLabelLTrim = false;
-    protected $pointLabelRTrim = false;
-    protected $pointLabelNice = false;
-    protected $runInformation = false;
-    protected $clearScreen = true;
-    protected $presenter;
-
     /**
      * Hold state of the query log
      * null = not set
@@ -25,6 +23,69 @@ class ConfigHandler implements ExportInterface
      */
     public $queryLogState;
 
+    /**
+     * @var bool
+     */
+    protected $consoleLive = false;
+
+    /**
+     * @var bool
+     */
+    protected $enableTool = true;
+
+    /**
+     * @var bool
+     */
+    protected $queryLog = false;
+
+    /**
+     * @var
+     */
+    protected $queryLogView;
+
+    /**
+     * @var bool
+     */
+    protected $pointLabelLTrim = false;
+
+    /**
+     * @var bool
+     */
+    protected $pointLabelRTrim = false;
+
+    /**
+     * @var bool
+     */
+    protected $pointLabelNice = false;
+
+    /**
+     * @var bool
+     */
+    protected $runInformation = false;
+
+    /**
+     * @var bool
+     */
+    protected $clearScreen = true;
+
+    /**
+     * @var
+     */
+    protected $presenter;
+
+    /**
+     * @var
+     */
+    private $configItems;
+
+    /**
+     * @var
+     */
+    private $pointLabelTrim;
+
+    /**
+     * ConfigHandler constructor.
+     */
     public function __construct()
     {
         // Set default
@@ -33,39 +94,50 @@ class ConfigHandler implements ExportInterface
     }
 
     /**
-     * Simple export function
+     *
      */
-    public function export()
+    protected function setDefaultConsoleLive()
     {
-        return get_object_vars($this);
+        $shortOpts = 'l::';
+        $longOpts = ['live'];
+        $options = getopt($shortOpts, $longOpts);
+
+        // Set live option
+        if (isset($options[ 'l' ]) || isset($options[ 'live' ])) {
+            $this->consoleLive = true;
+        }
     }
 
+    /**
+     *
+     */
+    protected function setDefaultPresenter()
+    {
+        if (php_sapi_name() === "cli") {
+            $this->setPresenter(Presenter::PRESENTER_CONSOLE);
+        } else {
+            $this->setPresenter(Presenter::PRESENTER_WEB);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @return array
+     */
+    public function export(): array
+    {
+        $vars = get_object_vars($this);
+        return $vars ?? [];
+    }
+
+    /**
+     * @return array
+     */
     public function getAllItemNames()
     {
         return array_keys($this->configItems);
     }
-
-    protected function setDefaultConsoleLive()
-    {
-        $shortopts = 'l::';
-        $longopts = ['live'];
-        $options = getopt($shortopts, $longopts);
-
-        // Set live option
-        if(isset($options['l']) or isset($options['live']))
-            $this->consoleLive = true;
-    }
-
-    // Print format
-    protected function setDefaultPresenter()
-    {
-        if (php_sapi_name() == "cli")
-            $this->setPresenter(Presenter::PRESENTER_CONSOLE);
-        else
-            $this->setPresenter(Presenter::PRESENTER_WEB);
-    }
-
-    // Getters and setters
 
     /**
      * @return bool
@@ -76,7 +148,7 @@ class ConfigHandler implements ExportInterface
     }
 
     /**
-     * @param bool $consoleLive
+     * @param $status
      */
     public function setConsoleLive($status)
     {
@@ -92,26 +164,26 @@ class ConfigHandler implements ExportInterface
     }
 
     /**
-     * @param bool $enableTool
+     * @param $value
+     * @throws ConfigException
      */
     public function setEnableTool($value)
     {
-        if(is_bool($value))
+        if (is_bool($value)) {
             $this->enableTool = $value;
-        elseif(is_string($value))
-        {
+        } elseif (is_string($value)) {
             $split = explode(':', $value);
 
             // Determinable stat on ENV
-            if(isset($split[1]) and $split[0] == 'ENV' and function_exists('env'))
-                $this->enableTool = (bool) env($split[1]);
-            else{
-            	print_r($split);
-            	throw new \Exception("Config::DISABLE_TOOL value string '" . $value . "' not supported! Check if ENV and value exists.");
+            if (isset($split[ 1 ]) && $split[ 0 ] === 'ENV' && function_exists('env')) {
+                $this->enableTool = (bool)env($split[ 1 ]);
+            } else {
+                print_r($split);
+                throw new ConfigException("Config::DISABLE_TOOL value string '" . $value . "' not supported! Check if ENV and value exists.");
             }
+        } else {
+            throw new ConfigException("Config::DISABLE_TOOL value '" . $value . "' not supported!");
         }
-        else
-        	throw new \Exception("Config::DISABLE_TOOL value '" . $value . "' not supported!");
     }
 
     /**
@@ -124,6 +196,7 @@ class ConfigHandler implements ExportInterface
 
     /**
      * @param bool $queryLog
+     * @param null $viewOption
      */
     public function setQueryLog($queryLog, $viewOption = null)
     {
@@ -144,14 +217,14 @@ class ConfigHandler implements ExportInterface
      */
     protected function setQueryLogView($queryLogView = null)
     {
-        if($queryLogView == 'resume' or ! $queryLogView)
+        if ($queryLogView === 'resume' || !$queryLogView) {
             $this->queryLogView = 'resume';
-        elseif($queryLogView == 'full')
+        } elseif ($queryLogView === 'full') {
             $this->queryLogView = $queryLogView;
-        else
-        	throw new \InvalidArgumentException("Query log view '". $queryLogView . "' does not exists, use: 'resume' or 'full'");
+        } else {
+            throw new InvalidArgumentException("Query log view '" . $queryLogView . "' does not exists, use: 'resume' or 'full'");
+        }
     }
-
 
 
     /**
@@ -171,7 +244,7 @@ class ConfigHandler implements ExportInterface
     }
 
     /**
-     * @param string $pointLabelLTrim
+     * @param $status
      */
     public function setPointLabelLTrim($status)
     {
@@ -187,7 +260,7 @@ class ConfigHandler implements ExportInterface
     }
 
     /**
-     * @param string $pointLabelRTrim
+     * @param $status
      */
     public function setPointLabelRTrim($status)
     {
@@ -203,19 +276,19 @@ class ConfigHandler implements ExportInterface
     }
 
     /**
-     * @param mixed $presenter
+     * @param int $mixed
      */
-    public function setPresenter($mixed)
+    public function setPresenter($mixed):void
     {
-        if(is_int($mixed))
+        if (is_int($mixed)) {
             $this->presenter = $mixed;
-        else
-            if($mixed == 'console')
-                $this->presenter = Presenter::PRESENTER_CONSOLE;
-            elseif($mixed == 'web')
-                $this->presenter = Presenter::PRESENTER_WEB;
-            else
-            	throw new \InvalidArgumentException("Presenter '" . $mixed . "' does not exists. Use: console or web.");
+        } elseif ($mixed === 'console') {
+            $this->presenter = Presenter::PRESENTER_CONSOLE;
+        } elseif ($mixed === 'web') {
+            $this->presenter = Presenter::PRESENTER_WEB;
+        } else {
+            throw new InvalidArgumentException("Presenter '" . $mixed . "' does not exists. Use: console or web.");
+        }
     }
 
     /**
@@ -231,16 +304,7 @@ class ConfigHandler implements ExportInterface
      */
     public function setPointLabelNice($pointLabelNice)
     {
-        $this->pointLabelNice = (bool) $pointLabelNice;
-    }
-
-    /**
-     * Set run information
-     * @param bool $status
-     */
-    public function setRunInformation($status)
-    {
-        $this->runInformation = (bool) $status;
+        $this->pointLabelNice = (bool)$pointLabelNice;
     }
 
     /**
@@ -251,17 +315,28 @@ class ConfigHandler implements ExportInterface
         return $this->runInformation;
     }
 
-	/**
-	 * @return bool
-	 */
-	public function isClearScreen() {
-		return $this->clearScreen;
-	}
+    /**
+     * Set run information
+     * @param bool $status
+     */
+    public function setRunInformation($status)
+    {
+        $this->runInformation = (bool)$status;
+    }
 
-	/**
-	 * @param bool $clearScreen
-	 */
-	public function setClearScreen($clearScreen) {
-		$this->clearScreen = (bool) $clearScreen;
-	}
+    /**
+     * @return bool
+     */
+    public function isClearScreen()
+    {
+        return $this->clearScreen;
+    }
+
+    /**
+     * @param bool $clearScreen
+     */
+    public function setClearScreen($clearScreen)
+    {
+        $this->clearScreen = (bool)$clearScreen;
+    }
 }
