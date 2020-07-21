@@ -1,7 +1,8 @@
 # Change Log
 
 ## Unreleased
-
+- Remove ugly windows console error (#20 from MarouaneRag/patch-1)
+ 
 ## [v2.5.0](https://github.com/bvanhoekelen/performance/tree/v2.5.0) - 2019-03-31
 ## Change
 - Use `protected` instead of `private`
