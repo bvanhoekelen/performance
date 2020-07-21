@@ -131,9 +131,11 @@ class ConsolePresenter extends Presenter
     }
 
     protected function setCommandSize()
-    {
-        $this->commandLineWidth = exec('tput cols');
-        $this->commandLineHeight = exec('tput lines');
+    { 
+	$inWindows = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+
+        $this->commandLineWidth = $inWindows ? 0 : exec('tput cols');
+        $this->commandLineHeight = $inWindows ? 0 : exec('tput lines');
 
         if($this->commandLineWidth < 60)
             $this->commandLineWidth = 60;
