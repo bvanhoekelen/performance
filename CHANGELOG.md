@@ -1,10 +1,13 @@
 # Change Log
 
 ## Unreleased
+
+## [v2.5.1](https://github.com/bvanhoekelen/performance/tree/v2.5.1) - 2020-07-21
+### Add
 - Remove ugly windows console error (#20 from MarouaneRag/patch-1)
  
 ## [v2.5.0](https://github.com/bvanhoekelen/performance/tree/v2.5.0) - 2019-03-31
-## Change
+### Change
 - Use `protected` instead of `private`
 - Use `static` instead of `self`
 - use `/**` for comments
