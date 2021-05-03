@@ -7,7 +7,7 @@ $capsule = new DB();
 $capsule->addConnection([
     'driver' => 'mysql',
     'host' => '127.0.0.1',
-    'port' => '8889',
+    'port' => '3306',
     'database' => 'performance',
     'username' => 'root',
     'password' => 'root',

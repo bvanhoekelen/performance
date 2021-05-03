@@ -37,8 +37,8 @@
     "require-dev": {
         "larapack/dd": "1.*",
         "phpunit/phpunit": "^5.7",
-        "illuminate/database": "^5.4",
-        "illuminate/events": "^5.4"
+        "illuminate/database": "^6.20.26",
+        "illuminate/events": "^v6.20.26"
     },
     "autoload": {
         "psr-4": {
