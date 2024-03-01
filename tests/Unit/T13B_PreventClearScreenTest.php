@@ -1,4 +1,4 @@
-<?php namespace Tests\Unit;
+<?php namespace Unit;
 
 use Performance\Config;
 use Performance\Performance;

@@ -3,8 +3,8 @@
 /*
  * Require Performance
  */
-require_once('../vendor/autoload.php');
 use Performance\Performance;
+require_once(__DIR__.'/../vendor/autoload.php');
 
 /*
  * One simply performance check with label

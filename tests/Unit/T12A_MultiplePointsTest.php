@@ -1,9 +1,10 @@
-<?php namespace Tests\Unit;
+<?php namespace Unit;
 
 use Performance\Lib\Point;
 use Performance\Performance;
+use PHPUnit\Framework\TestCase;
 
-class T12A_MultiplePointsTest extends \PHPUnit_Framework_TestCase
+class T12A_MultiplePointsTest extends TestCase
 {
 
     protected function setTestUp()

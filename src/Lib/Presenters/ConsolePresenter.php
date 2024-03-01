@@ -9,6 +9,7 @@ class ConsolePresenter extends Presenter
     protected $commandLineHeight;
     protected $cellWightResult;
     protected $cellWightLabel;
+    protected $printStack;
 
     public function bootstrap()
     {
