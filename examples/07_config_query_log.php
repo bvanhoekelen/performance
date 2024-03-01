@@ -4,7 +4,7 @@
  * Require Performance
  */
 
-require_once('../vendor/autoload.php');
+require_once(__DIR__.'/../vendor/autoload.php');
 require_once('helper/UseEloquent.php');
 require_once('helper/user.php');
 

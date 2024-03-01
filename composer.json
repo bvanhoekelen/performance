@@ -31,12 +31,12 @@
         }
     ],
     "require": {
-        "php": ">=5.6.0",
+        "php": ">=8.1.0",
         "bvanhoekelen/terminal-style": "^1.0"
     },
     "require-dev": {
-        "larapack/dd": "1.*",
-        "phpunit/phpunit": "^5.7",
+        "larapack/dd": "~1.1",
+        "phpunit/phpunit": "~11.0",
         "illuminate/database": "^5.4",
         "illuminate/events": "^5.4"
     },

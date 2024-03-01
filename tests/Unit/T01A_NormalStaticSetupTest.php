@@ -1,9 +1,9 @@
-<?php namespace Tests\Unit;
+<?php namespace Unit;
 
-use Performance\Config;
 use Performance\Performance;
+use PHPUnit\Framework\TestCase;
 
-class T01A_NormalStaticSetupTest extends \PHPUnit_Framework_TestCase
+class T01A_NormalStaticSetupTest extends TestCase
 {
     protected function setTestUp()
     {

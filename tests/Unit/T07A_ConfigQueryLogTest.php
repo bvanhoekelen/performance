@@ -1,10 +1,11 @@
-<?php namespace Tests\Unit;
+<?php namespace Unit;
 
 use Performance\Performance;
 use Performance\Config;
+use PHPUnit\Framework\TestCase;
 
 
-class T07A_ConfigQueryLogTest extends \PHPUnit_Framework_TestCase
+class T07A_ConfigQueryLogTest extends TestCase
 {
     protected function setTestUp()
     {
