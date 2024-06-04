@@ -1,8 +1,9 @@
-<?php namespace Tests\Unit;
+<?php namespace Unit;
 
 use Performance\Performance;
+use PHPUnit\Framework\TestCase;
 
-class T14A_UseExceptionsTest extends \PHPUnit_Framework_TestCase
+class T14A_UseExceptionsTest extends TestCase
 {
     protected function setTestUp()
     {

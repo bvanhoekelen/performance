@@ -1,9 +1,10 @@
-<?php namespace Tests\Unit;
+<?php namespace Unit;
 
 use Performance\Performance;
 use Performance\Config;
+use PHPUnit\Framework\TestCase;
 
-class T04A_ConfigTrimTest extends \PHPUnit_Framework_TestCase
+class T04A_ConfigTrimTest extends TestCase
 {
 
     protected function setTestUp()

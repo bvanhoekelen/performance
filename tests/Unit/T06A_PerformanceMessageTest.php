@@ -1,9 +1,10 @@
-<?php namespace Tests\Unit;
+<?php namespace Unit;
 
 use Performance\Config;
 use Performance\Performance;
+use PHPUnit\Framework\TestCase;
 
-class T06A_PerformanceMessageTest extends \PHPUnit_Framework_TestCase
+class T06A_PerformanceMessageTest extends TestCase
 {
     protected function setTestUp()
     {

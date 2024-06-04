@@ -1,9 +1,10 @@
-<?php namespace Tests\Unit;
+<?php namespace Unit;
 
 use Performance\Performance;
 use Performance\Config;
+use PHPUnit\Framework\TestCase;
 
-class T09A_ConfigNiceLabelTest extends \PHPUnit_Framework_TestCase
+class T09A_ConfigNiceLabelTest extends TestCase
 {
 
     protected function setTestUp()
